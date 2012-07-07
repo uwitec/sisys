@@ -2,29 +2,35 @@ package data.connect;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
+import data.bean.mapping.BeanMapping;
+
 public class GenericTemplate {
-	    // ¶¨ÒåÊı¾İ¿âÁ¬½Ó
+	    // å®šä¹‰æ•°æ®åº“è¿æ¥
 		private int result;
 		private DatabaseConnect databaseConnect;
 	    private Connection connection;
 	 
-	    // ¶¨ÒåsqlÓï¾ä
+	    // å®šä¹‰sqlè¯­å¥
 	    private String sqlValue;
 	 
-	    // ¶¨ÒåsqlÓï¾ä²ÎÊıÁĞ±í
+	    // å®šä¹‰sqlè¯­å¥å‚æ•°åˆ—è¡¨
 	    private List<Object> values;
+	    
+	    //å®šä¹‰BeanMappingæ˜ å°„
+	    private BeanMapping mapping;
 	 
 	    private PreparedStatement preparedStatement;
 	    private Statement statement;
 	    private ResultSet resultSet;
 	    /*
-	     * ¹¹Ôìº¯Êı
+	     * æ„é€ å‡½æ•°
 	     */
 	    public GenericTemplate() {
 	    	 databaseConnect = new DatabaseConnect();
@@ -33,80 +39,89 @@ public class GenericTemplate {
 	    }
 	    
 	    /**
-	     * Éè¶¨SQLÓï¾ä
+	     * è®¾å®šSQLè¯­å¥
 	     */
 	    public void setSqlValue(String sqlValue) {
 	        this.sqlValue = sqlValue;
 	    }
 	 
 	    /**
-	     * Éè¶¨SQLÓï¾äµÄ²ÎÊıÁĞ±í
+	     * è®¾å®šSQLè¯­å¥çš„å‚æ•°åˆ—è¡¨
 	     */
 	    public void setValues(List<Object> values) {
 	        this.values = values;
 	    }
+	    
+	    /**
+	     * è®¾å®šBeanMappingæ˜ å°„
+	     */
+	    public void setMapping(BeanMapping mapping){
+	    	this.mapping = mapping;
+	    }
 	 
 	    /**
-	     * ½«SQLÓï¾ä²ÎÊıÁĞ±íÖĞµÄÖµ¸³¸øÔ¤Ö´ĞĞÓï¾ä.
+	     * å°†SQLè¯­å¥å‚æ•°åˆ—è¡¨ä¸­çš„å€¼èµ‹ç»™é¢„æ‰§è¡Œè¯­å¥.
 	     *
 	     * @param pstmt
-	     *            Ô¤Ö´ĞĞÓï¾ä
+	     *            é¢„æ‰§è¡Œè¯­å¥
 	     * @param values
-	     *            sqlÓï¾ä²ÎÊıÁĞ±í
+	     *            sqlè¯­å¥å‚æ•°åˆ—è¡¨
 	     * @throws SQLException 
 	     */
 	    private void setValues(PreparedStatement pstmt, List<Object> values) throws SQLException {
-	        // Ñ­»·£¬½«SQLÓï¾ä²ÎÊıÁĞ±íÖĞµÄÖµÒÀ´Î¸³¸øÔ¤Ö´ĞĞÓï¾ä
+	        // å¾ªç¯ï¼Œå°†SQLè¯­å¥å‚æ•°åˆ—è¡¨ä¸­çš„å€¼ä¾æ¬¡èµ‹ç»™é¢„æ‰§è¡Œè¯­å¥
 	    	
 	        for (int i = 0; i < values.size(); i++) {
 	            Object v = values.get(i);
-	            // ×¢Òâ£¬setObject()·½·¨µÄË÷ÒıÖµ´Ó1¿ªÊ¼£¬ËùÒÔÓĞi+1
+	            // æ³¨æ„ï¼ŒsetObject()æ–¹æ³•çš„ç´¢å¼•å€¼ä»1å¼€å§‹ï¼Œæ‰€ä»¥æœ‰i+1
 	            pstmt.setObject(i + 1, v);
 	        }
 	    }
 	 
 	    /**
-	     * Ö´ĞĞ²éÑ¯
+	     * æ‰§è¡ŒæŸ¥è¯¢
 	     *
 	     * @return a javax.servlet.jsp.jstl.sql.Result
-	     *                ·µ»ØResult¶ÔÏóresult
+	     *                è¿”å›Resultå¯¹è±¡result
 	     * @exception SQLException
-	     *                ¶¨ÒåsqlÒì³£
+	     *                å®šä¹‰sqlå¼‚å¸¸
 	     */
-	    public ResultSet executeQuery() throws SQLException {
-	    	
-	            if (values != null && values.size() > 0) {
-	                // Ê¹ÓÃÔ¤´¦ÀíÓï¾ä£¬²¢Éè¶¨ËùÓĞµÄsqlÓï¾äËùÓĞ²ÎÊıÖµ
-	                preparedStatement = (PreparedStatement) connection.prepareStatement(sqlValue);
-	                setValues(preparedStatement, values);
-	                //System.out.print(values);
-	                // Ö´ĞĞ²éÑ¯sqlÓï¾ä£¬·µ»Ø²éÑ¯½á¹û¼¯
-	                resultSet = preparedStatement.executeQuery();
-	            } else {
-	                statement = (Statement) connection.createStatement();
-	                resultSet = statement.executeQuery(sqlValue);
-	               
-	            }
-	        return resultSet;
+	    public List<Object> executeQuery() throws SQLException {
+	    	List<Object> resultList = new ArrayList<Object>();
+            if (values != null && values.size() > 0) {
+                // ä½¿ç”¨é¢„å¤„ç†è¯­å¥ï¼Œå¹¶è®¾å®šæ‰€æœ‰çš„sqlè¯­å¥æ‰€æœ‰å‚æ•°å€¼
+                preparedStatement = (PreparedStatement) connection.prepareStatement(sqlValue);
+                setValues(preparedStatement, values);
+                //System.out.print(values);
+                // æ‰§è¡ŒæŸ¥è¯¢sqlè¯­å¥ï¼Œè¿”å›æŸ¥è¯¢ç»“æœé›†
+                resultSet = preparedStatement.executeQuery();
+            } else {
+                statement = (Statement) connection.createStatement();
+                resultSet = statement.executeQuery(sqlValue);
+            }
+            while(resultSet.next()){
+            	resultList.add(mapping.mapping(resultSet));
+            }
+	        return resultList;
 	    }
 	 
 	    /**
-	     * Ö´ĞĞUpdateÓï¾ä
+	     * æ‰§è¡ŒUpdateè¯­å¥
 	     *
 	     * @return numOfRows
-	     *                ·µ»ØÊÜÓ°ÏìµÄĞĞÊı
+	     *                è¿”å›å—å½±å“çš„è¡Œæ•°
 	     * @exception SQLException
-	     *                ¶¨ÒåsqlÒì³£
+	     *                å®šä¹‰sqlå¼‚å¸¸
 	     */
 	    public int executeUpdate() throws SQLException {
 	        
 	            if (values != null && values.size() > 0) {
-	                // Ê¹ÓÃÔ¤´¦ÀíÓï¾ä£¬²¢Éè¶¨ËùÓĞµÄsqlÓï¾äËùÓĞ²ÎÊıÖµ
+	                // ä½¿ç”¨é¢„å¤„ç†è¯­å¥ï¼Œå¹¶è®¾å®šæ‰€æœ‰çš„sqlè¯­å¥æ‰€æœ‰å‚æ•°å€¼
 	                preparedStatement = (PreparedStatement) connection.prepareStatement(sqlValue);
 	                setValues(preparedStatement, values);
 	                result = preparedStatement.executeUpdate();
 	            } else {
-	                // Ö´ĞĞ¸üĞÂsqlÓï¾ä£¬·µ»ØÊÜÓ°ÏìµÄĞĞÊı
+	                // æ‰§è¡Œæ›´æ–°sqlè¯­å¥ï¼Œè¿”å›å—å½±å“çš„è¡Œæ•°
 	            	statement = (Statement) connection.createStatement();
 	            	result = statement.executeUpdate(sqlValue);
 	            }
