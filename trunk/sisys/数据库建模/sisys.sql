@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2012/7/6 22:20:42                            */
+/* Created on:     2012/7/8 12:45:57                            */
 /*==============================================================*/
 
 
@@ -22,9 +22,15 @@ drop table if exists process;
 
 drop table if exists product;
 
+drop table if exists productLine;
+
 drop table if exists scheduleTab;
 
 drop table if exists staffDetail;
+
+drop table if exists staffKind;
+
+drop table if exists user;
 
 drop table if exists workForm;
 
@@ -39,8 +45,11 @@ create table Staff
 (
    Id                   int not null,
    deptId               int,
+   kindId               int,
    staName              varchar(20),
    staNo                varchar(20),
+   isDelete             int default 0,
+   deleteTime           date,
    primary key (Id),
    key AK_Key_2 (Id)
 );
@@ -61,6 +70,8 @@ create table batch
    disqNum              int,
    disqPercent          int,
    totalNum             int,
+   isDelete             int default 0,
+   deleteTime           date,
    primary key (Id)
 );
 
@@ -85,6 +96,8 @@ create table department
    Id                   int not null,
    deptNo               varchar(20),
    deptName             varchar(20),
+   isDelete             int default 0,
+   deleteTime           date,
    primary key (Id)
 );
 
@@ -108,6 +121,8 @@ create table disqKind
    Id                   int not null,
    disDesc              varchar(30),
    kind                 int,
+   isDelete             int default 0,
+   deleteTime           date,
    primary key (Id)
 );
 
@@ -119,6 +134,8 @@ create table flowpath
    Id                   int not null,
    sequence             varchar(20),
    proId                int,
+   isDelete             int default 0,
+   deleteTime           date,
    primary key (Id)
 );
 
@@ -133,6 +150,8 @@ create table process
    procNo               varchar(20),
    unitOutput           int,
    unitCost             int,
+   isDelete             int default 0,
+   deleteTime           date,
    primary key (Id)
 );
 
@@ -143,12 +162,27 @@ create table product
 (
    Id                   int not null,
    deptId               int,
+   prolineId            int,
    proNo                varchar(20),
    proName              varchar(20),
    time                 date,
    disqNum              int,
-   disqPerc             int,
+   disqPerc             double,
    totalNum             int,
+   isDelete             int default 0,
+   deleteTime           date,
+   primary key (Id)
+);
+
+/*==============================================================*/
+/* Table: productLine                                           */
+/*==============================================================*/
+create table productLine
+(
+   Id                   int not null,
+   lineDesc             varchar(20),
+   isDelete             int default 0,
+   deleteTime           date,
    primary key (Id)
 );
 
@@ -178,7 +212,33 @@ create table staffDetail
    quaNum               int,
    gWaste               int,
    lWaste               int,
-   workHours            int,
+   workHours            double,
+   primary key (Id)
+);
+
+/*==============================================================*/
+/* Table: staffKind                                             */
+/*==============================================================*/
+create table staffKind
+(
+   Id                   int not null,
+   kindDesc             varchar(20),
+   isDelete             int default 0,
+   deleteTime           date,
+   primary key (Id)
+);
+
+/*==============================================================*/
+/* Table: user                                                  */
+/*==============================================================*/
+create table user
+(
+   Id                   int not null,
+   username             varchar(20),
+   password             varchar(20),
+   level                int,
+   isDelete             int default 0,
+   deleteTime           date,
    primary key (Id)
 );
 
@@ -195,6 +255,8 @@ create table workForm
    quaNum               int,
    disDetail            varchar(0),
    time                 date,
+   isDelete             int default 0,
+   deleteTime           date,
    primary key (Id)
 );
 
@@ -206,8 +268,8 @@ create table workHoursTab
    Id                   int not null,
    staId                int,
    time                 date,
-   workHours            int,
-   salary               int,
+   workHours            double,
+   salary               double,
    primary key (Id)
 );
 
@@ -228,6 +290,9 @@ create table workTab
 
 alter table Staff add constraint FK_Reference_15 foreign key (deptId)
       references department (Id) on delete restrict on update restrict;
+
+alter table Staff add constraint FK_Reference_24 foreign key (kindId)
+      references staffKind (Id) on delete restrict on update restrict;
 
 alter table batch add constraint FK_Reference_12 foreign key (workTabId)
       references workTab (Id) on delete restrict on update restrict;
@@ -258,6 +323,9 @@ alter table flowpath add constraint FK_Reference_10 foreign key (proId)
 
 alter table product add constraint FK_Reference_14 foreign key (deptId)
       references department (Id) on delete restrict on update restrict;
+
+alter table product add constraint FK_Reference_22 foreign key (prolineId)
+      references productLine (Id) on delete restrict on update restrict;
 
 alter table scheduleTab add constraint FK_Reference_16 foreign key (batchId)
       references batch (Id) on delete restrict on update restrict;
