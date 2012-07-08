@@ -1,4 +1,4 @@
-package sisys.data.dao;
+package data.dao;
 
 public class ProductLineDAO {
 

@@ -1,4 +1,4 @@
-package sisys.data.bean;
+package data.bean;
 
 import java.util.Date;
 

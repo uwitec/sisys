@@ -1,4 +1,4 @@
-package sisys.data.test;
+package data.test;
 
 public class ProductLineDAOTest {
 

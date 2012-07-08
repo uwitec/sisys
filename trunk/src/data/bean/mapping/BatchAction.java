@@ -1,4 +1,4 @@
-package sisys.data.mapping;
+package data.bean.mapping;
 
 public class BatchAction {
 
