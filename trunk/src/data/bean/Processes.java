@@ -7,12 +7,12 @@ import java.util.Date;
  * @author huangxin 工序信息
  * 
  */
-public class Process {
+public class Processes {
 
 	private int id;
 	private String procName;
 	private String colorNo;
-	private String proNo;
+	private String procNo;
 	private int unitOutput; // 班产量，用于转换工时：工时=生产数量/班产量*8
 	private int unitCost; // 工时单价，用于转换为工钱
 	private int isDelete;
@@ -43,12 +43,12 @@ public class Process {
 		this.colorNo = colorNo;
 	}
 
-	public String getProNo() {
-		return proNo;
+	public String getProcNo() {
+		return procNo;
 	}
 
-	public void setProNo(String proNo) {
-		this.proNo = proNo;
+	public void setProcNo(String proNo) {
+		this.procNo = proNo;
 	}
 
 	public int getUnitOutput() {
@@ -93,7 +93,7 @@ public class Process {
 				+ ((deleteTime == null) ? 0 : deleteTime.hashCode());
 		result = prime * result + id;
 		result = prime * result + isDelete;
-		result = prime * result + ((proNo == null) ? 0 : proNo.hashCode());
+		result = prime * result + ((procNo == null) ? 0 : procNo.hashCode());
 		result = prime * result
 				+ ((procName == null) ? 0 : procName.hashCode());
 		result = prime * result + unitCost;
@@ -110,7 +110,7 @@ public class Process {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Process other = (Process) obj;
+		Processes other = (Processes) obj;
 		if (colorNo == null) {
 			if (other.colorNo != null)
 				return false;
@@ -125,10 +125,10 @@ public class Process {
 			return false;
 		if (isDelete != other.isDelete)
 			return false;
-		if (proNo == null) {
-			if (other.proNo != null)
+		if (procNo == null) {
+			if (other.procNo != null)
 				return false;
-		} else if (!proNo.equals(other.proNo))
+		} else if (!procNo.equals(other.procNo))
 			return false;
 		if (procName == null) {
 			if (other.procName != null)
@@ -143,20 +143,20 @@ public class Process {
 	}
 
 	// 构造函数
-	public Process(int id, String procName, String colorNo, String proNo,
+	public Processes(int id, String procName, String colorNo, String proNo,
 			int unitOutput, int unitCost, int isDelete, Date deleteTime) {
 		super();
 		this.id = id;
 		this.procName = procName;
 		this.colorNo = colorNo;
-		this.proNo = proNo;
+		this.procNo = proNo;
 		this.unitOutput = unitOutput;
 		this.unitCost = unitCost;
 		this.isDelete = isDelete;
 		this.deleteTime = deleteTime;
 	}
 
-	public Process() {
+	public Processes() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -165,7 +165,7 @@ public class Process {
 	@Override
 	public String toString() {
 		return "Process [id=" + id + ", procName=" + procName + ", colorNo="
-				+ colorNo + ", proNo=" + proNo + ", unitOutput=" + unitOutput
+				+ colorNo + ", proNo=" + procNo + ", unitOutput=" + unitOutput
 				+ ", unitCost=" + unitCost + ", isDelete=" + isDelete
 				+ ", deleteTime=" + deleteTime + "]";
 	}

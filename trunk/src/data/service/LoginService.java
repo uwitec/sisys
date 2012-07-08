@@ -11,13 +11,13 @@ public class LoginService {
 	
 	public UserBean checkLogin(String username,String password,Integer level) throws SQLException{
 		UserBean user = null;
-		List<Object> list = userDAO.queryByName(username);
+		/*List<Object> list = userDAO.queryByName(username);
 		if(list.size() > 0){
 			user = (UserBean)list.get(0);
 			if(user.getPassword().equals(password)&&user.getLevel().equals(level)){
 				return user;
 			}
-		}
+		}*/
 		return null;
 	}
 	

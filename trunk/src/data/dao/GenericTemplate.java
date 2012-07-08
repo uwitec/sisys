@@ -1,4 +1,4 @@
-package data.connect;
+package data.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +10,7 @@ import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
 import data.bean.mapping.BeanMapping;
+import data.connect.DatabaseConnect;
 
 public class GenericTemplate {
 	    // 定义数据库连接
@@ -86,8 +87,8 @@ public class GenericTemplate {
 	     * @exception SQLException
 	     *                定义sql异常
 	     */
-	    public List<Object> executeQuery() throws SQLException {
-	    	List<Object> resultList = new ArrayList<Object>();
+	    public ResultSet executeQuery() throws SQLException {
+	    	
             if (values != null && values.size() > 0) {
                 // 使用预处理语句，并设定所有的sql语句所有参数值
                 preparedStatement = (PreparedStatement) connection.prepareStatement(sqlValue);
@@ -99,10 +100,7 @@ public class GenericTemplate {
                 statement = (Statement) connection.createStatement();
                 resultSet = statement.executeQuery(sqlValue);
             }
-            while(resultSet.next()){
-            	resultList.add(mapping.mapping(resultSet));
-            }
-	        return resultList;
+	        return resultSet;
 	    }
 	 
 	    /**

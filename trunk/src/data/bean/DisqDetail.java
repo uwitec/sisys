@@ -7,7 +7,7 @@ package data.bean;
 public class DisqDetail {
 
 	private int id;
-	private int disKind; // 不合格详细种类的id
+	private int disKId; // 不合格详细种类的id
 	private int nextId; // 该工单记录的下一条不合格详细记录id,0代表结尾
 	private int num;
 
@@ -20,12 +20,12 @@ public class DisqDetail {
 		this.id = id;
 	}
 
-	public int getDisKind() {
-		return disKind;
+	public int getDisKId() {
+		return disKId;
 	}
 
-	public void setDisKind(int disKind) {
-		this.disKind = disKind;
+	public void setDisKId(int disKind) {
+		this.disKId = disKind;
 	}
 
 	public int getNextId() {
@@ -49,7 +49,7 @@ public class DisqDetail {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + disKind;
+		result = prime * result + disKId;
 		result = prime * result + id;
 		result = prime * result + nextId;
 		result = prime * result + num;
@@ -66,7 +66,7 @@ public class DisqDetail {
 		if (getClass() != obj.getClass())
 			return false;
 		DisqDetail other = (DisqDetail) obj;
-		if (disKind != other.disKind)
+		if (disKId != other.disKId)
 			return false;
 		if (id != other.id)
 			return false;
@@ -81,7 +81,7 @@ public class DisqDetail {
 	public DisqDetail(int id, int disKind, int nextId, int num) {
 		super();
 		this.id = id;
-		this.disKind = disKind;
+		this.disKId = disKind;
 		this.nextId = nextId;
 		this.num = num;
 	}
@@ -94,7 +94,7 @@ public class DisqDetail {
 	// 转换为字符串
 	@Override
 	public String toString() {
-		return "DisqDetail [id=" + id + ", disKind=" + disKind + ", nextId="
+		return "DisqDetail [id=" + id + ", disKind=" + disKId + ", nextId="
 				+ nextId + ", num=" + num + "]";
 	}
 

@@ -1,45 +1,44 @@
 package data.dao;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.bean.Batch;
-import data.bean.User;
-import data.bean.UserBean;
-import data.bean.mapping.BatchMapping;
-import data.bean.mapping.BeanMapping;
-import data.bean.mapping.UserMapping;
+import data.bean.Flowpath;
+import data.bean.Processes;
+import data.bean.mapping.FlowpathMapping;
+import data.bean.mapping.ProcessesMapping;
 
-public class UserDAO {
+public class ProcessesDAO {
 
 	GenericTemplate genericTemplate;
 	List<Object> value;
 	String sql;
 	int result;
 	boolean flag;
-	List<User> list;
+	List<Processes> list;
 	
 	/**
 	 * 构造函数
 	 */
-	public UserDAO() {
+	public ProcessesDAO() {
 		genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
 		flag = false;
-		list = new ArrayList<User>();
+		list = new ArrayList<Processes>();
 	}
 	
-	public int create(User entity) {
+	public int create(Processes entity) {
 		// TODO Auto-generated method stub
-		sql = "insert into user values (?,?,?,?,?,?)";
+		sql = "insert into process values (?,?,?,?,?,?,?,?)";
 		
 		value.add(entity.getId());
-		value.add(entity.getUsername());
-		value.add(entity.getPassword());
-		value.add(entity.getLevel());
+		value.add(entity.getProcName());
+		value.add(entity.getColorNo());
+		value.add(entity.getProcNo());
+		value.add(entity.getUnitOutput());
+		value.add(entity.getUnitCost());
 		value.add(entity.getIsDelete());
 		value.add(entity.getDeleteTime());
 		
@@ -56,9 +55,9 @@ public class UserDAO {
 		return result;
 	}
 
-	public int delete(User entity) {
+	public int delete(Processes entity) {
 		// TODO Auto-generated method stub
-		sql = "delete from user where id=?";
+		sql = "delete from process where Id=?";
 		value.add(entity.getId());
 		genericTemplate.setSqlValue(sql);
 		genericTemplate.setValues(value);
@@ -73,14 +72,16 @@ public class UserDAO {
 		return result;
 	}
 
-	public int update(User entity) {
+	public int update(Processes entity, Integer pk) {
 		// TODO Auto-generated method stub
-		sql = "update user set username=?,password=?,level=?,isDelete=?,deleteTime=? where id=?";
+		sql = "update process set procName=?,colorNo=?,procNo=?,unitOutput=?,unitCost=?," +
+				"isDelete=?,deleteTime=? where Id=?";
 
-
-		value.add(entity.getUsername());
-		value.add(entity.getPassword());
-		value.add(entity.getLevel());
+		value.add(entity.getProcName());
+		value.add(entity.getColorNo());
+		value.add(entity.getProcNo());
+		value.add(entity.getUnitOutput());
+		value.add(entity.getUnitCost());
 		value.add(entity.getIsDelete());
 		value.add(entity.getDeleteTime());
 		value.add(entity.getId());
@@ -97,20 +98,20 @@ public class UserDAO {
 		return result;
 	}
 
-	public List<User> read(User entity) {
+	public List<Processes> read(Processes entity) {
 		// TODO Auto-generated method stub
-		UserMapping userMapping = new UserMapping();
-		User user = null;
+		ProcessesMapping processesMapping = new ProcessesMapping();
+		Processes processes = null;
 		ResultSet resultSet;
-		sql = "select * from user where Id=?";
+		sql = "select * from process where Id=?";
 		value.add(entity.getId());
 		genericTemplate.setSqlValue(sql);
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
 			//System.out.print(genericTemplate.executeQuery());
-			user = (User) userMapping.mapping(resultSet);
-			list.add(user);
+			processes = (Processes) processesMapping.mapping(resultSet);
+			list.add(processes);
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -119,19 +120,19 @@ public class UserDAO {
 		return list;
 	}
 
-	public List<User> readByPk(Integer pk) {
+	public List<Processes> readByPk(Integer pk) {
 		// TODO Auto-generated method stub
-		UserMapping userMapping = new UserMapping();
-		User user = null;
+		ProcessesMapping processesMapping = new ProcessesMapping();
+		Processes processes = null;
 		ResultSet resultSet;
-		sql = "select * from user where Id=?";
+		sql = "select * from process where Id=?";
 		value.add(pk);
 		genericTemplate.setSqlValue(sql);
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			user = (User)userMapping.mapping(resultSet);
-			list.add(user);
+			processes = (Processes) processesMapping.mapping(resultSet);
+			list.add(processes);
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}finally {
@@ -143,7 +144,7 @@ public class UserDAO {
 	public int count() {
 		// TODO Auto-generated method stub
 		ResultSet resultSet;
-		sql = "select count(*) from user";
+		sql = "select count(*) from process";
 		genericTemplate.setSqlValue(sql);
 		try {
 			resultSet = genericTemplate.executeQuery();
@@ -157,5 +158,4 @@ public class UserDAO {
 		}
 		return result;
 	}
-
 }
