@@ -81,7 +81,7 @@
 			<ul id="main-nav">  <!-- Accordion Menu -->
 				
 				<li>
-					<a href="Index_viewer.jsp" class="nav-top-item current no-submenu"> <!-- Add the class "current" to current menu item -->
+					<a href="Index_viewer.jsp" class="nav-top-item no-submenu"> <!-- Add the class "current" to current menu item -->
 						首页
 					</a>       
 				</li>
@@ -108,7 +108,7 @@
 				</li>
 				
 				<li>
-					<a href="AdminInfo_viewer.jsp" class="nav-top-item no-submenu"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
+					<a href="AdminInfo_viewer.jsp" class="nav-top-item no-submenu current"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
 						个人信息管理
 					</a>
 				</li>
@@ -125,22 +125,13 @@
 			<h2>Welcome!</h2>
 			<p id="page-intro">What would you like to do?</p>
 			
-			<ul class="shortcut-buttons-set">
-				
-				<li><a class="shortcut-button" href="FormSearch_viewer.jsp"><span>
-					<img src="resources/images/icons/paper_content_pencil_48.png" alt="icon" /><br />
-					工单列表
-				</span></a></li>
-				
-			</ul><!-- End .shortcut-buttons-set -->
-			
 			<div class="clear"></div> <!-- End .clear -->
 			
 			<div class="content-box"><!-- Start Content Box -->
 				
 				<div class="content-box-header">
 					
-					<h3>超期未完成产品</h3>
+					<h3>个人信息</h3>
 
 					
 					<div class="clear"></div>
@@ -151,48 +142,23 @@
 					
 					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
 						
-						<table>
-							<tfoot>
-								<tr>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td><a href="#">  more</a></td>
-								</tr>
-							</tfoot>
-						 
-							<tbody>
-								<tr>
-									<td><h3>生产一部</h3></td>
-									<td><h3>生产二部</h3></td>
-									<td><h3>生产三部</h3></td>
-									<td><h3>生产四部</h3></td>
-									<td><h3>生产五部</h3></td>
-									<td><h3>生产六部</h3></td>
-								</tr>
-								
-								<tr>
-									<td><h6>product6:</h6><a href="SheetJD1.jsp" title="title">20120624</a></td>
-									<td><h6>product7:</h6><a href="#" title="title">20120602</a></td>
-									<td><h6>product8:</h6><a href="#" title="title">20120603</a></td>
-									<td><h6>product9:</h6><a href="#" title="title">20120604</a></td>
-									<td><h6>product0:</h6><a href="#" title="title">20120605</a></td>
-									<td><h6>product1:</h6><a href="#" title="title">20120606</a></td>
-								</tr>
-								
-								<tr>
-									<td><h6>product7:</h6><a href="#" title="title">20120601</a></td>
-									<td><h6>product8:</h6><a href="#" title="title">20120602</a></td>
-									<td><h6>product9:</h6><a href="#" title="title">20120603</a></td>
-									<td><h6>product0:</h6><a href="#" title="title">20120604</a></td>
-									<td><h6>product1:</h6><a href="#" title="title">20120605</a></td>
-									<td><h6>product2:</h6><a href="#" title="title">20120606</a></td>
-								</tr>
-							</tbody>
-							
+						<form action="" method="">
+						<table class = "add_form">
+							<tr>
+								<td><span>用户名</span></td>
+								<td><input type="text" width="50px" value="admin"></td>
+							</tr>
+							<tr>
+								<td><span>密码</span></td>
+								<td><input type="text" width="50px" value="admin"></td>
+							</tr>
+							<tr>
+								<td><input type="submit" class="button" value="修改"></td>
+							</tr>
 						</table>
+						</form>
+						
+						
 						
 					</div> <!-- End #tab1 -->
 					
@@ -201,80 +167,12 @@
 				</div> <!-- End .content-box-content -->
 				
 			</div> <!-- End .content-box -->
-			
-
-			<div class="content-box"><!-- Start Content Box -->
-				
-				<div class="content-box-header">
-					
-					<h3>正在生产产品</h3>
-
-					
-					<div class="clear"></div>
-					
-				</div> <!-- End .content-box-header -->
-				
-				<div class="content-box-content">
-					
-					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
-						
-						<table>
-							<tfoot>
-								<tr>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td><a href="#">  more</a></td>
-								</tr>
-							</tfoot>
-						 
-							<tbody>
-								<tr>
-									<td><h3>生产一部</h3></td>
-									<td><h3>生产二部</h3></td>
-									<td><h3>生产三部</h3></td>
-									<td><h3>生产四部</h3></td>
-									<td><h3>生产五部</h3></td>
-									<td><h3>生产六部</h3></td>
-								</tr>
-								
-								<tr>
-									<td><h6>product6:</h6><a href="SheetJD1.jsp" title="title">20120501</a></td>
-									<td><h6>product7:</h6><a href="#" title="title">20120502</a></td>
-									<td><h6>product8:</h6><a href="#" title="title">20120503</a></td>
-									<td><h6>product9:</h6><a href="#" title="title">20120504</a></td>
-									<td><h6>product0:</h6><a href="#" title="title">20120505</a></td>
-									<td><h6>product1:</h6><a href="#" title="title">20120506</a></td>
-								</tr>
-								
-								<tr>
-									<td><h6>product7:</h6><a href="#" title="title">20120501</a></td>
-									<td><h6>product8:</h6><a href="#" title="title">20120502</a></td>
-									<td><h6>product9:</h6><a href="#" title="title">20120503</a></td>
-									<td><h6>product0:</h6><a href="#" title="title">20120504</a></td>
-									<td><h6>product1:</h6><a href="#" title="title">20120505</a></td>
-									<td><h6>product2:</h6><a href="#" title="title">20120506</a></td>
-								</tr>
-							</tbody>
-							
-						</table>
-						
-					</div> <!-- End #tab1 -->
-					
-  
-					
-				</div> <!-- End .content-box-content -->
-				
-			</div> <!-- End .content-box -->
-			
 
 			<div class="clear"></div>
-
+			
 			<div id="footer">
 				<small> <!-- Remove this notice or replace it with whatever you want -->
-					&#169; Copyright 2012 Your Company | Powered by 顺江实验室 | <a href="#">Top</a>
+						&#169; Copyright 2012 Your Company | Powered by 顺江实验室 | <a href="#">Top</a>
 				</small>
 			</div><!-- End #footer -->
 			
@@ -282,5 +180,6 @@
 		
 	</div></body>
   
+
 <!-- Download From www.exet.tk-->
 </html>

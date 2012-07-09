@@ -81,8 +81,14 @@
 			<ul id="main-nav">  <!-- Accordion Menu -->
 				
 				<li>
-					<a href="Index_viewer.jsp" class="nav-top-item current no-submenu"> <!-- Add the class "current" to current menu item -->
+					<a href="Index_admin.jsp" class="nav-top-item current no-submenu"> <!-- Add the class "current" to current menu item -->
 						首页
+					</a>       
+				</li>
+				
+				<li>
+					<a href="BatchAdd.jsp" class="nav-top-item no-submenu">
+						新建批次
 					</a>       
 				</li>
 				
@@ -91,7 +97,7 @@
 					工单管理
 					</a>
 					<ul>
-						<li><a href="FormSearch_viewer.jsp">工单列表</a></li>
+						<li><a href="FormSearch_admin.jsp">工单列表</a></li>
 					</ul>
 				</li>
 				
@@ -100,15 +106,37 @@
 						统计单管理
 					</a>
 					<ul>
-						<li><a href="SearchJD_viewer.jsp">生产进度统计单</a></li>
-						<li><a href="SearchHour_viewer.jsp">工时统计单</a></li>
-						<li><a href="SearchProduct_viewer.jsp">不合格品统计单</a></li>
-						<li><a href="SearchPeople_viewer.jsp">员工工作统计单</a></li>
+						<li><a href="SearchJD_admin.jsp">生产进度统计单</a></li>
+						<li><a href="SearchHour_admin.jsp">工时统计单</a></li>
+						<li><a href="SearchProduct_admin.jsp">不合格品统计单</a></li>
+						<li><a href="SearchPeople_admin.jsp">员工工作统计单</a></li>
 					</ul>
 				</li>
 				
 				<li>
-					<a href="AdminInfo_viewer.jsp" class="nav-top-item no-submenu"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
+					<a href="OutOfDue.jsp" class="nav-top-item no-submenu"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
+						超期批次管理
+					</a>
+				</li>
+				
+				<li>
+					<a href="#" class="nav-top-item">
+						数据管理
+					</a>
+					<ul>
+						<li><a href="DataSave.jsp">数据备份</a></li>
+						<li><a href="DataLogin.jsp">数据导入</a></li>
+					</ul>
+				</li>
+				
+				<li>
+					<a href="UserAdd.jsp" class="nav-top-item no-submenu"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
+						添加用户
+					</a>
+				</li>
+				
+				<li>
+					<a href="AdminInfo_admin.jsp" class="nav-top-item no-submenu"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
 						个人信息管理
 					</a>
 				</li>
@@ -127,9 +155,14 @@
 			
 			<ul class="shortcut-buttons-set">
 				
-				<li><a class="shortcut-button" href="FormSearch_viewer.jsp"><span>
+				<li><a class="shortcut-button" href="FormSearch_admin.jsp"><span>
 					<img src="resources/images/icons/paper_content_pencil_48.png" alt="icon" /><br />
 					工单列表
+				</span></a></li>
+				
+				<li><a class="shortcut-button" href="BatchAdd.jsp"><span>
+					<img src="resources/images/icons/image_add_48.png" alt="icon" /><br />
+					新建批次
 				</span></a></li>
 				
 			</ul><!-- End .shortcut-buttons-set -->
