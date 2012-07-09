@@ -4,12 +4,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import data.bean.Processes;
 
-public class ProcessesMapping implements BeanMapping {
+public class ProcessesMapping extends BasicMapping<Processes> {
 
-	public Object mapping(ResultSet rs) throws SQLException {
+	public Processes mapping(ResultSet rs)  {
 		
 		Processes process = new Processes();
-		if(rs.next()) {
+		try {
 			process.setColorNo(rs.getString("colorNo"));
 			process.setDeleteTime(rs.getDate("deleteTime"));
 			process.setId(rs.getInt("Id"));
@@ -18,6 +18,8 @@ public class ProcessesMapping implements BeanMapping {
 			process.setProcNo(rs.getString("procNo"));
 			process.setUnitCost(rs.getInt("unitCost"));
 			process.setUnitOutput(rs.getInt("unitOutput"));
+		} catch(SQLException ex) {
+			ex.printStackTrace();
 		}
 		return process;
 	}

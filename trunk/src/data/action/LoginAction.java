@@ -1,6 +1,6 @@
 package data.action;
 
-import data.bean.UserBean;
+import data.bean.User;
 import data.service.LoginService;
 
 public class LoginAction extends BaseAction{
@@ -15,10 +15,10 @@ public class LoginAction extends BaseAction{
 		System.out.println(level + username + password);
 		
 		LoginService loginService = new LoginService();
-		UserBean user = loginService.checkLogin(username, password, Integer.valueOf(level));
-		if(user != null){
+		//UserBean user = loginService.checkLogin(username, password, Integer.valueOf(level));
+		/*if(user != null){
 			return SUCCESS;
-		}
+		}*/
 		return INPUT;
 		
 	}

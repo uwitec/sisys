@@ -9,6 +9,7 @@ import data.bean.DisqDetail;
 import data.bean.DisqKind;
 import data.bean.mapping.DisqDetailMapping;
 import data.bean.mapping.DisqKindMapping;
+import data.util.GenericTemplate;
 
 public class DisqKindDAO {
 

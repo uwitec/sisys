@@ -8,6 +8,7 @@ import data.bean.DailyStaffDisq;
 import data.bean.DisqDetail;
 import data.bean.mapping.DailyStaffDisqMapping;
 import data.bean.mapping.DisqDetailMapping;
+import data.util.GenericTemplate;
 
 public class DisqDetailDAO {
 

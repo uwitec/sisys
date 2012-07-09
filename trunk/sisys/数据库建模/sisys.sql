@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2012/7/8 12:45:57                            */
+/* Created on:     2012/7/9 23:14:39                            */
 /*==============================================================*/
 
 
@@ -308,12 +308,6 @@ alter table dailyStaffDisq add constraint FK_Reference_20 foreign key (disqdeId)
 
 alter table dailyStaffDisq add constraint FK_Reference_21 foreign key (staffId)
       references Staff (Id) on delete restrict on update restrict;
-
-alter table disqDetail add constraint FK_Reference_1 foreign key (nextId)
-      references Staff (Id) on delete restrict on update restrict;
-
-alter table disqDetail add constraint FK_Reference_19 foreign key (nextId)
-      references disqDetail (Id) on delete restrict on update restrict;
 
 alter table disqDetail add constraint FK_Reference_2 foreign key (disKId)
       references disqKind (Id) on delete restrict on update restrict;

@@ -9,6 +9,7 @@ import data.bean.Product;
 import data.bean.ProductLine;
 import data.bean.mapping.ProductLineMapping;
 import data.bean.mapping.ProductMapping;
+import data.util.GenericTemplate;
 
 public class ProductLineDAO {
 

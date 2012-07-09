@@ -5,17 +5,19 @@ import java.sql.SQLException;
 
 import data.bean.StaffKind;
 
-public class StaffKindMapping implements BeanMapping{
+public class StaffKindMapping extends BasicMapping<StaffKind>{
 
-	public StaffKind mapping(ResultSet rs) throws SQLException {
+	public StaffKind mapping(ResultSet rs) {
 
 		StaffKind StaffKind = new StaffKind();
 		
-		if(rs.next()) {			
+		try {			
 			StaffKind.setId(rs.getInt("Id"));
 			StaffKind.setKindDesc(rs.getString("kindDesc"));
 			StaffKind.setIsDelete(rs.getInt("isDelete"));
 			StaffKind.setDeleteTime(rs.getDate("deleteTime"));
+		} catch(SQLException ex) {
+			ex.printStackTrace();
 		}
 		
 		return StaffKind;

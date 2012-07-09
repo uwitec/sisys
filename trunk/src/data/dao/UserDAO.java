@@ -1,32 +1,29 @@
 package data.dao;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import data.bean.Batch;
 import data.bean.User;
-import data.bean.UserBean;
-import data.bean.mapping.BatchMapping;
-import data.bean.mapping.BeanMapping;
 import data.bean.mapping.UserMapping;
+import data.util.GenericQueryImpl;
 
-public class UserDAO {
+public class UserDAO extends GenericQueryImpl<User, UserMapping>{
 
-	GenericTemplate genericTemplate;
+	//GenericTemplate genericTemplate;
 	List<Object> value;
 	String sql;
 	int result;
 	boolean flag;
 	List<User> list;
-	
+	static UserMapping userMapping = new UserMapping();
 	/**
 	 * 构造函数
 	 */
 	public UserDAO() {
-		genericTemplate = new GenericTemplate();
+		super(User.class, userMapping);
+		//genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
 		flag = false;
@@ -150,9 +147,10 @@ public class UserDAO {
 		genericTemplate.setSqlValue(sql);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			while(resultSet.next()) {
-				result ++;
+			if(resultSet.next()) {
+				result = resultSet.getInt("count(*)");
 			}
+			
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}finally {

@@ -7,6 +7,7 @@ import java.util.List;
 
 import data.bean.Batch;
 import data.bean.mapping.BatchMapping;
+import data.util.GenericTemplate;
 
 public class BatchDAO {
 

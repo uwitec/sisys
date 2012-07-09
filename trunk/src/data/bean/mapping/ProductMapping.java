@@ -5,12 +5,12 @@ import java.sql.SQLException;
 
 import data.bean.Product;
 
-public class ProductMapping implements BeanMapping {
+public class ProductMapping extends BasicMapping<Product> {
 
-	public Object mapping(ResultSet rs) throws SQLException {
+	public Product mapping(ResultSet rs) {
 		
 		Product product = new Product();		
-		if(rs.next()) {
+		try {
 			product.setDeleteTime(rs.getDate("deleteTime"));
 			product.setDeptId(rs.getInt("deptId"));
 			product.setDisqNum(rs.getInt("disqNum"));
@@ -22,6 +22,8 @@ public class ProductMapping implements BeanMapping {
 			product.setProNo(rs.getString("proNo"));
 			product.setTime(rs.getDate("time"));
 			product.setTotalNum(rs.getInt("totalNum"));
+		} catch(SQLException ex) {
+			ex.printStackTrace();
 		}
 		return product;
 	}

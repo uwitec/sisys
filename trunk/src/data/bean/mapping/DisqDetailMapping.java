@@ -5,16 +5,18 @@ import java.sql.SQLException;
 
 import data.bean.DisqDetail;
 
-public class DisqDetailMapping implements BeanMapping {
+public class DisqDetailMapping extends BasicMapping<DisqDetail> {
 
-	public Object mapping(ResultSet rs) throws SQLException {
+	public DisqDetail mapping(ResultSet rs) {
 		
 		DisqDetail disqDetail = new DisqDetail();
-		if(rs.next()) {
+		try {
 			disqDetail.setDisKId(rs.getInt("disKId"));
 			disqDetail.setId(rs.getInt("Id"));
 			disqDetail.setNextId(rs.getInt("nextId"));
 			disqDetail.setNum(rs.getInt("num"));
+		} catch(SQLException ex) {
+			ex.printStackTrace();
 		}
 		return disqDetail;
 		

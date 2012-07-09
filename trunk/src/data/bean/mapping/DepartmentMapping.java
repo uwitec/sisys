@@ -5,17 +5,19 @@ import java.sql.SQLException;
 
 import data.bean.Department;
 
-public class DepartmentMapping implements BeanMapping{
+public class DepartmentMapping extends BasicMapping<Department>{
 
-	public Department mapping(ResultSet rs) throws SQLException {
+	public Department mapping(ResultSet rs) {
 
 		Department department = new Department();
-		if(rs.next()) {			
+		try {			
 			department.setId(rs.getInt("Id"));
 			department.setDeptName(rs.getString("deptName"));
 			department.setDeptNo(rs.getString("deptNo"));
 			department.setIsDelete(rs.getInt("isDelete"));
 			department.setDeleteTime(rs.getDate("deleteTime"));
+		} catch(SQLException ex) {
+			ex.printStackTrace();
 		}
 		
 		return department;

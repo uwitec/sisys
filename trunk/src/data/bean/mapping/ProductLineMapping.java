@@ -5,16 +5,18 @@ import java.sql.SQLException;
 
 import data.bean.ProductLine;
 
-public class ProductLineMapping implements BeanMapping {
+public class ProductLineMapping extends BasicMapping<ProductLine> {
 
-	public Object mapping(ResultSet rs) throws SQLException {
+	public ProductLine mapping(ResultSet rs) {
 		
 		ProductLine productLine = new ProductLine();
-		if(rs.next()) {
+		try {
 			productLine.setDeleteTime(rs.getDate("deleteTime"));
 			productLine.setId(rs.getInt("Id"));
 			productLine.setIsDelete(rs.getInt("isDelete"));
 			productLine.setLineDesc(rs.getString("lineDesc"));
+		} catch(SQLException ex) {
+			ex.printStackTrace();
 		}
 		return productLine;
 	}

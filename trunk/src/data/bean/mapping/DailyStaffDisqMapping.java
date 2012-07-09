@@ -5,17 +5,19 @@ import java.sql.SQLException;
 
 import data.bean.DailyStaffDisq;
 
-public class DailyStaffDisqMapping implements BeanMapping  {
+public class DailyStaffDisqMapping extends BasicMapping<DailyStaffDisq>  {
 
-	public Object mapping(ResultSet rs) throws SQLException {
+	public DailyStaffDisq mapping(ResultSet rs) {
 		
 		DailyStaffDisq dailyStaffDisq = new DailyStaffDisq();
-		if(rs.next()) {
+		try {
 			dailyStaffDisq.setDisqdeId(rs.getInt("disqdeId"));
 			dailyStaffDisq.setId(rs.getInt("Id"));
 			dailyStaffDisq.setStaffId(rs.getInt("staffId"));
 			dailyStaffDisq.setTime(rs.getDate("time"));
 			dailyStaffDisq.setTotalNum(rs.getInt("totalNum"));
+		} catch(SQLException ex) {
+			ex.printStackTrace();
 		}
 		return dailyStaffDisq;
 	}

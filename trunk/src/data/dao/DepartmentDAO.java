@@ -9,8 +9,8 @@ import java.util.List;
 import data.bean.Batch;
 import data.bean.Department;
 import data.bean.mapping.BatchMapping;
-import data.bean.mapping.BeanMapping;
 import data.bean.mapping.DepartmentMapping;
+import data.util.GenericTemplate;
 
 public class DepartmentDAO {
 

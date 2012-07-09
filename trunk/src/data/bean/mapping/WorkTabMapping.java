@@ -5,12 +5,12 @@ import java.sql.SQLException;
 
 import data.bean.WorkTab;
 
-public class WorkTabMapping implements BeanMapping {
+public class WorkTabMapping extends BasicMapping<WorkTab> {
 
-	public Object mapping(ResultSet rs) throws SQLException {
+	public WorkTab mapping(ResultSet rs) {
 
 		WorkTab workTab = new WorkTab();
-		if(rs.next()) {
+		try {
 			workTab.setDisqNum(rs.getInt("disqNum"));
 			workTab.setId(rs.getInt("Id"));
 			workTab.setIsEnd(rs.getInt("isEnd"));
@@ -18,6 +18,8 @@ public class WorkTabMapping implements BeanMapping {
 			workTab.setOverTime(rs.getDate("overTime"));
 			workTab.setProcId(rs.getInt("procId"));
 			workTab.setQuNum(rs.getInt("quNum"));
+		} catch(SQLException ex) {
+			ex.printStackTrace();
 		}
 		return workTab;
 	}

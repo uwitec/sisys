@@ -8,6 +8,7 @@ import data.bean.Product;
 import data.bean.ScheduleTab;
 import data.bean.mapping.ProductMapping;
 import data.bean.mapping.ScheduleTabMapping;
+import data.util.GenericTemplate;
 
 public class ScheduleTabDAO {
 

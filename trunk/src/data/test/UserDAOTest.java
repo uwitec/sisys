@@ -1,9 +1,13 @@
 package data.test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import data.bean.Batch;
 import data.bean.User;
 import data.dao.BatchDAO;
 import data.dao.UserDAO;
+import data.util.OrderType;
 
 public class UserDAOTest {
 	UserDAO udao = new UserDAO();
@@ -17,13 +21,17 @@ public class UserDAOTest {
 		//udt.testReadByPk();
 		//udt.testCount();
 		//udt.testDelete();
+		//udt.testFindEntity();
+		//udt.testFindEntity2();
+		//udt.testCount2();
+		//udt.testDelete();
 	}
 	public void testCreate() {
 		u.setDeleteTime(null);
-		u.setId(1);
+		u.setId(5);
 		u.setIsDelete(0);
-		u.setLevel(1);
-		u.setPassword("");
+		u.setLevel(2);
+		u.setPassword("123");
 		u.setUsername("123");
 		System.out.print(udao.create(u));
 	}
@@ -50,5 +58,31 @@ public class UserDAOTest {
 	}
 	public void testCount() {
 		System.out.print(udao.count());
+	}
+	public void testFindEntity() {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("username", "123");
+		System.out.print(udao.findEntity(map));
+	}
+	public void testFindEntity2() {
+		Map<String, String> equalsMap = new HashMap<String, String>();
+		Map<String, OrderType> orderMap = new HashMap<String, OrderType>();
+		equalsMap.put("username", "123");
+		orderMap.put("Id", OrderType.DESC);
+		System.out.println(udao.findEntity(equalsMap, orderMap, 1, 5));
+	}
+	
+	public void testCount2() {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("username", "123");
+		System.out.print(udao.countEntity(map));
+	}
+	
+	public void testCount3() {
+		Map<String, String> equalsMap = new HashMap<String, String>();
+		Map<String, OrderType> orderMap = new HashMap<String, OrderType>();
+		equalsMap.put("username", "123");
+		orderMap.put("Id", OrderType.DESC);
+		System.out.println(udao.findEntity(equalsMap, orderMap, 1, 5));
 	}
 }

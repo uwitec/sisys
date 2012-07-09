@@ -1,4 +1,4 @@
-package data.dao;
+package data.util;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +9,7 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
-import data.bean.mapping.BeanMapping;
+import data.bean.mapping.BasicMapping;
 import data.connect.DatabaseConnect;
 
 public class GenericTemplate {
@@ -25,7 +25,7 @@ public class GenericTemplate {
 	    private List<Object> values;
 	    
 	    //定义BeanMapping映射
-	    private BeanMapping mapping;
+	    private BasicMapping mapping;
 	 
 	    private PreparedStatement preparedStatement;
 	    private Statement statement;
@@ -56,7 +56,7 @@ public class GenericTemplate {
 	    /**
 	     * 设定BeanMapping映射
 	     */
-	    public void setMapping(BeanMapping mapping){
+	    public void setMapping(BasicMapping mapping){
 	    	this.mapping = mapping;
 	    }
 	 
@@ -97,8 +97,10 @@ public class GenericTemplate {
                 // 执行查询sql语句，返回查询结果集
                 resultSet = preparedStatement.executeQuery();
             } else {
+            	System.out.println(sqlValue);
                 statement = (Statement) connection.createStatement();
                 resultSet = statement.executeQuery(sqlValue);
+                System.out.println(resultSet);
             }
 	        return resultSet;
 	    }

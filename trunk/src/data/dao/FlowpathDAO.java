@@ -9,6 +9,7 @@ import data.bean.DisqKind;
 import data.bean.Flowpath;
 import data.bean.mapping.DisqKindMapping;
 import data.bean.mapping.FlowpathMapping;
+import data.util.GenericTemplate;
 
 public class FlowpathDAO {
 

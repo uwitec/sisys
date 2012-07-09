@@ -5,12 +5,12 @@ import java.sql.SQLException;
 
 import data.bean.StaffDetail;
 
-public class StaffDetailMapping implements BeanMapping {
+public class StaffDetailMapping extends BasicMapping<StaffDetail> {
 
-	public Object mapping(ResultSet rs) throws SQLException {
+	public StaffDetail mapping(ResultSet rs) {
 
 		StaffDetail staffDetail = new StaffDetail();
-		if(rs.next()) {
+		try {
 			staffDetail.setlWaste(rs.getInt("lWaste"));
 			staffDetail.setgWaste(rs.getInt("gWaste"));
 			staffDetail.setId(rs.getInt("Id"));
@@ -20,6 +20,8 @@ public class StaffDetailMapping implements BeanMapping {
 			staffDetail.setQuaNum(rs.getInt("quaNum"));
 			staffDetail.setStaffId(rs.getInt("staffId"));
 			staffDetail.setWorkHours(rs.getDouble("workHours"));
+		} catch(SQLException ex) {
+			ex.printStackTrace();
 		}
 		return staffDetail;
 	}

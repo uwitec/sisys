@@ -5,17 +5,19 @@ import java.sql.SQLException;
 
 import data.bean.DisqKind;
 
-public class DisqKindMapping implements BeanMapping {
+public class DisqKindMapping extends BasicMapping<DisqKind> {
 
-	public Object mapping(ResultSet rs) throws SQLException {
+	public DisqKind mapping(ResultSet rs) {
 
 		DisqKind disqKind = new DisqKind();
-		if(rs.next()) {
+		try {
 			disqKind.setDeleteTime(rs.getDate("deleteTime"));
 			disqKind.setDisDesc(rs.getString("disDesc"));
 			disqKind.setId(rs.getInt("Id"));
 			disqKind.setIsDelete(rs.getInt("isDelete"));
 			disqKind.setKind(rs.getInt("kind"));
+		} catch(SQLException ex) {
+			ex.printStackTrace();
 		}
 		return disqKind;
 	}

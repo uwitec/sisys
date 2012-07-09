@@ -8,6 +8,7 @@ import data.bean.Batch;
 import data.bean.DailyStaffDisq;
 import data.bean.mapping.BatchMapping;
 import data.bean.mapping.DailyStaffDisqMapping;
+import data.util.GenericTemplate;
 
 public class DailyStaffDisqDAO {
 

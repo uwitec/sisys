@@ -5,12 +5,12 @@ import java.sql.SQLException;
 
 import data.bean.Batch;
 
-public class BatchMapping implements BeanMapping {
+public class BatchMapping  extends BasicMapping<Batch> {
 
-	public Object mapping(ResultSet rs) throws SQLException {
+	public Batch mapping(ResultSet rs) {
 		// TODO Auto-generated method stub
 		Batch batch = new Batch();
-		if(rs.next()) {
+		try {
 			batch.setBatchNo(rs.getString("batchNo"));
 			batch.setDeleteTime(rs.getDate("deleteTime"));
 			batch.setDisqNum(rs.getInt("disqNum"));
@@ -24,9 +24,10 @@ public class BatchMapping implements BeanMapping {
 			batch.setStatus(rs.getInt("status"));
 			batch.setTotalNum(rs.getInt("totalNum"));
 			batch.setWorkTabId(rs.getInt("workTabId"));
-			
-		}
-		
+		} catch(SQLException ex) {
+			ex.printStackTrace();
+		}		
+
 		return batch;
 	}
 

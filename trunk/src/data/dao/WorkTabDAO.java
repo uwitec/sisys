@@ -8,6 +8,7 @@ import data.bean.Product;
 import data.bean.WorkTab;
 import data.bean.mapping.ProductMapping;
 import data.bean.mapping.WorkTabMapping;
+import data.util.GenericTemplate;
 
 public class WorkTabDAO {
 

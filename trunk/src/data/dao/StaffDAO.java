@@ -10,8 +10,8 @@ import data.bean.Batch;
 import data.bean.Staff;
 
 import data.bean.mapping.BatchMapping;
-import data.bean.mapping.BeanMapping;
 import data.bean.mapping.StaffMapping;
+import data.util.GenericTemplate;
 
 public class StaffDAO {
 

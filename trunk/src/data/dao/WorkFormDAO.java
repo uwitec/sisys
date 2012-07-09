@@ -9,6 +9,7 @@ import data.bean.Product;
 import data.bean.WorkForm;
 import data.bean.mapping.ProductMapping;
 import data.bean.mapping.WorkFormMapping;
+import data.util.GenericTemplate;
 
 public class WorkFormDAO {
 

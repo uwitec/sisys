@@ -9,6 +9,7 @@ import data.bean.Processes;
 import data.bean.Product;
 import data.bean.mapping.ProcessesMapping;
 import data.bean.mapping.ProductMapping;
+import data.util.GenericTemplate;
 
 public class ProductDAO {
 

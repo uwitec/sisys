@@ -8,6 +8,7 @@ import data.bean.Product;
 import data.bean.WorkHoursTab;
 import data.bean.mapping.ProductMapping;
 import data.bean.mapping.WorkHoursTabMapping;
+import data.util.GenericTemplate;
 
 public class WorkHoursTabDAO {
 

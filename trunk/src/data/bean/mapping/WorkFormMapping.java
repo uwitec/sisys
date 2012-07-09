@@ -5,12 +5,12 @@ import java.sql.SQLException;
 
 import data.bean.WorkForm;
 
-public class WorkFormMapping implements BeanMapping {
+public class WorkFormMapping extends BasicMapping<WorkForm> {
 
-	public Object mapping(ResultSet rs) throws SQLException {
+	public WorkForm mapping(ResultSet rs) {
 		
 		WorkForm workForm = new WorkForm();
-		if(rs.next()) {
+		try {
 			workForm.setBatchId(rs.getInt("batchId"));
 			workForm.setDeleteTime(rs.getDate("deleteTime"));
 			workForm.setDisDetail(rs.getString("disDetail"));
@@ -21,6 +21,8 @@ public class WorkFormMapping implements BeanMapping {
 			workForm.setQuaNum(rs.getInt("quaNum"));
 			workForm.setStaId(rs.getInt("staId"));
 			workForm.setTime(rs.getDate("time"));
+		} catch(SQLException ex) {
+			ex.printStackTrace();
 		}
 		return workForm;
 	}

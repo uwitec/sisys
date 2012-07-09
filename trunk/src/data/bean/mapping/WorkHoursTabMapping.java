@@ -5,16 +5,18 @@ import java.sql.SQLException;
 
 import data.bean.WorkHoursTab;
 
-public class WorkHoursTabMapping implements BeanMapping {
+public class WorkHoursTabMapping extends BasicMapping<WorkHoursTab> {
 
-	public Object mapping(ResultSet rs) throws SQLException {
+	public WorkHoursTab mapping(ResultSet rs) {
 		WorkHoursTab workHoursTab = new WorkHoursTab();
-		if(rs.next()) {
+		try {
 			workHoursTab.setId(rs.getInt("Id"));
 			workHoursTab.setSalary(rs.getDouble("salary"));
 			workHoursTab.setStaId(rs.getInt("staId"));
 			workHoursTab.setTime(rs.getDate("time"));
 			workHoursTab.setWorkHours(rs.getDouble("workHours"));
+		} catch(SQLException ex) {
+			ex.printStackTrace();
 		}
 		return workHoursTab;
 	}

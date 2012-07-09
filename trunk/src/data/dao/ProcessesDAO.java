@@ -9,6 +9,7 @@ import data.bean.Flowpath;
 import data.bean.Processes;
 import data.bean.mapping.FlowpathMapping;
 import data.bean.mapping.ProcessesMapping;
+import data.util.GenericTemplate;
 
 public class ProcessesDAO {
 

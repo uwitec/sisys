@@ -5,13 +5,13 @@ import java.sql.SQLException;
 
 import data.bean.Staff;
 
-public class StaffMapping implements BeanMapping{
+public class StaffMapping extends BasicMapping<Staff>{
 
-	public Staff mapping(ResultSet rs) throws SQLException {
+	public Staff mapping(ResultSet rs) {
 
 		Staff Staff = new Staff();
 		
-		if(rs.next()) {			
+		try {			
 			Staff.setId(rs.getInt("Id"));
 			Staff.setDeptId(rs.getInt("deptId"));
 			Staff.setKindId(rs.getInt("kindId"));
@@ -20,6 +20,8 @@ public class StaffMapping implements BeanMapping{
 			Staff.setIsDelete(rs.getInt("isDelete"));
 			Staff.setDeleteTime(rs.getDate("deleteTime"));
 
+		} catch(SQLException ex) {
+			ex.printStackTrace();
 		}
 		
 		return Staff;
