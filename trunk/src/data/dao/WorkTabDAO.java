@@ -1,5 +1,159 @@
 package data.dao;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import data.bean.Product;
+import data.bean.WorkTab;
+import data.bean.mapping.ProductMapping;
+import data.bean.mapping.WorkTabMapping;
+
 public class WorkTabDAO {
 
+	GenericTemplate genericTemplate;
+	List<Object> value;
+	String sql;
+	int result;
+	boolean flag;
+	List<WorkTab> list;
+	
+	/**
+	 * 构造函数
+	 */
+	public WorkTabDAO() {
+		genericTemplate = new GenericTemplate();
+		value = new ArrayList<Object>();
+		result = 0;
+		flag = false;
+		list = new ArrayList<WorkTab>();
+	}
+	
+	public int create(WorkTab entity) {
+		// TODO Auto-generated method stub
+		sql = "insert into workTab values (?,?,?,?,?,?,?)";
+		
+		value.add(entity.getId());
+		value.add(entity.getProcId());
+		value.add(entity.getQuNum());
+		value.add(entity.getDisqNum());
+		value.add(entity.getIsOver());
+		value.add(entity.getOverTime());
+		value.add(entity.getIsEnd());
+		
+		genericTemplate.setSqlValue(sql);
+		genericTemplate.setValues(value);
+		try {
+			result = genericTemplate.executeUpdate();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			genericTemplate.close();
+		}
+		
+		return result;
+	}
+
+	public int delete(WorkTab entity) {
+		// TODO Auto-generated method stub
+		sql = "delete from workTab where Id=?";
+		value.add(entity.getId());
+		genericTemplate.setSqlValue(sql);
+		genericTemplate.setValues(value);
+		try {
+			result = genericTemplate.executeUpdate();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			genericTemplate.close();
+		}
+
+		return result;
+	}
+
+	public int update(WorkTab entity, Integer pk) {
+		// TODO Auto-generated method stub
+		sql = "update workTab set procId=?,quNum=?,disqNum=?,isOver=?,overTime=?,isEnd=? where Id=?";
+
+
+		value.add(entity.getProcId());
+		value.add(entity.getQuNum());
+		value.add(entity.getDisqNum());
+		value.add(entity.getIsOver());
+		value.add(entity.getOverTime());
+		value.add(entity.getIsEnd());
+		value.add(entity.getId());
+		
+		genericTemplate.setSqlValue(sql);
+		genericTemplate.setValues(value);
+		try {
+			result = genericTemplate.executeUpdate();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			genericTemplate.close();
+		}
+		return result;
+	}
+
+	public List<WorkTab> read(WorkTab entity) {
+		// TODO Auto-generated method stub
+		WorkTabMapping workTabMapping = new WorkTabMapping();
+		WorkTab workTab = null;
+		ResultSet resultSet;
+		sql = "select * from workTab where Id=?";
+		value.add(entity.getId());
+		genericTemplate.setSqlValue(sql);
+		genericTemplate.setValues(value);
+		try {
+			resultSet = genericTemplate.executeQuery();
+			//System.out.print(genericTemplate.executeQuery());
+			workTab = (WorkTab) workTabMapping.mapping(resultSet);
+			list.add(workTab);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			genericTemplate.close();
+		}
+		return list;
+	}
+
+	public List<WorkTab> readByPk(Integer pk) {
+		// TODO Auto-generated method stub
+		WorkTabMapping workTabMapping = new WorkTabMapping();
+		WorkTab workTab = null;
+		ResultSet resultSet;
+		sql = "select * from workTab where Id=?";
+		value.add(pk);
+		genericTemplate.setSqlValue(sql);
+		genericTemplate.setValues(value);
+		try {
+			resultSet = genericTemplate.executeQuery();
+			workTab = (WorkTab) workTabMapping.mapping(resultSet);
+			list.add(workTab);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			genericTemplate.close();
+		}
+		return list;
+	}
+
+	public int count() {
+		// TODO Auto-generated method stub
+		ResultSet resultSet;
+		sql = "select count(*) from workTab";
+		genericTemplate.setSqlValue(sql);
+		try {
+			resultSet = genericTemplate.executeQuery();
+			while(resultSet.next()) {
+				result ++;
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			genericTemplate.close();
+		}
+		return result;
+	}
 }

@@ -1,5 +1,7 @@
 package data.bean;
 
+import java.util.Date;
+
 /**
  * 
  * @author huangxin 工作表 记录一个批次中按流程顺序排列的所有工序的完成情况， 即按链表形式组织工序，提供接口（id号）给对应批次
@@ -11,7 +13,7 @@ public class WorkTab {
 	private int quNum;
 	private int disqNum;
 	private int isOver; // 判断该工序是否已完成
-	private int OverTime;
+	private Date OverTime;
 	private int isEnd; // 判断是否是该流程的最后一个工序
 
 	// get和set方法
@@ -55,11 +57,11 @@ public class WorkTab {
 		this.isOver = isOver;
 	}
 
-	public int getOverTime() {
+	public Date getOverTime() {
 		return OverTime;
 	}
 
-	public void setOverTime(int overTime) {
+	public void setOverTime(Date overTime) {
 		OverTime = overTime;
 	}
 
@@ -72,11 +74,14 @@ public class WorkTab {
 	}
 
 	// 得到hashCode
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + OverTime;
+		result = prime * result
+				+ ((OverTime == null) ? 0 : OverTime.hashCode());
 		result = prime * result + disqNum;
 		result = prime * result + id;
 		result = prime * result + isEnd;
@@ -86,7 +91,6 @@ public class WorkTab {
 		return result;
 	}
 
-	// 判断两个类是否相同
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -96,7 +100,10 @@ public class WorkTab {
 		if (getClass() != obj.getClass())
 			return false;
 		WorkTab other = (WorkTab) obj;
-		if (OverTime != other.OverTime)
+		if (OverTime == null) {
+			if (other.OverTime != null)
+				return false;
+		} else if (!OverTime.equals(other.OverTime))
 			return false;
 		if (disqNum != other.disqNum)
 			return false;
@@ -115,7 +122,7 @@ public class WorkTab {
 
 	// 构造函数
 	public WorkTab(int id, int procId, int quNum, int disqNum, int isOver,
-			int overTime, int isEnd) {
+			Date overTime, int isEnd) {
 		super();
 		this.id = id;
 		this.procId = procId;

@@ -4,7 +4,7 @@ package data.bean;
  * 
  * @author huangxin 员工生产详细 将员工对一道工序的完成情况汇总。用于导出员工完成详细表
  */
-public class staffDetail {
+public class StaffDetail {
 
 	private int id;
 	private int staffId;
@@ -73,11 +73,11 @@ public class staffDetail {
 		this.gWaste = gWaste;
 	}
 
-	public int getfWaste() {
+	public int getlWaste() {
 		return lWaste;
 	}
 
-	public void setfWaste(int fWaste) {
+	public void setlWaste(int fWaste) {
 		this.lWaste = fWaste;
 	}
 
@@ -118,7 +118,7 @@ public class staffDetail {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		staffDetail other = (staffDetail) obj;
+		StaffDetail other = (StaffDetail) obj;
 		if (lWaste != other.lWaste)
 			return false;
 		if (gWaste != other.gWaste)
@@ -151,7 +151,7 @@ public class staffDetail {
 	}
 
 	// 构造函数
-	public staffDetail(int id, int staffId, String proName, String proNo,
+	public StaffDetail(int id, int staffId, String proName, String proNo,
 			String procName, int quaNum, int gWaste, int fWaste,
 			double workHours) {
 		super();
@@ -166,7 +166,7 @@ public class staffDetail {
 		this.workHours = workHours;
 	}
 
-	public staffDetail() {
+	public StaffDetail() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
