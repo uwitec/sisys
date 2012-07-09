@@ -174,7 +174,7 @@ public class staffDetail {
 	// 转换为字符串
 	@Override
 	public String toString() {
-		return "staffDetail [id=" + id + ", staffId=" + staffId + ", proName="
+		return "StaffDetail [id=" + id + ", staffId=" + staffId + ", proName="
 				+ proName + ", proNo=" + proNo + ", procName=" + procName
 				+ ", quaNum=" + quaNum + ", gWaste=" + gWaste + ", fWaste="
 				+ lWaste + ", workHours=" + workHours + "]";
