@@ -16,8 +16,8 @@ public class ProductDAOTest {
 		//test.testUpdate();
 		//test.testRead();
 		//test.testReadByPk();
-		//test.testCount();
-		test.testDelete();
+		test.testCount();
+		//test.testDelete();
 	}
 	
 	public void testCreate() {

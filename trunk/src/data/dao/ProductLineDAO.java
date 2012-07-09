@@ -2,6 +2,7 @@ package data.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import data.bean.Product;
@@ -53,7 +54,9 @@ public class ProductLineDAO {
 
 	public int delete(ProductLine entity) {
 		// TODO Auto-generated method stub
-		sql = "delete from productLine where Id=?";
+		sql = "update productline set isDelete=?,deleteTime=? where id=?";
+		value.add(1);
+		value.add(new Date());
 		value.add(entity.getId());
 		genericTemplate.setSqlValue(sql);
 		genericTemplate.setValues(value);

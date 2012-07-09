@@ -2,6 +2,7 @@ package data.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import data.bean.Flowpath;
@@ -57,7 +58,9 @@ public class ProcessesDAO {
 
 	public int delete(Processes entity) {
 		// TODO Auto-generated method stub
-		sql = "delete from process where Id=?";
+		sql = "update process set isDelete=?,deleteTime=? where id=?";
+		value.add(1);
+		value.add(new Date());
 		value.add(entity.getId());
 		genericTemplate.setSqlValue(sql);
 		genericTemplate.setValues(value);

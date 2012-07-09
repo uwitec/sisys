@@ -2,6 +2,7 @@ package data.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import data.bean.DisqDetail;
@@ -54,7 +55,9 @@ public class DisqKindDAO {
 
 	public int delete(DisqKind entity) {
 		// TODO Auto-generated method stub
-		sql = "delete from disqKind where Id=?";
+		sql = "update disqkind set isDelete=?,deleteTime=? where id=?";
+		value.add(1);
+		value.add(new Date());
 		value.add(entity.getId());
 		genericTemplate.setSqlValue(sql);
 		genericTemplate.setValues(value);

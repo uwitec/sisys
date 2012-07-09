@@ -11,11 +11,11 @@ public class StaffDAOTest {
 
 	public static void main(String args[]) {
 		StaffDAOTest udt = new StaffDAOTest();
-		udt.testCreate();
+		//udt.testCreate();
 		//udt.testUpdate();
 		//udt.testRead();
 		//udt.testReadByPk();
-		//udt.testCount();
+		udt.testCount();
 		//udt.testDelete();
 	}
 	public void testCreate() {
@@ -23,7 +23,7 @@ public class StaffDAOTest {
 		u.setId(1);
 		u.setIsDelete(0);
 		u.setDeptId(1);
-		u.setKindId(1);
+		u.setKindId(2);
 		u.setStaName("123");
 		u.setStaNo("352");
 		System.out.print(udao.create(u));
@@ -34,7 +34,7 @@ public class StaffDAOTest {
 		u.setIsDelete(0);
 		u.setDeptId(1);
 		u.setKindId(2);
-		u.setStaName("123");
+		u.setStaName("1223");
 		u.setStaNo("352");
 		System.out.print(udao.update(u));
 	}

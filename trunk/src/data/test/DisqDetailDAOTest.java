@@ -22,15 +22,15 @@ public class DisqDetailDAOTest {
 	public void testCreate() {
 		d.setDisKId(1);
 		d.setId(1);
-		d.setNextId(2);
+		d.setNextId(1);
 		d.setNum(1);
 		System.out.print(ddd.create(d));
 	}
 	public void testUpdate() {
 		d.setDisKId(1);
 		d.setId(1);
-		d.setNextId(2);
-		d.setNum(1);
+		d.setNextId(1);
+		d.setNum(2);
 		
 		System.out.print(ddd.update(d,1));
 	}

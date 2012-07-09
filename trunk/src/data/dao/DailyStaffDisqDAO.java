@@ -55,7 +55,7 @@ public class DailyStaffDisqDAO {
 
 	public int delete(DailyStaffDisq entity) {
 		// TODO Auto-generated method stub
-		sql = "delete from batch where Id=?";
+		sql = "delete from dailyStaffDisq where Id=?";
 		value.add(entity.getId());
 		genericTemplate.setSqlValue(sql);
 		genericTemplate.setValues(value);
@@ -72,7 +72,7 @@ public class DailyStaffDisqDAO {
 
 	public int update(DailyStaffDisq entity, Integer pk) {
 		// TODO Auto-generated method stub
-		sql = "update batch set disqdeId=?,staffId=?,totalNum=?,time=? where Id=?";
+		sql = "update dailystaffdisq set disqdeId=?,staffId=?,totalNum=?,time=? where Id=?";
 
 		value.add(entity.getDisqdeId());
 		value.add(entity.getStaffId());

@@ -17,7 +17,7 @@ public class WorkHoursTabDAOTest {
 		//test.testRead();
 		//test.testReadByPk();
 		//test.testCount();
-		test.testDelete();
+		//test.testDelete();
 	}
 	
 	public void testCreate() {

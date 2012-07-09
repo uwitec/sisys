@@ -12,12 +12,12 @@ public class ProductLineDAOTest {
 
 	public static void main(String args[]) {
 		ProductLineDAOTest test = new ProductLineDAOTest();
-		//test.testCreate();
-		//test.testUpdate();
-		//test.testRead();
-		//test.testReadByPk();
-		//test.testCount();
-		test.testDelete();
+		//test.testCreate();//1
+		//test.testUpdate();//1
+		//test.testRead();//1
+		//test.testReadByPk();//1
+		//test.testCount();//1
+		//test.testDelete();
 	}
 	
 	public void testCreate() {

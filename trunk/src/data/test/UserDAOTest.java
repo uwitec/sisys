@@ -11,12 +11,12 @@ public class UserDAOTest {
 
 	public static void main(String args[]) {
 		UserDAOTest udt = new UserDAOTest();
-		//udt.testCreate();
+		udt.testCreate();
 		//udt.testUpdate();
 		//udt.testRead();
 		//udt.testReadByPk();
 		//udt.testCount();
-		udt.testDelete();
+		//udt.testDelete();
 	}
 	public void testCreate() {
 		u.setDeleteTime(null);

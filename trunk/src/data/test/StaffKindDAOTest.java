@@ -12,7 +12,7 @@ public class StaffKindDAOTest {
 	public static void main(String args[]) {
 		StaffKindDAOTest udt = new StaffKindDAOTest();
 		//udt.testCreate();
-		//udt.testUpdate();
+		udt.testUpdate();
 		//udt.testRead();
 		//udt.testReadByPk();
 		//udt.testCount();
@@ -27,9 +27,9 @@ public class StaffKindDAOTest {
 	}
 	public void testUpdate() {
 		u.setDeleteTime(null);
-		u.setId(1);
+		u.setId(2);
 		u.setIsDelete(0);
-		u.setKindDesc("kindDesc");
+		u.setKindDesc("kind0esc");
 		System.out.print(udao.update(u));
 	}
 	public void testRead() {

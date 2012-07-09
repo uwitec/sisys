@@ -3,6 +3,7 @@ package data.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import data.bean.Batch;
@@ -59,7 +60,9 @@ public class StaffDAO {
 
 	public int delete(Staff entity) {
 		// TODO Auto-generated method stub
-		sql = "delete from staff where id=?";
+		sql = "update staff set isDelete=?,deleteTime=? where id=?";
+		value.add(1);
+		value.add(new Date());
 		value.add(entity.getId());
 		genericTemplate.setSqlValue(sql);
 		genericTemplate.setValues(value);
@@ -76,7 +79,7 @@ public class StaffDAO {
 
 	public int update(Staff entity) {
 		// TODO Auto-generated method stub
-		sql = "update staff set deptId=?,kindId=?,deptName=?,deptNo=?,isDelete=?,deleteTime=? where id=?";
+		sql = "update staff set deptId=?,kindId=?,staName=?,staNo=?,isDelete=?,deleteTime=? where id=?";
 
 
 		value.add(entity.getDeptId());

@@ -16,11 +16,11 @@ public class DepartmentDAOTest {
 
 	public static void main(String args[]) {
 		DepartmentDAOTest udt = new DepartmentDAOTest();
-		//udt.testCreate();
-		//udt.testUpdate();
-		//udt.testRead();
-		//udt.testReadByPk();
-		//udt.testCount();
+		//udt.testCreate();//1
+		//udt.testUpdate();//1
+		//udt.testRead();//1
+		//udt.testReadByPk();//1
+		//udt.testCount();//1
 		udt.testDelete();
 	}
 	public void testCreate() {

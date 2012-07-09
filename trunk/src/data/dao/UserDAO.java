@@ -3,6 +3,7 @@ package data.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import data.bean.Batch;
@@ -58,7 +59,9 @@ public class UserDAO {
 
 	public int delete(User entity) {
 		// TODO Auto-generated method stub
-		sql = "delete from user where id=?";
+		sql = "update user set isDelete=?,deleteTime=? where id=?";
+		value.add(1);
+		value.add(new Date());
 		value.add(entity.getId());
 		genericTemplate.setSqlValue(sql);
 		genericTemplate.setValues(value);

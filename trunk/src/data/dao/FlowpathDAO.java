@@ -2,6 +2,7 @@ package data.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import data.bean.DisqKind;
@@ -31,7 +32,7 @@ public class FlowpathDAO {
 	
 	public int create(Flowpath entity) {
 		// TODO Auto-generated method stub
-		sql = "insert into fowpath values (?,?,?,?,?)";
+		sql = "insert into flowpath values (?,?,?,?,?)";
 		
 		value.add(entity.getId());
 		value.add(entity.getSequence());
@@ -54,7 +55,9 @@ public class FlowpathDAO {
 
 	public int delete(Flowpath entity) {
 		// TODO Auto-generated method stub
-		sql = "delete from flowpath where Id=?";
+		sql = "update flowpath set isDelete=?,deleteTime=? where id=?";
+		value.add(1);
+		value.add(new Date());
 		value.add(entity.getId());
 		genericTemplate.setSqlValue(sql);
 		genericTemplate.setValues(value);

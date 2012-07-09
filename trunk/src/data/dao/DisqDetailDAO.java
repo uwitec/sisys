@@ -31,7 +31,7 @@ public class DisqDetailDAO {
 	
 	public int create(DisqDetail entity) {
 		// TODO Auto-generated method stub
-		sql = "insert into disqDetailDAO values (?,?,?,?)";
+		sql = "insert into disqdetail values (?,?,?,?)";
 		
 		value.add(entity.getId());
 		value.add(entity.getDisKId());
