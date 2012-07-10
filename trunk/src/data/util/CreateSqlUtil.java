@@ -22,10 +22,10 @@ public class CreateSqlUtil {
 				Element element=iterator.next();
 				String name=element.getName();
 				OP op=element.getOp();
-				Object value=element.getObject();
+				Object[] value=element.getObject();
 				switch (element.link) {
 				case WHERE:
-					cnd.where(name, op, value);
+					cnd.where(name, op, value);						
 					break;
 				case AND:
 					cnd.and(name, op, value);

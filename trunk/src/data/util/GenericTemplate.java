@@ -117,6 +117,7 @@ public class GenericTemplate {
 	        
 	            if (values != null && values.size() > 0) {
 	                // 使用预处理语句，并设定所有的sql语句所有参数值
+	            	System.out.println(sqlValue);
 	                preparedStatement = (PreparedStatement) connection.prepareStatement(sqlValue);
 	                setValues(preparedStatement, values);
 	                result = preparedStatement.executeUpdate();

@@ -10,7 +10,7 @@ public class Element {
 	Link link;
 	OP op;
 	String name;
-	Object object;
+	Object[] object;
 	boolean asc;
 	
 	public Element(){}
@@ -22,7 +22,7 @@ public class Element {
 	 * @param name
 	 * @param object
 	 */
-	public Element(Link link,OP op,String name,Object object){
+	public Element(Link link,OP op,String name,Object[] object){
 		this.link=link;
 		this.op=op;
 		this.name=name;
@@ -41,7 +41,7 @@ public class Element {
 		this.asc=asc;
 	}
 	
-	public Element(Link link,OP op,String name,Object object,boolean asc){
+	public Element(Link link,OP op,String name,Object[] object,boolean asc){
 		this.link=link;
 		this.op=op;
 		this.name=name;
@@ -87,13 +87,13 @@ public class Element {
 	/**
 	 * @return the object
 	 */
-	public Object getObject() {
+	public Object[] getObject() {
 		return object;
 	}
 	/**
 	 * @param object the object to set
 	 */
-	public void setObject(Object object) {
+	public void setObject(Object[] object) {
 		this.object = object;
 	}
 	/**
