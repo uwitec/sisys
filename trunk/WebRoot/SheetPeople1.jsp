@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+﻿<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
   <head>
     <title>Simpla Admin</title>
@@ -10,22 +8,34 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     
     <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<SCRIPT type=text/javascript>
+		function tableExportor(id){ 
+			var forum = document.forms["tableExport"]; 
+			forum.title.value = document.getElementById('tableTitle').innerHTML;
+			forum.content.value=eval(id+".innerHTML"); 
+			forum.submit(); 
+		} 
+	</SCRIPT>
 
   </head>
   
   <body>
-    <h2 align="center">员工工作统计表</h2>
-	<div align="center"><a class="button" href="#">导出</a></div>
+    <h2 align="center" id="tableTitle">员工工作统计表</h2>
+	<form name="tableExport" method="POST" action="tableExportor.action">
+		<input type="hidden" name="title">
+		<input type="hidden" name="content">
+		<div align="center"><input  onclick=tableExportor('MainTable') class="button" type="button" value="导出"></div>
+	</form>
 	<br></br>
 	<div align="center">
-		<table border="1" cellspacing="1" cellpadding="5">
+		<table border="1" cellspacing="1" cellpadding="5" id="MainTable">
 				<tr align="center">
-					<th width=10%>员工名称</td>
-					<th width=10%>张三</td>
-					<th width=10%>工号</td>
-					<th colspan=2 width=20%>29001040</td>
-					<th width=10%>所属部门</td>
-					<th colspan=2 width=20%>机电</td>
+					<td width=10%>员工名称</td>
+					<td width=10%>张三</td>
+					<td width=10%>工号</td>
+					<td colspan = 2 width=20%>29001040</td>
+					<td width=10%>所属部门</td>
+					<td colspan=2 width=20%>机电</td>
 				</tr>
 				<tr align="center">
 					<td width=10%>序号</td>
@@ -48,14 +58,14 @@
 					<td width=10%>3</td>
 				</tr>
 				<tr align="center">
-					<td width=10%>&nbsp;</td>
-					<td width=10%>&nbsp;</td>
-					<td width=10%>&nbsp;</td>
-					<td width=10%>&nbsp;</td>
-					<td width=10%>&nbsp;</td>
-					<td width=10%>&nbsp;</td>
-					<td width=10%>&nbsp;</td>
-					<td width=10%>&nbsp;</td>
+					<td width=10%>002</td>
+					<td width=10%>转轴</td>
+					<td width=10%>01003</td>
+					<td width=10%>2</td>
+					<td width=10%>290</td>
+					<td width=10%>2</td>
+					<td width=10%>1</td>
+					<td width=10%>2</td>
 				</tr>
 
 			</table>

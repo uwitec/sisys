@@ -65,6 +65,26 @@
 			</script>
 		<![endif]-->
 		
+		<script type="text/javascript">
+			function checkType(){
+				var forum = document.forms["fileForm"]; 
+				var upload = document.getElementsByName("filePath")[0].value;
+				if(upload.length == 0){
+					alert("请选择上传文件！");
+					document.getElementsByName("filePath")[0].focus();
+					return false;
+				}
+				var type = upload.substring(upload.lastIndexOf(".")+1,upload.length);
+				if(type == "sql"){
+					forum.submit();
+				}else{
+					alert("文件类型错误！只允许导入sql文件！");
+					document.getElementsByName("filePath")[0].focus();
+					return false;
+				}
+			}
+		</script>
+		
 	</head>
   
 	<body><div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
@@ -171,16 +191,16 @@
 		
 				<div id="login-content">
 				
-				<form action="#">
+				<form method="post" action="dataImport.action" name="fileForm" >
 				
 					<p>
 						<label>路径</label>
-						<input class="text-input" type="text" /><a class="button" href="#">浏览...</a>
+						<input class="text-input" type="file" name="filePath"/>
 					</p>
 					
 					<div class="clear"></div>
 					<p>
-						<input class="button" type="submit" value="确定" />
+						<input onclick=checkType() class="button" type="button" value="确定" />
 					</p>
 					
 				</form>

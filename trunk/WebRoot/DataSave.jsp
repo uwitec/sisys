@@ -171,16 +171,13 @@
 		
 				<div id="login-content">
 				
-				<form action="#">
+				<form action="dataExport.action">
 				
-					<p>
-						<label>路径</label>
-						<input class="text-input" type="text" /><a class="button" href="#">浏览...</a>
-					</p>
+					
 					
 					<div class="clear"></div>
 					<p>
-						<input class="button" type="submit" value="确定" />
+						<input class="button" type="submit" value="确定备份" />
 					</p>
 					
 				</form>

@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -20,10 +18,10 @@
 	<div align="center">
 		<table border="1" cellspacing="1" cellpadding="5">
 				<tr align="center">
-					<th width=25%>批次号</th>
-					<th width=25%>总数量</th>
-					<th width=25%>废品数量</th>
-					<th width=25%>废品率</th>
+					<td width=25%>批次号</td>
+					<td width=25%>总数量</td>
+					<td width=25%>废品数量</td>
+					<td width=25%>废品率</td>
 				</tr>
 				<tr align="center">
 					<td>&nbsp;</td>
