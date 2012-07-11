@@ -6,12 +6,15 @@ import java.util.Date;
 import java.util.List;
 
 import data.bean.Product;
+import data.bean.User;
 import data.bean.WorkForm;
 import data.bean.mapping.ProductMapping;
+import data.bean.mapping.UserMapping;
 import data.bean.mapping.WorkFormMapping;
+import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
-public class WorkFormDAO {
+public class WorkFormDAO extends GenericQueryImpl<WorkForm, WorkFormMapping> {
 
 	GenericTemplate genericTemplate;
 	List<Object> value;
@@ -19,11 +22,13 @@ public class WorkFormDAO {
 	int result;
 	boolean flag;
 	List<WorkForm> list;
+	static WorkFormMapping workFormMapping = new WorkFormMapping();
 	
 	/**
 	 * 构造函数
 	 */
 	public WorkFormDAO() {
+		super(WorkForm.class, workFormMapping);
 		genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
@@ -165,5 +170,9 @@ public class WorkFormDAO {
 			genericTemplate.close();
 		}
 		return result;
+	}
+	
+	public void queryWorkForm(String sql) {
+		this.findEntityByList(sql);
 	}
 }

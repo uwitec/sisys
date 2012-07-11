@@ -22,7 +22,7 @@ public class Element {
 	 * @param name
 	 * @param object
 	 */
-	public Element(Link link,OP op,String name,Object[] object){
+	public Element( Link link,OP op,String name,Object[] object){
 		this.link=link;
 		this.op=op;
 		this.name=name;

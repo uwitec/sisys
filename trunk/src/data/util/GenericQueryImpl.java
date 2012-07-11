@@ -116,6 +116,30 @@ public class GenericQueryImpl<E, M extends BasicMapping> {
 		}
 		return list;
 	}
+
+	/**
+	 * 传入SQL语句进行查询
+	 * @param sql
+	 * @return
+	 */
+	public List<E> findEntityByList(String sql) {
+
+		List<E> list = new ArrayList<E>();
+		ResultSet rs = null;
+		try {
+			genericTemplate.setSqlValue(sql);
+			rs = genericTemplate.executeQuery();
+			while(rs.next()) {
+				entity = (E) entityMappingClass.mapping(rs);
+				list.add((E) entity);
+			}
+		} catch (RuntimeException re) {
+			re.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return list;
+	}
 	
 	/**
 	 * 查询列表中存在的个数
