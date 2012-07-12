@@ -4,10 +4,12 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-
+	
     <constant name="struts.enable.DynamicMethodInvocation" value="true" />
     <constant name="struts.devMode" value="true" />
-	
+    
+	<include file="struts_manageUser.xml"></include>
+
 	<package name="common" namespace="/" extends="struts-default">
 		
 		<action name="tableExportor" class="data.util.ExcelExportor" method="tableExportor">

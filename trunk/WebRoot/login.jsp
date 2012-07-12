@@ -1,4 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<%
+	String error = request.getParameter("result");
+	if(error == null) {
+		error = "";
+	} else if(error.equals("false")){
+		error = "用户名或密码错误，请重新输入！";
+	} else if(error.equals("empty")) {
+		error = "输入值不能为空，请重试！";
+	}
+%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -69,19 +83,28 @@
 				<img id="logo" src="resources/images/logo1.png" alt="Simpla Admin logo" />
 			</div> <!-- End #logn-top -->
 			
+			<div align="center">
+					<label>
+						<%=error%>
+					</lable>
+			</div>
+			
 			<div id="login-content">
 				
 				<form action="login.action" method="post">
-				
+					
+									
 					<div class="notification information png_bg">
+					
 						<div>
 							首次使用，用户名密码都是admin
 						</div>
 					</div>
 					
 					<p>
-						<select name="level" class="" style="width: 300px">
-								<option>请选择登录权限</option>
+						<select name="user.level" style="width: 300px">
+						
+								<option value="0">请选择登录权限</option>
 								<option value="1">查看人员</option>
 								<option value="2">输入人员</option>
 								<option value="3">管理员</option>
@@ -92,17 +115,17 @@
 					
 					<p>
 						<label>用户名</label>
-						<input class="text-input" type="text" name="username"/>
+						<input class="text-input" type="text" name="user.username"/>
 					</p>
 					<div class="clear"></div>
 					<p>
 						<label>密码</label>
-						<input class="text-input" type="password" name="password"/>
+						<input class="text-input" type="password" name="user.password"/>
 					</p>
+					
 					<div class="clear"></div>
-					<p id="remember-password">
-						<input type="checkbox" />记住我
-					</p>
+					
+					
 					<div class="clear"></div>
 					<p><input type="submit" class="button" value="登录"></p>
 						

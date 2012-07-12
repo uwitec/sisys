@@ -11,7 +11,7 @@ public class User {
 	private int id;
 	private String username;
 	private String password;
-	private int level; // 用户权限，0代表普通统计员，1代表查看人员，2代表管理员
+	private int level; // 用户权限，1代表查看人员，2代表普通统计员，3代表管理员
 	private int isDelete;
 	private Date deleteTime;
 
@@ -46,6 +46,11 @@ public class User {
 
 	public void setLevel(int level) {
 		this.level = level;
+	}
+	
+	public void setLevel(String level) {
+		System.out.println(level);
+		this.level = Integer.parseInt(level);
 	}
 
 	public int getIsDelete() {

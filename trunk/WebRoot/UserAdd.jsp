@@ -2,6 +2,24 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%
+	String error = (String)request.getParameter("result");
+	if(error == null) {
+		error = "";
+	} else if(error.equals("success")) {
+		error = "添加用户成功！";
+	} else if(error.equals("nameError")){
+		error = "用户名重复，请重试！";
+	} else if(error.equals("false")){
+		error = "添加用户失败！";
+	} else if(error.equals("empty")) {
+		error = "输入不能为空！";
+	}
+	
+ %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
@@ -183,28 +201,33 @@
 				<div class="content-box-content">
 
 					<div id="login-content">
+					
+						<label>
+							<%=error %>
+						</label>
 
-						<form action="#">
+						<form action="addUser.action">
 							<p>
-								<label>用户类型</label> <select>
-									<option value="">----请选择--</option>
-									<option>普通查看人员</option>
-									<option>输入人员</option>
-									<option>管理员</option>
+								<label>用户类型</label>
+								<select name="user.level">
+									<option value="0">----请选择--</option>
+									<option value="1">普通查看人员</option>
+									<option value="2">输入人员</option>
+									<option value="3">管理员</option>
 								</select>
 							</p>
 
 							<p>
-								<label>初始用户名</label> <input class="text-input" type="text" />
+								<label>初始用户名</label> <input class="text-input" type="text" name="user.username"/>
 							</p>
 							<div class="clear"></div>
 							<p>
-								<label>初始用户密码</label> <input class="text-input" type="text" />
+								<label>初始用户密码</label> <input class="text-input" type="text" name="user.password"/>
 							</p>
 							<div class="clear"></div>
 
 							<p>
-								<input class="button" type="button" value="确定" />
+								<input type="submit" class="button" value="确定" />
 							</p>
 							<div class="clear"></div>
 						</form>

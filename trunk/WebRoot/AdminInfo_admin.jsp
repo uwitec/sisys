@@ -1,6 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="data.bean.User"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<% String error = request.getParameter("result");
+	if(error == null) {
+		error = "";
+	} else if(error.equals("success")) {
+		error = "修改成功！";
+	} else if(error.equals("nameError")){
+		error = "用户名重复，请重新输入！";
+	} else if(error.equals("false")){
+		error = "修改失败！";
+	} else if(error.equals("empty")) {
+		error = "输入不能为空！";
+	}
+	
+	User user = (User)session.getAttribute("user"); 
+	String username = user.getUsername();
+	String password = user.getPassword();
+%>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
@@ -170,15 +189,19 @@
 					
 					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
 						
-						<form action="" method="">
+						<label>
+							<%=error%>
+						</label>
+						
+						<form action="modifyAdmin.action" method="get">
 						<table class = "add_form">
 							<tr>
 								<td><span>用户名</span></td>
-								<td><input type="text" width="50px" value="admin"></td>
+								<td><input type="text" width="50px" value=<%=username%> name="user.username"></td>
 							</tr>
 							<tr>
 								<td><span>密码</span></td>
-								<td><input type="text" width="50px" value="admin"></td>
+								<td><input type="text" width="50px" value=<%=password%> name="user.password"></td>
 							</tr>
 							<tr>
 								<td><input type="submit" class="button" value="修改"></td>
