@@ -9,10 +9,6 @@
     <constant name="struts.devMode" value="true" />
 	
 	<package name="common" namespace="/" extends="struts-default">
-		<action name="login" class="data.action.LoginAction">
-			<result name="success">/Index_viewer.jsp</result>
-			<result name="input">/login.jsp</result>
-		</action>
 		
 		<action name="tableExportor" class="data.util.ExcelExportor" method="tableExportor">
 			<result name="error">/error.jsp</result>
