@@ -8,12 +8,15 @@ import java.util.List;
 
 import data.bean.Batch;
 import data.bean.Staff;
+import data.bean.User;
 
 import data.bean.mapping.BatchMapping;
 import data.bean.mapping.StaffMapping;
+import data.bean.mapping.UserMapping;
+import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
-public class StaffDAO {
+public class StaffDAO extends GenericQueryImpl<Staff, StaffMapping> {
 
 	GenericTemplate genericTemplate;
 	List<Object> value;
@@ -21,11 +24,13 @@ public class StaffDAO {
 	int result;
 	boolean flag;
 	List<Staff> list;
+	static StaffMapping staffMapping = new StaffMapping();
 	
 	/**
 	 * 构造函数
 	 */
 	public StaffDAO() {
+		super(Staff.class, staffMapping);
 		genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
@@ -39,7 +44,7 @@ public class StaffDAO {
 		
 		value.add(entity.getId());
 		value.add(entity.getDeptId());
-		value.add(entity.getKindId());
+		value.add(entity.getKind());
 		value.add(entity.getStaName());
 		value.add(entity.getStaNo());
 		value.add(entity.getIsDelete());
@@ -79,11 +84,11 @@ public class StaffDAO {
 
 	public int update(Staff entity) {
 		// TODO Auto-generated method stub
-		sql = "update staff set deptId=?,kindId=?,staName=?,staNo=?,isDelete=?,deleteTime=? where id=?";
+		sql = "update staff set deptId=?,kind=?,staName=?,staNo=?,isDelete=?,deleteTime=? where id=?";
 
 
 		value.add(entity.getDeptId());
-		value.add(entity.getKindId());
+		value.add(entity.getKind());
 		value.add(entity.getStaName());
 		value.add(entity.getStaNo());
 		value.add(entity.getIsDelete());
@@ -152,9 +157,10 @@ public class StaffDAO {
 		genericTemplate.setSqlValue(sql);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			while(resultSet.next()) {
-				result ++;
+			if(resultSet.next()) {
+				result = resultSet.getInt("count(*)");
 			}
+			
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}finally {

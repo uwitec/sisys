@@ -10,7 +10,7 @@ public class Staff {
 
 	private int id;
 	private int deptId;
-	private int kindId;
+	private String kind;
 	private String staName;
 	private String staNo;
 	private int isDelete;
@@ -33,12 +33,12 @@ public class Staff {
 		this.deptId = deptId;
 	}
 
-	public int getKindId() {
-		return kindId;
+	public String getKind() {
+		return kind;
 	}
 
-	public void setKindId(int kindId) {
-		this.kindId = kindId;
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 
 	public String getStaName() {
@@ -83,19 +83,19 @@ public class Staff {
 		result = prime * result + deptId;
 		result = prime * result + id;
 		result = prime * result + isDelete;
-		result = prime * result + kindId;
+		result = prime * result + ((kind == null) ? 0 : kind.hashCode());
 		result = prime * result + ((staName == null) ? 0 : staName.hashCode());
 		result = prime * result + ((staNo == null) ? 0 : staNo.hashCode());
 		return result;
 	}
 
 	// 构造函数
-	public Staff(int id, int deptId, int kindId, String staName, String staNo,
+	public Staff(int id, int deptId, String kind, String staName, String staNo,
 			int isDelete, Date deleteTime) {
 		super();
 		this.id = id;
 		this.deptId = deptId;
-		this.kindId = kindId;
+		this.kind = kind;
 		this.staName = staName;
 		this.staNo = staNo;
 		this.isDelete = isDelete;
@@ -123,7 +123,7 @@ public class Staff {
 			return false;
 		if (isDelete != other.isDelete)
 			return false;
-		if (kindId != other.kindId)
+		if (kind != other.kind)
 			return false;
 		if (staName == null) {
 			if (other.staName != null)
@@ -146,7 +146,7 @@ public class Staff {
 	// 转换为字符串
 	@Override
 	public String toString() {
-		return "Staff [id=" + id + ", deptId=" + deptId + ", kindId=" + kindId
+		return "Staff [id=" + id + ", deptId=" + deptId + ", kind=" + kind
 				+ ", staName=" + staName + ", staNo=" + staNo + ", isDelete="
 				+ isDelete + ", deleteTime=" + deleteTime + "]";
 	}

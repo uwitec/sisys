@@ -8,11 +8,14 @@ import java.util.List;
 
 import data.bean.Batch;
 import data.bean.Department;
+import data.bean.User;
 import data.bean.mapping.BatchMapping;
 import data.bean.mapping.DepartmentMapping;
+import data.bean.mapping.UserMapping;
+import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
-public class DepartmentDAO {
+public class DepartmentDAO extends GenericQueryImpl<Department, DepartmentMapping> {
 
 	GenericTemplate genericTemplate;
 	List<Object> value;
@@ -20,11 +23,13 @@ public class DepartmentDAO {
 	int result;
 	boolean flag;
 	List<Department> list;
+	static DepartmentMapping departmentMapping = new DepartmentMapping();
 	
 	/**
 	 * 构造函数
 	 */
 	public DepartmentDAO() {
+		super(Department.class, departmentMapping);
 		genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
@@ -147,9 +152,10 @@ public class DepartmentDAO {
 		genericTemplate.setSqlValue(sql);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			while(resultSet.next()) {
-				result ++;
+			if(resultSet.next()) {
+				result = resultSet.getInt("count(*)");
 			}
+			
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}finally {

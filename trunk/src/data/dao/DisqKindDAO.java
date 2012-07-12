@@ -7,11 +7,14 @@ import java.util.List;
 
 import data.bean.DisqDetail;
 import data.bean.DisqKind;
+import data.bean.User;
 import data.bean.mapping.DisqDetailMapping;
 import data.bean.mapping.DisqKindMapping;
+import data.bean.mapping.UserMapping;
+import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
-public class DisqKindDAO {
+public class DisqKindDAO  extends GenericQueryImpl<DisqKind, DisqKindMapping>{
 
 	GenericTemplate genericTemplate;
 	List<Object> value;
@@ -19,11 +22,13 @@ public class DisqKindDAO {
 	int result;
 	boolean flag;
 	List<DisqKind> list;
+	static DisqKindMapping disqKindMapping = new DisqKindMapping();
 	
 	/**
 	 * 构造函数
 	 */
 	public DisqKindDAO() {
+		super(DisqKind.class, disqKindMapping);
 		genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
@@ -145,8 +150,8 @@ public class DisqKindDAO {
 		genericTemplate.setSqlValue(sql);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			while(resultSet.next()) {
-				result ++;
+			if(resultSet.next()) {
+				result = resultSet.getInt("count(*)");
 			}
 		} catch(Exception ex) {
 			ex.printStackTrace();

@@ -36,7 +36,7 @@ public class DataSave extends BaseAction{
 	public String dataExport() throws Exception{		
 		try {
 			Runtime rt = Runtime.getRuntime();
-			Process child = rt.exec("D:/Java/MySQL/MySQL Server 5.0/bin/mysqldump -uroot -proot sisys");
+			Process child = rt.exec("E:/Program Files/MySQL/MySQL Server 5.0/bin/mysqldump -uroot -proot sisys");
 			
 			InputStream in = child.getInputStream();
 			InputStreamReader isr = new InputStreamReader(in,"utf8");
@@ -82,7 +82,7 @@ public class DataSave extends BaseAction{
 		try {
 			filePath = request.getParameter("filePath");
 			Runtime rt = Runtime.getRuntime();
-			Process child = rt.exec("D:/Java/MySQL/MySQL Server 5.0/bin/mysql -uroot -proot sisys");
+			Process child = rt.exec("E:/Program Files/MySQL/MySQL Server 5.0/bin/mysql -uroot -proot sisys");
 			OutputStream out = child.getOutputStream();
 			
 			String inStr;

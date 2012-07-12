@@ -7,11 +7,14 @@ import java.util.List;
 
 import data.bean.DisqKind;
 import data.bean.Flowpath;
+import data.bean.User;
 import data.bean.mapping.DisqKindMapping;
 import data.bean.mapping.FlowpathMapping;
+import data.bean.mapping.UserMapping;
+import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
-public class FlowpathDAO {
+public class FlowpathDAO  extends GenericQueryImpl<Flowpath, FlowpathMapping> {
 
 	GenericTemplate genericTemplate;
 	List<Object> value;
@@ -19,11 +22,13 @@ public class FlowpathDAO {
 	int result;
 	boolean flag;
 	List<Flowpath> list;
+	static FlowpathMapping flowpathMapping = new FlowpathMapping();
 	
 	/**
 	 * 构造函数
 	 */
 	public FlowpathDAO() {
+		super(Flowpath.class, flowpathMapping);
 		genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
@@ -145,8 +150,8 @@ public class FlowpathDAO {
 		genericTemplate.setSqlValue(sql);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			while(resultSet.next()) {
-				result ++;
+			if(resultSet.next()) {
+				result = resultSet.getInt("count(*)");
 			}
 		} catch(Exception ex) {
 			ex.printStackTrace();

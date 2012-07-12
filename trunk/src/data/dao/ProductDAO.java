@@ -7,11 +7,14 @@ import java.util.List;
 
 import data.bean.Processes;
 import data.bean.Product;
+import data.bean.User;
 import data.bean.mapping.ProcessesMapping;
 import data.bean.mapping.ProductMapping;
+import data.bean.mapping.UserMapping;
+import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
-public class ProductDAO {
+public class ProductDAO  extends GenericQueryImpl<Product, ProductMapping> {
 
 	GenericTemplate genericTemplate;
 	List<Object> value;
@@ -19,11 +22,13 @@ public class ProductDAO {
 	int result;
 	boolean flag;
 	List<Product> list;
+	static ProductMapping productMapping = new ProductMapping();
 	
 	/**
 	 * 构造函数
 	 */
 	public ProductDAO() {
+		super(Product.class, productMapping);
 		genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
@@ -158,9 +163,10 @@ public class ProductDAO {
 		genericTemplate.setSqlValue(sql);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			while(resultSet.next()) {
-				result ++;
+			if(resultSet.next()) {
+				result = resultSet.getInt("count(*)");
 			}
+			
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}finally {

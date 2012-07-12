@@ -161,8 +161,8 @@ public class WorkFormDAO extends GenericQueryImpl<WorkForm, WorkFormMapping> {
 		genericTemplate.setSqlValue(sql);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			while(resultSet.next()) {
-				result ++;
+			if(resultSet.next()) {
+				result = resultSet.getInt("count(*)");
 			}
 		} catch(Exception ex) {
 			ex.printStackTrace();

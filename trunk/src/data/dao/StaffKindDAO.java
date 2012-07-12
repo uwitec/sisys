@@ -8,12 +8,15 @@ import java.util.List;
 
 import data.bean.Batch;
 import data.bean.StaffKind;
+import data.bean.User;
 
 import data.bean.mapping.BatchMapping;
 import data.bean.mapping.StaffKindMapping;
+import data.bean.mapping.UserMapping;
+import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
-public class StaffKindDAO {
+public class StaffKindDAO extends GenericQueryImpl<StaffKind, StaffKindMapping> {
 
 	GenericTemplate genericTemplate;
 	List<Object> value;
@@ -21,11 +24,13 @@ public class StaffKindDAO {
 	int result;
 	boolean flag;
 	List<StaffKind> list;
+	static StaffKindMapping staffKindMapping = new StaffKindMapping();
 	
 	/**
 	 * 构造函数
 	 */
 	public StaffKindDAO() {
+		super(StaffKind.class, staffKindMapping);
 		genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
@@ -145,8 +150,8 @@ public class StaffKindDAO {
 		genericTemplate.setSqlValue(sql);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			while(resultSet.next()) {
-				result ++;
+			if(resultSet.next()) {
+				result = resultSet.getInt("count(*)");
 			}
 		} catch(Exception ex) {
 			ex.printStackTrace();

@@ -23,7 +23,7 @@ public class StaffDAOTest {
 		u.setId(1);
 		u.setIsDelete(0);
 		u.setDeptId(1);
-		u.setKindId(2);
+		u.setKind("");
 		u.setStaName("123");
 		u.setStaNo("352");
 		System.out.print(udao.create(u));
@@ -33,7 +33,7 @@ public class StaffDAOTest {
 		u.setId(1);
 		u.setIsDelete(0);
 		u.setDeptId(1);
-		u.setKindId(2);
+		u.setKind("");
 		u.setStaName("1223");
 		u.setStaNo("352");
 		System.out.print(udao.update(u));

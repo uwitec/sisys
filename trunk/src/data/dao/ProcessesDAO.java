@@ -7,11 +7,14 @@ import java.util.List;
 
 import data.bean.Flowpath;
 import data.bean.Processes;
+import data.bean.User;
 import data.bean.mapping.FlowpathMapping;
 import data.bean.mapping.ProcessesMapping;
+import data.bean.mapping.UserMapping;
+import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
-public class ProcessesDAO {
+public class ProcessesDAO  extends GenericQueryImpl<Processes, ProcessesMapping> {
 
 	GenericTemplate genericTemplate;
 	List<Object> value;
@@ -19,11 +22,13 @@ public class ProcessesDAO {
 	int result;
 	boolean flag;
 	List<Processes> list;
+	static ProcessesMapping processesMapping = new ProcessesMapping();
 	
 	/**
 	 * 构造函数
 	 */
 	public ProcessesDAO() {
+		super(Processes.class, processesMapping);
 		genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
@@ -152,9 +157,10 @@ public class ProcessesDAO {
 		genericTemplate.setSqlValue(sql);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			while(resultSet.next()) {
-				result ++;
+			if(resultSet.next()) {
+				result = resultSet.getInt("count(*)");
 			}
+			
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}finally {

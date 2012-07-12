@@ -11,6 +11,7 @@ public class ProductLineMapping extends BasicMapping<ProductLine> {
 		
 		ProductLine productLine = new ProductLine();
 		try {
+			productLine.setLineNo(rs.getInt("lineNo"));
 			productLine.setDeleteTime(rs.getDate("deleteTime"));
 			productLine.setId(rs.getInt("Id"));
 			productLine.setIsDelete(rs.getInt("isDelete"));

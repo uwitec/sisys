@@ -9,6 +9,7 @@ import java.util.Date;
 public class ProductLine {
 
 	private int id;
+	private int lineNo;
 	private String lineDesc;
 	private int isDelete;
 	private Date deleteTime;
@@ -57,6 +58,7 @@ public class ProductLine {
 		result = prime * result + isDelete;
 		result = prime * result
 				+ ((lineDesc == null) ? 0 : lineDesc.hashCode());
+		result = prime * result + lineNo;
 		return result;
 	}
 
@@ -84,18 +86,24 @@ public class ProductLine {
 				return false;
 		} else if (!lineDesc.equals(other.lineDesc))
 			return false;
+		if (lineNo != other.lineNo)
+			return false;
 		return true;
 	}
 
 	// 构造函数
-	public ProductLine(int id, String lineDesc, int isDelete, Date deleteTime) {
+	public ProductLine(int id, int lineNo, String lineDesc, int isDelete, Date deleteTime) {
 		super();
 		this.id = id;
 		this.lineDesc = lineDesc;
 		this.isDelete = isDelete;
 		this.deleteTime = deleteTime;
+		this.lineNo = lineNo;
 	}
 
+	
+
+	
 	public ProductLine() {
 		// TODO Auto-generated constructor stub
 	}
@@ -103,8 +111,16 @@ public class ProductLine {
 	// 转换为字符串
 	@Override
 	public String toString() {
-		return "ProductLine [id=" + id + ", lineDesc=" + lineDesc
+		return "ProductLine [id=" + id + ", lineNo=" + lineNo + ", lineDesc=" + lineDesc
 				+ ", isDelete=" + isDelete + ", deleteTime=" + deleteTime + "]";
+	}
+
+	public void setLineNo(int lineNo) {
+		this.lineNo = lineNo;
+	}
+
+	public int getLineNo() {
+		return lineNo;
 	}
 
 }

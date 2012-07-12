@@ -7,11 +7,14 @@ import java.util.List;
 
 import data.bean.Product;
 import data.bean.ProductLine;
+import data.bean.User;
 import data.bean.mapping.ProductLineMapping;
 import data.bean.mapping.ProductMapping;
+import data.bean.mapping.UserMapping;
+import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
-public class ProductLineDAO {
+public class ProductLineDAO  extends GenericQueryImpl<ProductLine, ProductLineMapping> {
 
 	GenericTemplate genericTemplate;
 	List<Object> value;
@@ -19,11 +22,13 @@ public class ProductLineDAO {
 	int result;
 	boolean flag;
 	List<ProductLine> list;
+	static ProductLineMapping productLineMapping = new ProductLineMapping();
 	
 	/**
 	 * 构造函数
 	 */
 	public ProductLineDAO() {
+		super(ProductLine.class, productLineMapping);
 		genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
@@ -33,9 +38,10 @@ public class ProductLineDAO {
 	
 	public int create(ProductLine entity) {
 		// TODO Auto-generated method stub
-		sql = "insert into productLine values (?,?,?,?)";
+		sql = "insert into productLine values (?,?,?,?,?)";
 		
 		value.add(entity.getId());
+		value.add(entity.getLineNo());
 		value.add(entity.getLineDesc());
 		value.add(entity.getIsDelete());
 		value.add(entity.getDeleteTime());
@@ -74,8 +80,9 @@ public class ProductLineDAO {
 
 	public int update(ProductLine entity, Integer pk) {
 		// TODO Auto-generated method stub
-		sql = "update productLine set lineDesc=?,isDelete=?,deleteTime=? where Id=?";
+		sql = "update productLine set lineNo=?,lineDesc=?,isDelete=?,deleteTime=? where Id=?";
 
+		value.add(entity.getLineNo());
 		value.add(entity.getLineDesc());
 		value.add(entity.getIsDelete());
 		value.add(entity.getDeleteTime());
@@ -143,8 +150,8 @@ public class ProductLineDAO {
 		genericTemplate.setSqlValue(sql);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			while(resultSet.next()) {
-				result ++;
+			if(resultSet.next()) {
+				result = resultSet.getInt("count(*)");
 			}
 		} catch(Exception ex) {
 			ex.printStackTrace();

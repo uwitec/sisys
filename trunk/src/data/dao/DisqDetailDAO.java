@@ -6,11 +6,14 @@ import java.util.List;
 
 import data.bean.DailyStaffDisq;
 import data.bean.DisqDetail;
+import data.bean.User;
 import data.bean.mapping.DailyStaffDisqMapping;
 import data.bean.mapping.DisqDetailMapping;
+import data.bean.mapping.UserMapping;
+import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
-public class DisqDetailDAO {
+public class DisqDetailDAO  extends GenericQueryImpl<DisqDetail, DisqDetailMapping> {
 
 	GenericTemplate genericTemplate;
 	List<Object> value;
@@ -18,11 +21,13 @@ public class DisqDetailDAO {
 	int result;
 	boolean flag;
 	List<DisqDetail> list;
+	static DisqDetailMapping disqDetailMapping = new DisqDetailMapping();
 	
 	/**
 	 * 构造函数
 	 */
 	public DisqDetailDAO() {
+		super(DisqDetail.class, disqDetailMapping);
 		genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
@@ -140,9 +145,10 @@ public class DisqDetailDAO {
 		genericTemplate.setSqlValue(sql);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			while(resultSet.next()) {
-				result ++;
+			if(resultSet.next()) {
+				result = resultSet.getInt("count(*)");
 			}
+			
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}finally {

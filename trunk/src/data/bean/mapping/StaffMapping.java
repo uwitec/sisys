@@ -14,7 +14,7 @@ public class StaffMapping extends BasicMapping<Staff>{
 		try {			
 			Staff.setId(rs.getInt("Id"));
 			Staff.setDeptId(rs.getInt("deptId"));
-			Staff.setKindId(rs.getInt("kindId"));
+			Staff.setKind(rs.getString("kind"));
 			Staff.setStaName(rs.getString("staName"));
 			Staff.setStaNo(rs.getString("staNo"));			
 			Staff.setIsDelete(rs.getInt("isDelete"));

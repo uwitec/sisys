@@ -6,11 +6,14 @@ import java.util.List;
 
 import data.bean.Product;
 import data.bean.StaffDetail;
+import data.bean.User;
 import data.bean.mapping.ProductMapping;
 import data.bean.mapping.StaffDetailMapping;
+import data.bean.mapping.UserMapping;
+import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
-public class StaffDetailDAO {
+public class StaffDetailDAO extends GenericQueryImpl<StaffDetail, StaffDetailMapping> {
 
 	GenericTemplate genericTemplate;
 	List<Object> value;
@@ -18,11 +21,13 @@ public class StaffDetailDAO {
 	int result;
 	boolean flag;
 	List<StaffDetail> list;
+	static StaffDetailMapping staffDetailMapping = new StaffDetailMapping();
 	
 	/**
 	 * 构造函数
 	 */
 	public StaffDetailDAO() {
+		super(StaffDetail.class, staffDetailMapping);
 		genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
@@ -151,9 +156,10 @@ public class StaffDetailDAO {
 		genericTemplate.setSqlValue(sql);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			while(resultSet.next()) {
-				result ++;
+			if(resultSet.next()) {
+				result = resultSet.getInt("count(*)");
 			}
+			
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}finally {

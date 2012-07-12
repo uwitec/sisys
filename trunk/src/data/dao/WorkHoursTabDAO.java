@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.bean.Product;
+import data.bean.User;
 import data.bean.WorkHoursTab;
 import data.bean.mapping.ProductMapping;
+import data.bean.mapping.UserMapping;
 import data.bean.mapping.WorkHoursTabMapping;
+import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
-public class WorkHoursTabDAO {
+public class WorkHoursTabDAO extends GenericQueryImpl<WorkHoursTab, WorkHoursTabMapping> {
 
 	GenericTemplate genericTemplate;
 	List<Object> value;
@@ -18,11 +21,13 @@ public class WorkHoursTabDAO {
 	int result;
 	boolean flag;
 	List<WorkHoursTab> list;
+	static WorkHoursTabMapping workHoursTabMapping = new WorkHoursTabMapping();
 	
 	/**
 	 * 构造函数
 	 */
 	public WorkHoursTabDAO() {
+		super(WorkHoursTab.class, workHoursTabMapping);
 		genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
@@ -142,8 +147,8 @@ public class WorkHoursTabDAO {
 		genericTemplate.setSqlValue(sql);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			while(resultSet.next()) {
-				result ++;
+			if(resultSet.next()) {
+				result = resultSet.getInt("count(*)");
 			}
 		} catch(Exception ex) {
 			ex.printStackTrace();

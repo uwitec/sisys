@@ -8,6 +8,7 @@ import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
 import data.action.LoginAction;
+import data.bean.User;
 
 public class CheckLoginInterceptor extends AbstractInterceptor {
 
@@ -32,9 +33,9 @@ public class CheckLoginInterceptor extends AbstractInterceptor {
 
         Map session = invocation.getInvocationContext().getSession();
 
-        String login = (String) session.get(USER);
+        User user = (User) session.get(USER);
 
-        if (login != null && login.length() > 0) {
+        if (user != null) {
 
             // 存在的情况下进行后续操作。
 
