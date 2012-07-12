@@ -13,12 +13,13 @@ public class Batch {
 	private int flowId; // 流程Id号
 	private int proId;
 	private int workTabId; // 工作表Id号，即某个流程下工序完成情况记录链表（WorkForm）的入口
-	private int status; // 0代表正在生产，1代表已完成，2代表超期未完成，3代表已处理
+	private int status; // 0代表正在生产，1代表已完成，2代表超期未完成，3代表已处理,4代表错误
 	private Date startTime;
 	private Date endTime;
 	private int disqNum;
 	private double disqPercent;
 	private int totalNum; // 目标生产数量
+	private String note;//备注，对超期批次的修改
 	private int isDelete;
 	private Date deleteTime;
 
@@ -147,6 +148,7 @@ public class Batch {
 		result = prime * result
 				+ ((startTime == null) ? 0 : startTime.hashCode());
 		result = prime * result + status;
+		result = prime * result + ((note == null) ? 0 : note.hashCode());
 		result = prime * result + totalNum;
 		result = prime * result + workTabId;
 		return result;
@@ -197,6 +199,11 @@ public class Batch {
 			return false;
 		if (status != other.status)
 			return false;
+		if (note == null) {
+			if (other.note != null)
+				return false;
+		} else if (!note.equals(other.note))
+			return false;
 		if (totalNum != other.totalNum)
 			return false;
 		if (workTabId != other.workTabId)
@@ -207,7 +214,7 @@ public class Batch {
 	// 构造函数
 	public Batch(int id, String batchNo, int flowId, int proId, int workTabId,
 			int status, Date startTime, Date endTime, int disqNum,
-			double disqPercent, int totalNum, int isDelete, Date deleteTime) {
+			double disqPercent, int totalNum, String note, int isDelete, Date deleteTime) {
 		super();
 		this.id = id;
 		this.batchNo = batchNo;
@@ -220,6 +227,7 @@ public class Batch {
 		this.disqNum = disqNum;
 		this.disqPercent = disqPercent;
 		this.totalNum = totalNum;
+		this.note = note;
 		this.isDelete = isDelete;
 		this.deleteTime = deleteTime;
 	}
@@ -237,7 +245,15 @@ public class Batch {
 				+ ", status=" + status + ", startTime=" + startTime
 				+ ", endTime=" + endTime + ", disqNum=" + disqNum
 				+ ", disqPercent=" + disqPercent + ", totalNum=" + totalNum
-				+ ", isDelete=" + isDelete + ", deleteTime=" + deleteTime + "]";
+				+ ", note=" + note + ", isDelete=" + isDelete + ", deleteTime=" + deleteTime + "]";
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	public String getNote() {
+		return note;
 	}
 
 }

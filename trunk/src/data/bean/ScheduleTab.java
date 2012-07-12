@@ -13,6 +13,7 @@ public class ScheduleTab {
 	private Date time;
 	private String colorNo;
 	private int num;
+	private int wtId;
 
 	// get和set方法
 	public int getId() {
@@ -65,6 +66,7 @@ public class ScheduleTab {
 		result = prime * result + id;
 		result = prime * result + num;
 		result = prime * result + ((time == null) ? 0 : time.hashCode());
+		result = prime * result + wtId;
 		return result;
 	}
 
@@ -94,17 +96,20 @@ public class ScheduleTab {
 				return false;
 		} else if (!time.equals(other.time))
 			return false;
+		if (num != other.num)
+			return false;
 		return true;
 	}
 
 	// 构造函数
-	public ScheduleTab(int id, int batchId, Date time, String colorNo, int num) {
+	public ScheduleTab(int id, int batchId, Date time, String colorNo, int num, int wtId) {
 		super();
 		this.id = id;
 		this.batchId = batchId;
 		this.time = time;
 		this.colorNo = colorNo;
 		this.num = num;
+		this.wtId = wtId;
 	}
 
 	public ScheduleTab() {
@@ -116,7 +121,15 @@ public class ScheduleTab {
 	@Override
 	public String toString() {
 		return "ScheduleTab [id=" + id + ", batchId=" + batchId + ", time="
-				+ time + ", colorNo=" + colorNo + ", num=" + num + "]";
+				+ time + ", colorNo=" + colorNo + ", num=" + num + ", wtId=" + wtId + "]";
+	}
+
+	public void setWtId(int wtId) {
+		this.wtId = wtId;
+	}
+
+	public int getWtId() {
+		return wtId;
 	}
 
 }

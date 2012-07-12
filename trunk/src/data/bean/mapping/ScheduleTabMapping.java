@@ -16,6 +16,7 @@ public class ScheduleTabMapping extends BasicMapping<ScheduleTab> {
 			scheduleTab.setId(rs.getInt("Id"));
 			scheduleTab.setNum(rs.getInt("num"));
 			scheduleTab.setTime(rs.getDate("time"));
+			scheduleTab.setWtId(rs.getInt("wtId"));
 		} catch(SQLException ex) {
 			ex.printStackTrace();
 		}

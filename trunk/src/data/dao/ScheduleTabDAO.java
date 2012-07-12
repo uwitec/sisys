@@ -37,13 +37,14 @@ public class ScheduleTabDAO extends GenericQueryImpl<ScheduleTab, ScheduleTabMap
 	
 	public int create(ScheduleTab entity) {
 		// TODO Auto-generated method stub
-		sql = "insert into scheduleTab values (?,?,?,?,?)";
+		sql = "insert into scheduleTab values (?,?,?,?,?,?)";
 		
 		value.add(entity.getId());
 		value.add(entity.getBatchId());
 		value.add(entity.getTime());
 		value.add(entity.getColorNo());
 		value.add(entity.getNum());
+		value.add(entity.getWtId());
 		
 		genericTemplate.setSqlValue(sql);
 		genericTemplate.setValues(value);
@@ -77,12 +78,13 @@ public class ScheduleTabDAO extends GenericQueryImpl<ScheduleTab, ScheduleTabMap
 
 	public int update(ScheduleTab entity, Integer pk) {
 		// TODO Auto-generated method stub
-		sql = "update scheduleTab set batchId=?,time=?,colorNo=?,num=? where Id=?";
+		sql = "update scheduleTab set batchId=?,time=?,colorNo=?,num=?,wtId=? where Id=?";
 
 		value.add(entity.getBatchId());
 		value.add(entity.getTime());
 		value.add(entity.getColorNo());
 		value.add(entity.getNum());
+		value.add(entity.getWtId());
 		value.add(entity.getId());
 		
 		genericTemplate.setSqlValue(sql);

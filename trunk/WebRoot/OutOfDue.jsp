@@ -175,14 +175,20 @@
 				<form action="SheetJD.jsp">
 				
 					<p>
+						<label>产品编号</label>
+						<input class="text-input" type="text" name="proNo"/>
+					</p>
+					<div class="clear"></div>
+				
+					<p>
 						<label>批次号</label>
-						<input class="text-input" type="text" />
+						<input class="text-input" type="text" name="batchNo"/>
 					</p>
 					<div class="clear"></div>
 				
 					<p>
 						<label>备注(可为空)</label>
-						<input class="text-input" type="text" />
+						<input class="text-input" type="text" name="note" />
 					</p>
 					<div class="clear"></div>
 				

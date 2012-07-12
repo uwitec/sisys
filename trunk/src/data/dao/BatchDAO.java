@@ -36,7 +36,7 @@ public class BatchDAO  extends GenericQueryImpl<Batch, BatchMapping>{
 	
 	public int create(Batch entity) {
 		// TODO Auto-generated method stub
-		sql = "insert into batch values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		sql = "insert into batch values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		value.add(entity.getId());
 		value.add(entity.getBatchNo());
@@ -49,6 +49,7 @@ public class BatchDAO  extends GenericQueryImpl<Batch, BatchMapping>{
 		value.add(entity.getDisqNum());
 		value.add(entity.getDisqPercent());
 		value.add(entity.getTotalNum());
+		value.add(entity.getNote());
 		value.add(entity.getIsDelete());
 		value.add(entity.getDeleteTime());
 		
