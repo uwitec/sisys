@@ -9,11 +9,16 @@
     <constant name="struts.devMode" value="true" />
     
 	<include file="struts_manageUser.xml"></include>
+	
+	<include file="struts_manageBatch.xml"></include>
 
 	<package name="common" namespace="/" extends="struts-default">
 		
-		<action name="tableExportor" class="data.util.ExcelExportor" method="tableExportor">
+		<action name="test" class="data.action.test" method="tableExportor">
 			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="tableExportor" class="data.util.ExcelExportor" method="checkLogin">
 		</action>
 		
 		<action name="dataExport" class="data.util.DataSave" method="dataExport">

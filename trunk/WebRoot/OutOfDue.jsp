@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+ <% String error = request.getParameter("result");
+	if(error == null) {
+		error = "";
+	} else if(error.equals("success")) {
+		error = "修改成功！";
+	} else if(error.equals("none")){
+		error = "该批次不存在，请重试！";
+	} else if(error.equals("false")){
+		error = "修改失败！";
+	} else if(error.equals("empty")) {
+		error = "输入不能为空！";
+	}
+%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -172,28 +187,32 @@
 		
 				<div id="login-content">
 				
-				<form action="SheetJD.jsp">
+				<form action="modifyOutDue.action" method="get">
+				
+				<label>
+					<%=error%>
+				</label>
 				
 					<p>
 						<label>产品编号</label>
-						<input class="text-input" type="text" name="proNo"/>
+						<input class="text-input" type="text" name="product.proNo"/>
 					</p>
 					<div class="clear"></div>
 				
 					<p>
 						<label>批次号</label>
-						<input class="text-input" type="text" name="batchNo"/>
+						<input class="text-input" type="text" name="batch.batchNo"/>
 					</p>
 					<div class="clear"></div>
 				
 					<p>
 						<label>备注(可为空)</label>
-						<input class="text-input" type="text" name="note" />
+						<input class="text-input" type="text" name="batch.note" />
 					</p>
 					<div class="clear"></div>
 				
 					<p>
-						<input class="button" type="button" value="已处理"/>
+						<input type="submit" class="button" value="已处理"/>
 					</p>
 
 				</form>

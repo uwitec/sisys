@@ -84,7 +84,12 @@ public class CreateSqlUtil {
 			int equalsCount = 0;
 			for (Map.Entry<String, ?> entry : equalsMap.entrySet()) {
 				equalsCount++;
-				sql.append(entry.getKey() + "='" + entry.getValue() + "'");
+				if(entry.getValue() instanceof Integer) {
+					sql.append(entry.getKey() + "=" + entry.getValue() );
+				} else {
+					sql.append(entry.getKey() + "='" + entry.getValue() + "'");
+				}
+				
 				if (equalsCount < equalsSize) {
 					sql.append(" and ");
 				}

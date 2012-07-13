@@ -53,6 +53,7 @@ public class BatchDAO  extends GenericQueryImpl<Batch, BatchMapping>{
 		value.add(entity.getIsDelete());
 		value.add(entity.getDeleteTime());
 		
+		
 		genericTemplate.setSqlValue(sql);
 		genericTemplate.setValues(value);
 		try {
@@ -88,7 +89,7 @@ public class BatchDAO  extends GenericQueryImpl<Batch, BatchMapping>{
 	public int update(Batch entity, Integer pk) {
 		// TODO Auto-generated method stub
 		sql = "update batch set batchNo=?,flowId=?,proId=?,workTabId=?,status=?,startTime=?,endTime=?,disqNum=?," +
-				"disqPercent=?,totalNum=?,isDelete=?,deleteTime=? where id=?";
+				"disqPercent=?,totalNum=?,note=?,isDelete=?,deleteTime=? where id=?";
 
 		value.add(entity.getBatchNo());
 		value.add(entity.getFlowId());
@@ -100,6 +101,7 @@ public class BatchDAO  extends GenericQueryImpl<Batch, BatchMapping>{
 		value.add(entity.getDisqNum());
 		value.add(entity.getDisqPercent());
 		value.add(entity.getTotalNum());
+		value.add(entity.getNote());
 		value.add(entity.getIsDelete());
 		value.add(entity.getDeleteTime());
 		value.add(entity.getId());

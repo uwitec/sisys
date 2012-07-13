@@ -1,6 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="data.bean.Batch"%>
+<%@ page import="data.bean.Flowpath"%>
+<%@ page import="data.bean.Product"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+				+ request.getServerName() + ":" + request.getServerPort()
+				+ path + "/";
+%>
+
+<%
+	String fp = (String)request.getAttribute("fp");
+	Batch batch = (Batch)request.getAttribute("batch");
+	Product product = (Product)request.getAttribute("product");
+	Flowpath flowpath = (Flowpath)request.getAttribute("flowpath");
+	
+	String error = request.getParameter("result");
+	if(error == null) {
+		error = "";
+	} else if(error.equals("success")) {
+		error = "添加成功！";
+	} else if(error.equals("fnone")){
+		error = "流程不存在，请重新选择！";
+	} else if(error.equals("pnone")){
+		error = "产品不存在，请重新输入产品编号！";
+	} else if(error.equals("false")) {
+		error = "添加失败！";
+	}
+%>
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -41,6 +72,9 @@
 
 <!--                       Javascripts                       -->
 
+<script type="text/javascript"
+	src="resources/scripts/addBatch.js"></script>
+
 <!-- jQuery -->
 <script type="text/javascript"
 	src="resources/scripts/jquery-1.3.2.min.js"></script>
@@ -70,10 +104,11 @@
 				DD_belatedPNG.fix('.png_bg, img, li');
 			</script>
 		<![endif]-->
-
+		
 </head>
 
 <body>
+
 	<div id="body-wrapper">
 		<!-- Wrapper for the radial gradient background -->
 
@@ -184,33 +219,53 @@
 
 					<div id="login-content">
 
-						<form action="#">
+						<input type="hidden" value=${product} name="product">
+						<input type="hidden" value=${fp} name="fp">
+						<input type="hidden" value=${flowpath} name="flowpath">
+						<input type="hidden" value=${batch} name="batch">
+						
+						<form action="addBatch.action" method="get">
 
-							<p>
-								<label>产品编号</label> <input class="text-input" type="text" />
-							</p>
-							<div class="clear"></div>
-							<p>
-								<label>批次号</label> <input class="text-input" type="text" />
-							</p>
-							<div class="clear"></div>
-							<p>
-								<label>开始时间</label> <input class="text-input" type="text" />
-							</p>
-							<div class="clear"></div>
-
-							<p>
-								<input class="button" type="button" value="确定" />
-							</p>
-							<div class="clear"></div>
-						</form>
+						<table class="">
+								<tr>
+									<td><span>产品编号</span></td>
+									<td><input type="text" width="50px"  id="proNo" name="product.proNo"  onblur='display()'></td>
+									<td><span>批次号</span></td>
+									<td><input type="text" width="50px"  name="batch.batchNo"></td>
+									
+								</tr>
+								<tr>
+									<td><span>开始时间</span></td>
+									<td><input type="text" width="50px"  name="batch.startTime"></td>
+									<td><span>结束时间</span></td>
+									<td><input type="text" width="50px" name="batch.endTime"></td>
+								</tr>
+								<tr>
+									<td><span>目标数量</span></td>
+									<td><input type="text" width="50px" name="batch.totalNum"></td>
+									
+								</tr>
+								<tr>
+									<td><span>选择流程</span></td>
+								</tr>
+								<tr>									
+									<td>
+										<div>
+											<textarea  id="flowpath" name="batch.flowId" value=${batch.flowId}>
+											${fp}
+											</textarea>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td><input class="button" type="submit" value="提交"></td>
+									<td><input class="button" type="reset" value="重置"></td>
+								</tr>
+							</table>
+							
 					</div>
 					<!-- End #login-content -->
 				</div>
-
-
-
-
 
 			</div>
 			<!-- End #main-content -->
