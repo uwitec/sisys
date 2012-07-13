@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class Batch {
 
-	private Integer id = null;
+	private int id;
 	private String batchNo;
 	private int flowId; // 流程Id号
 	private int proId;
@@ -17,6 +17,7 @@ public class Batch {
 	private Date startTime;
 	private Date endTime;
 	private int disqNum;
+	private int completeNum;
 	private double disqPercent;
 	private int totalNum; // 目标生产数量
 	private String note;//备注，对超期批次的修改
@@ -24,11 +25,41 @@ public class Batch {
 	private Date deleteTime;
 
 	// get和set方法
-	public Integer getId() {
+	public int getCompleteNum() {
+		return completeNum;
+	}
+
+	public Batch(int id, String batchNo, int flowId, int proId, int workTabId,
+			int status, Date startTime, Date endTime, int disqNum,
+			int completeNum, double disqPercent, int totalNum, String note,
+			int isDelete, Date deleteTime) {
+		super();
+		this.id = id;
+		this.batchNo = batchNo;
+		this.flowId = flowId;
+		this.proId = proId;
+		this.workTabId = workTabId;
+		this.status = status;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.disqNum = disqNum;
+		this.completeNum = completeNum;
+		this.disqPercent = disqPercent;
+		this.totalNum = totalNum;
+		this.note = note;
+		this.isDelete = isDelete;
+		this.deleteTime = deleteTime;
+	}
+
+	public void setCompleteNum(int completeNum) {
+		this.completeNum = completeNum;
+	}
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -128,12 +159,12 @@ public class Batch {
 		this.deleteTime = deleteTime;
 	}
 
-	// 得到hashCode
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((batchNo == null) ? 0 : batchNo.hashCode());
+		result = prime * result + completeNum;
 		result = prime * result
 				+ ((deleteTime == null) ? 0 : deleteTime.hashCode());
 		result = prime * result + disqNum;
@@ -144,17 +175,16 @@ public class Batch {
 		result = prime * result + flowId;
 		result = prime * result + id;
 		result = prime * result + isDelete;
+		result = prime * result + ((note == null) ? 0 : note.hashCode());
 		result = prime * result + proId;
 		result = prime * result
 				+ ((startTime == null) ? 0 : startTime.hashCode());
 		result = prime * result + status;
-		result = prime * result + ((note == null) ? 0 : note.hashCode());
 		result = prime * result + totalNum;
 		result = prime * result + workTabId;
 		return result;
 	}
 
-	// 判断两个类是否相同
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -168,6 +198,8 @@ public class Batch {
 			if (other.batchNo != null)
 				return false;
 		} else if (!batchNo.equals(other.batchNo))
+			return false;
+		if (completeNum != other.completeNum)
 			return false;
 		if (deleteTime == null) {
 			if (other.deleteTime != null)
@@ -190,6 +222,11 @@ public class Batch {
 			return false;
 		if (isDelete != other.isDelete)
 			return false;
+		if (note == null) {
+			if (other.note != null)
+				return false;
+		} else if (!note.equals(other.note))
+			return false;
 		if (proId != other.proId)
 			return false;
 		if (startTime == null) {
@@ -198,11 +235,6 @@ public class Batch {
 		} else if (!startTime.equals(other.startTime))
 			return false;
 		if (status != other.status)
-			return false;
-		if (note == null) {
-			if (other.note != null)
-				return false;
-		} else if (!note.equals(other.note))
 			return false;
 		if (totalNum != other.totalNum)
 			return false;
@@ -237,15 +269,15 @@ public class Batch {
 		// TODO Auto-generated constructor stub
 	}
 
-	// 转换为字符串
 	@Override
 	public String toString() {
 		return "Batch [id=" + id + ", batchNo=" + batchNo + ", flowId="
 				+ flowId + ", proId=" + proId + ", workTabId=" + workTabId
 				+ ", status=" + status + ", startTime=" + startTime
 				+ ", endTime=" + endTime + ", disqNum=" + disqNum
-				+ ", disqPercent=" + disqPercent + ", totalNum=" + totalNum
-				+ ", note=" + note + ", isDelete=" + isDelete + ", deleteTime=" + deleteTime + "]";
+				+ ", completeNum=" + completeNum + ", disqPercent="
+				+ disqPercent + ", totalNum=" + totalNum + ", note=" + note
+				+ ", isDelete=" + isDelete + ", deleteTime=" + deleteTime + "]";
 	}
 
 	public void setNote(String note) {

@@ -8,23 +8,25 @@ import java.util.Date;
  */
 public class WorkForm {
 
-	private Integer id = null;
+	private int id;
 	private int staId;
 	private int procId;
 	private int batchId;
 	private int proId;
 	private int quaNum;
-	private String disDetail; // 记录不合格详情，具体格式为(不合格种类ID)-(不合格品数量)；(不合格种类ID):(不合格品数量)...
+	private int gWaste;
+	private int lWaste;
+	private String disDetail; // 记录不合格详情，具体格式为:不合格种类1-不合格种类2-..-不合格种类2:不合格品1数量-不合格种类2数量-..-不合格种类n数量
 	private Date time; // 记录工单存入系统的时间
 	private int isDelete; // 标识是否删除，0未删除，1删除
 	private Date deleteTime; // 若删除，则记录删除时间
 
 	// get和set方法
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -100,7 +102,22 @@ public class WorkForm {
 		this.deleteTime = deleteTime;
 	}
 
-	// 得到hashCode
+	public int getgWaste() {
+		return gWaste;
+	}
+
+	public void setgWaste(int gWaste) {
+		this.gWaste = gWaste;
+	}
+
+	public int getlWaste() {
+		return lWaste;
+	}
+
+	public void setlWaste(int lWaste) {
+		this.lWaste = lWaste;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -110,8 +127,10 @@ public class WorkForm {
 				+ ((deleteTime == null) ? 0 : deleteTime.hashCode());
 		result = prime * result
 				+ ((disDetail == null) ? 0 : disDetail.hashCode());
+		result = prime * result + gWaste;
 		result = prime * result + id;
 		result = prime * result + isDelete;
+		result = prime * result + lWaste;
 		result = prime * result + proId;
 		result = prime * result + procId;
 		result = prime * result + quaNum;
@@ -120,7 +139,6 @@ public class WorkForm {
 		return result;
 	}
 
-	// 判断两个类是否相同
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -142,9 +160,13 @@ public class WorkForm {
 				return false;
 		} else if (!disDetail.equals(other.disDetail))
 			return false;
+		if (gWaste != other.gWaste)
+			return false;
 		if (id != other.id)
 			return false;
 		if (isDelete != other.isDelete)
+			return false;
+		if (lWaste != other.lWaste)
 			return false;
 		if (proId != other.proId)
 			return false;
@@ -179,18 +201,36 @@ public class WorkForm {
 		this.deleteTime = deleteTime;
 	}
 
+	public WorkForm(int id, int staId, int procId, int batchId, int proId,
+			int quaNum, int gWaste, int lWaste, String disDetail, Date time,
+			int isDelete, Date deleteTime) {
+		super();
+		this.id = id;
+		this.staId = staId;
+		this.procId = procId;
+		this.batchId = batchId;
+		this.proId = proId;
+		this.quaNum = quaNum;
+		this.gWaste = gWaste;
+		this.lWaste = lWaste;
+		this.disDetail = disDetail;
+		this.time = time;
+		this.isDelete = isDelete;
+		this.deleteTime = deleteTime;
+	}
+
 	public WorkForm() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	// 转换为字符串
 	@Override
 	public String toString() {
 		return "WorkForm [id=" + id + ", staId=" + staId + ", procId=" + procId
 				+ ", batchId=" + batchId + ", proId=" + proId + ", quaNum="
-				+ quaNum + ", disDetail=" + disDetail + ", time=" + time
-				+ ", isDelete=" + isDelete + ", deleteTime=" + deleteTime + "]";
+				+ quaNum + ", gWaste=" + gWaste + ", lWaste=" + lWaste
+				+ ", disDetail=" + disDetail + ", time=" + time + ", isDelete="
+				+ isDelete + ", deleteTime=" + deleteTime + "]";
 	}
 
 }

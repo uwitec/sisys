@@ -12,6 +12,7 @@ public class BatchMapping  extends BasicMapping<Batch> {
 		Batch batch = new Batch();
 		try {
 			batch.setBatchNo(rs.getString("batchNo"));
+			batch.setCompleteNum(rs.getInt("completeNum"));
 			batch.setDeleteTime(rs.getDate("deleteTime"));
 			batch.setDisqNum(rs.getInt("disqNum"));
 			batch.setDisqPercent(rs.getDouble("disqPercent"));

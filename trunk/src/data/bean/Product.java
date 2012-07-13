@@ -9,25 +9,51 @@ import java.util.Date;
  */
 public class Product {
 
-	private Integer id = null;
+	private int id;
 	private int deptId;
 	private int prolineId; // 生产线ID号
 	private String proNo;
 	private String proName;
 	private Date time;
+	private int completeNum;
 	private int disqNum; // 不合格数量
 	private double disqPerc; // 不合格品百分比
 	private int totalNum; // 目标数量
-	private int completeNum;
 	private int isDelete;
 	private Date deleteTime;
 
 	// get和set方法
-	public Integer getId() {
+	public int getCompleteNum() {
+		return completeNum;
+	}
+
+	public void setCompleteNum(int completeNum) {
+		this.completeNum = completeNum;
+	}
+
+	public Product(int id, int deptId, int prolineId, String proNo,
+			String proName, Date time, int completeNum, int disqNum,
+			double disqPerc, int totalNum, int isDelete, Date deleteTime) {
+		super();
+		this.id = id;
+		this.deptId = deptId;
+		this.prolineId = prolineId;
+		this.proNo = proNo;
+		this.proName = proName;
+		this.time = time;
+		this.completeNum = completeNum;
+		this.disqNum = disqNum;
+		this.disqPerc = disqPerc;
+		this.totalNum = totalNum;
+		this.isDelete = isDelete;
+		this.deleteTime = deleteTime;
+	}
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -95,14 +121,6 @@ public class Product {
 		this.totalNum = totalNum;
 	}
 
-	public int getCompleteNum() {
-		return completeNum;
-	}
-
-	public void setCompleteNum(int completeNum) {
-		this.completeNum = completeNum;
-	}
-
 	public int getIsDelete() {
 		return isDelete;
 	}
@@ -119,11 +137,11 @@ public class Product {
 		this.deleteTime = deleteTime;
 	}
 
-	// 得到hashCode
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + completeNum;
 		result = prime * result
 				+ ((deleteTime == null) ? 0 : deleteTime.hashCode());
 		result = prime * result + deptId;
@@ -141,7 +159,6 @@ public class Product {
 		return result;
 	}
 
-	// 判断两个类是否相同
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -151,6 +168,8 @@ public class Product {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
+		if (completeNum != other.completeNum)
+			return false;
 		if (deleteTime == null) {
 			if (other.deleteTime != null)
 				return false;
@@ -212,14 +231,14 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 
-	// 转换为字符串
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", deptId=" + deptId + ", prolineId="
 				+ prolineId + ", proNo=" + proNo + ", proName=" + proName
-				+ ", time=" + time + ", disqNum=" + disqNum + ", disqPerc="
-				+ disqPerc + ", totalNum=" + totalNum + ", isDelete="
-				+ isDelete + ", deleteTime=" + deleteTime + "]";
+				+ ", time=" + time + ", completeNum=" + completeNum
+				+ ", disqNum=" + disqNum + ", disqPerc=" + disqPerc
+				+ ", totalNum=" + totalNum + ", isDelete=" + isDelete
+				+ ", deleteTime=" + deleteTime + "]";
 	}
 
 }

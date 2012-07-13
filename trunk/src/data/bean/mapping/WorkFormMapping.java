@@ -14,8 +14,10 @@ public class WorkFormMapping extends BasicMapping<WorkForm> {
 			workForm.setBatchId(rs.getInt("batchId"));
 			workForm.setDeleteTime(rs.getDate("deleteTime"));
 			workForm.setDisDetail(rs.getString("disDetail"));
+			workForm.setgWaste(rs.getInt("gWaste"));
 			workForm.setId(rs.getInt("Id"));
 			workForm.setIsDelete(rs.getInt("isDelete"));
+			workForm.setlWaste(rs.getInt("lWaste"));
 			workForm.setProcId(rs.getInt("procId"));
 			workForm.setProId(rs.getInt("proId"));
 			workForm.setQuaNum(rs.getInt("quaNum"));

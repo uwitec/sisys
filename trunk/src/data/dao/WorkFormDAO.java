@@ -38,7 +38,7 @@ public class WorkFormDAO extends GenericQueryImpl<WorkForm, WorkFormMapping> {
 	
 	public int create(WorkForm entity) {
 		// TODO Auto-generated method stub
-		sql = "insert into workForm values (?,?,?,?,?,?,?,?,?,?)";
+		sql = "insert into workForm values (?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		value.add(entity.getId());
 		value.add(entity.getStaId());
@@ -50,6 +50,8 @@ public class WorkFormDAO extends GenericQueryImpl<WorkForm, WorkFormMapping> {
 		value.add(entity.getTime());
 		value.add(entity.getIsDelete());
 		value.add(entity.getDeleteTime());
+		value.add(entity.getgWaste());
+		value.add(entity.getlWaste());
 		
 		genericTemplate.setSqlValue(sql);
 		genericTemplate.setValues(value);
@@ -86,7 +88,7 @@ public class WorkFormDAO extends GenericQueryImpl<WorkForm, WorkFormMapping> {
 	public int update(WorkForm entity, Integer pk) {
 		// TODO Auto-generated method stub
 		sql = "update workForm set staId=?,procId=?,batchId=?,proId=?,quaNum=?," +
-				"disDetail=?,time=?,isDelete=?,deleteTime=? where Id=?";
+				"disDetail=?,time=?,isDelete=?,gWaste=?,lWaste=?,deleteTime=? where Id=?";
 
 		value.add(entity.getStaId());
 		value.add(entity.getProcId());
@@ -97,6 +99,8 @@ public class WorkFormDAO extends GenericQueryImpl<WorkForm, WorkFormMapping> {
 		value.add(entity.getTime());
 		value.add(entity.getIsDelete());
 		value.add(entity.getDeleteTime());
+		value.add(entity.getgWaste());
+		value.add(entity.getlWaste());
 		value.add(entity.getId());
 		
 		genericTemplate.setSqlValue(sql);

@@ -36,7 +36,7 @@ public class BatchDAO  extends GenericQueryImpl<Batch, BatchMapping>{
 	
 	public int create(Batch entity) {
 		// TODO Auto-generated method stub
-		sql = "insert into batch values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		sql = "insert into batch values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		value.add(entity.getId());
 		value.add(entity.getBatchNo());
@@ -50,6 +50,7 @@ public class BatchDAO  extends GenericQueryImpl<Batch, BatchMapping>{
 		value.add(entity.getDisqPercent());
 		value.add(entity.getTotalNum());
 		value.add(entity.getNote());
+		value.add(entity.getCompleteNum());
 		value.add(entity.getIsDelete());
 		value.add(entity.getDeleteTime());
 		
@@ -89,7 +90,7 @@ public class BatchDAO  extends GenericQueryImpl<Batch, BatchMapping>{
 	public int update(Batch entity, Integer pk) {
 		// TODO Auto-generated method stub
 		sql = "update batch set batchNo=?,flowId=?,proId=?,workTabId=?,status=?,startTime=?,endTime=?,disqNum=?," +
-				"disqPercent=?,totalNum=?,note=?,isDelete=?,deleteTime=? where id=?";
+				"disqPercent=?,totalNum=?,note=?,completeNum=?,isDelete=?,deleteTime=? where id=?";
 
 		value.add(entity.getBatchNo());
 		value.add(entity.getFlowId());
@@ -102,6 +103,7 @@ public class BatchDAO  extends GenericQueryImpl<Batch, BatchMapping>{
 		value.add(entity.getDisqPercent());
 		value.add(entity.getTotalNum());
 		value.add(entity.getNote());
+		value.add(entity.getCompleteNum());
 		value.add(entity.getIsDelete());
 		value.add(entity.getDeleteTime());
 		value.add(entity.getId());
