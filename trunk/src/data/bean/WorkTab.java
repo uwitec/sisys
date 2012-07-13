@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class WorkTab {
 
-	private int id;
+	private Integer id = null;
 	private int procId;
 	private int quNum;
 	private int disqNum;
@@ -17,11 +17,11 @@ public class WorkTab {
 	private int isEnd; // 判断是否是该流程的最后一个工序
 
 	// get和set方法
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

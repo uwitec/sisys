@@ -8,18 +8,18 @@ import java.util.Date;
  */
 public class ProductLine {
 
-	private int id;
+	private Integer id = null;
 	private int lineNo;
 	private String lineDesc;
 	private int isDelete;
 	private Date deleteTime;
 
 	// get 和set 方法
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

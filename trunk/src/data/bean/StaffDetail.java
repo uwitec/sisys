@@ -6,7 +6,7 @@ package data.bean;
  */
 public class StaffDetail {
 
-	private int id;
+	private Integer id = null;
 	private int staffId;
 	private String proName;
 	private String proNo;
@@ -17,11 +17,11 @@ public class StaffDetail {
 	private double workHours; // 工时
 
 	// get和set方法
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

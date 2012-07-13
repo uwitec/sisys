@@ -9,18 +9,18 @@ import java.util.Date;
  */
 public class Flowpath {
 
-	private int id;
+	private Integer id = null;
 	private String sequence;
 	private int proId;
 	private int isDelete;
 	private Date deleteTime;
 
 	// get和set方法
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

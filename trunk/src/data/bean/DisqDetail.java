@@ -6,17 +6,17 @@ package data.bean;
  **/
 public class DisqDetail {
 
-	private int id;
+	private Integer id = null;
 	private int disKId; // 不合格详细种类的id
 	private int nextId; // 该工单记录的下一条不合格详细记录id,0代表结尾
 	private int num;
 
 	// get和set方法
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

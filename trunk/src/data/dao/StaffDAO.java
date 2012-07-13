@@ -1,18 +1,12 @@
 package data.dao;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import data.bean.Batch;
 import data.bean.Staff;
-import data.bean.User;
-
-import data.bean.mapping.BatchMapping;
 import data.bean.mapping.StaffMapping;
-import data.bean.mapping.UserMapping;
 import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
@@ -168,5 +162,6 @@ public class StaffDAO extends GenericQueryImpl<Staff, StaffMapping> {
 		}
 		return result;
 	}
+	
 
 }

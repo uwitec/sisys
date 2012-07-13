@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class Batch {
 
-	private int id;
+	private Integer id = null;
 	private String batchNo;
 	private int flowId; // 流程Id号
 	private int proId;
@@ -24,11 +24,11 @@ public class Batch {
 	private Date deleteTime;
 
 	// get和set方法
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

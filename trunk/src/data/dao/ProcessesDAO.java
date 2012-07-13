@@ -38,7 +38,7 @@ public class ProcessesDAO  extends GenericQueryImpl<Processes, ProcessesMapping>
 	
 	public int create(Processes entity) {
 		// TODO Auto-generated method stub
-		sql = "insert into process values (?,?,?,?,?,?,?,?)";
+		sql = "insert into processes values (?,?,?,?,?,?,?,?)";
 		
 		value.add(entity.getId());
 		value.add(entity.getProcName());
@@ -46,6 +46,7 @@ public class ProcessesDAO  extends GenericQueryImpl<Processes, ProcessesMapping>
 		value.add(entity.getProcNo());
 		value.add(entity.getUnitOutput());
 		value.add(entity.getUnitCost());
+		System.out.println(entity.getUnitCost());
 		value.add(entity.getIsDelete());
 		value.add(entity.getDeleteTime());
 		
@@ -64,7 +65,7 @@ public class ProcessesDAO  extends GenericQueryImpl<Processes, ProcessesMapping>
 
 	public int delete(Processes entity) {
 		// TODO Auto-generated method stub
-		sql = "update process set isDelete=?,deleteTime=? where id=?";
+		sql = "update processes set isDelete=?,deleteTime=? where id=?";
 		value.add(1);
 		value.add(new Date());
 		value.add(entity.getId());
@@ -83,7 +84,7 @@ public class ProcessesDAO  extends GenericQueryImpl<Processes, ProcessesMapping>
 
 	public int update(Processes entity, Integer pk) {
 		// TODO Auto-generated method stub
-		sql = "update process set procName=?,colorNo=?,procNo=?,unitOutput=?,unitCost=?," +
+		sql = "update processes set procName=?,colorNo=?,procNo=?,unitOutput=?,unitCost=?," +
 				"isDelete=?,deleteTime=? where Id=?";
 
 		value.add(entity.getProcName());
@@ -112,7 +113,7 @@ public class ProcessesDAO  extends GenericQueryImpl<Processes, ProcessesMapping>
 		ProcessesMapping processesMapping = new ProcessesMapping();
 		Processes processes = null;
 		ResultSet resultSet;
-		sql = "select * from process where Id=?";
+		sql = "select * from processes where Id=?";
 		value.add(entity.getId());
 		genericTemplate.setSqlValue(sql);
 		genericTemplate.setValues(value);
@@ -134,7 +135,7 @@ public class ProcessesDAO  extends GenericQueryImpl<Processes, ProcessesMapping>
 		ProcessesMapping processesMapping = new ProcessesMapping();
 		Processes processes = null;
 		ResultSet resultSet;
-		sql = "select * from process where Id=?";
+		sql = "select * from processes where Id=?";
 		value.add(pk);
 		genericTemplate.setSqlValue(sql);
 		genericTemplate.setValues(value);
@@ -153,7 +154,7 @@ public class ProcessesDAO  extends GenericQueryImpl<Processes, ProcessesMapping>
 	public int count() {
 		// TODO Auto-generated method stub
 		ResultSet resultSet;
-		sql = "select count(*) from process";
+		sql = "select count(*) from processes";
 		genericTemplate.setSqlValue(sql);
 		try {
 			resultSet = genericTemplate.executeQuery();

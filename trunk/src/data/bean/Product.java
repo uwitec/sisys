@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class Product {
 
-	private int id;
+	private Integer id = null;
 	private int deptId;
 	private int prolineId; // 生产线ID号
 	private String proNo;
@@ -18,15 +18,16 @@ public class Product {
 	private int disqNum; // 不合格数量
 	private double disqPerc; // 不合格品百分比
 	private int totalNum; // 目标数量
+	private int completeNum;
 	private int isDelete;
 	private Date deleteTime;
 
 	// get和set方法
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -92,6 +93,14 @@ public class Product {
 
 	public void setTotalNum(int totalNum) {
 		this.totalNum = totalNum;
+	}
+
+	public int getCompleteNum() {
+		return completeNum;
+	}
+
+	public void setCompleteNum(int completeNum) {
+		this.completeNum = completeNum;
 	}
 
 	public int getIsDelete() {

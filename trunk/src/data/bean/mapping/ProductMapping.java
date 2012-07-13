@@ -22,6 +22,7 @@ public class ProductMapping extends BasicMapping<Product> {
 			product.setProNo(rs.getString("proNo"));
 			product.setTime(rs.getDate("time"));
 			product.setTotalNum(rs.getInt("totalNum"));
+			product.setCompleteNum(rs.getInt("completeNum"));
 		} catch(SQLException ex) {
 			ex.printStackTrace();
 		}

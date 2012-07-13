@@ -1,25 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="data.bean.User"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<% String error = request.getParameter("result");
-	if(error == null) {
-		error = "";
-	} else if(error.equals("success")) {
-		error = "修改成功！";
-	} else if(error.equals("nameError")){
-		error = "用户名重复，请重新输入！";
-	} else if(error.equals("false")){
-		error = "修改失败！";
-	} else if(error.equals("empty")) {
-		error = "输入不能为空！";
-	}
-	
-	User user = (User)session.getAttribute("user"); 
-	String username = user.getUsername();
-	String password = user.getPassword();
-%>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
@@ -83,6 +64,26 @@
 				DD_belatedPNG.fix('.png_bg, img, li');
 			</script>
 		<![endif]-->
+		
+		<script type="text/javascript">
+			function checkType(){
+				var forum = document.forms["fileForm"]; 
+				var upload = document.getElementsByName("filePath")[0].value;
+				if(upload.length == 0){
+					alert("请选择上传文件！");
+					document.getElementsByName("filePath")[0].focus();
+					return false;
+				}
+				var type = upload.substring(upload.lastIndexOf(".")+1,upload.length);
+				if(type == "xls"){
+					forum.submit();
+				}else{
+					alert("文件类型错误！只允许导入xls文件！");
+					document.getElementsByName("filePath")[0].focus();
+					return false;
+				}
+			}
+		</script>
 		
 	</head>
   
@@ -149,7 +150,7 @@
 				</li>
 				
 				<li>
-					<a href="#" class="nav-top-item">
+					<a href="#" class="nav-top-item current">
 						基本信息录入
 					</a>
 					<ul>
@@ -166,7 +167,7 @@
 				</li>
 				
 				<li>
-					<a href="AdminInfo_admin.jsp" class="nav-top-item current no-submenu"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
+					<a href="AdminInfo_admin.jsp" class="nav-top-item no-submenu"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
 						个人信息管理
 					</a>
 				</li>
@@ -180,66 +181,54 @@
 		<div id="main-content"> <!-- Main Content Section with everything -->
 			
 			<!-- Page Head -->
-			<h2>Welcome!</h2>
-			<p id="page-intro">What would you like to do?</p>
+			<h2>生产线编码表导入</h2>
+			<p id="page-intro">Data Import</p>
+			
+			
 			
 			<div class="clear"></div> <!-- End .clear -->
 			
 			<div class="content-box"><!-- Start Content Box -->
 				
 				<div class="content-box-header">
-					
-					<h3>个人信息</h3>
+				
+					<h3>Select Box</h3>
 
-					
 					<div class="clear"></div>
 					
 				</div> <!-- End .content-box-header -->
 				
 				<div class="content-box-content">
-					
-					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
-						
-						<label>
-							<%=error%>
-						</label>
-						
-						<form action="modifyAdmin.action" method="get">
-						<table class = "add_form">
-							<tr>
-								<td><span>用户名</span></td>
-								<td><input type="text" width="50px" value=<%=username%> name="user.username"></td>
-							</tr>
-							<tr>
-								<td><span>密码</span></td>
-								<td><input type="text" width="50px" value=<%=password%> name="user.password"></td>
-							</tr>
-							<tr>
-								<td><input type="submit" class="button" value="修改"></td>
-							</tr>
-						</table>
-						</form>
-						
-						
-						
-					</div> <!-- End #tab1 -->
-					
-  
-					
-				</div> <!-- End .content-box-content -->
+		
+				<div id="login-content">
 				
-			</div> <!-- End .content-box -->
-
-			<div class="clear"></div>
+				<form method="post" action="proLineImport.action" name="fileForm" >
+				
+					<p>
+						<label>路径</label>
+						<input class="text-input" type="file" name="filePath"/>
+					</p>
+					
+					<div class="clear"></div>
+					<p>
+						<input onclick=checkType() class="button" type="button" value="确定" />
+					</p>
+					
+				</form>
+			</div> <!-- End #login-content -->
+						</div>
+						
+						
 			
-			<div id="footer">
+			
+			
+		</div> <!-- End #main-content -->
+		<div id="footer">
 				<small> <!-- Remove this notice or replace it with whatever you want -->
 						&#169; Copyright 2012 Your Company | Powered by 顺江实验室 | <a href="#">Top</a>
 				</small>
 			</div><!-- End #footer -->
-			
-		</div> <!-- End #main-content -->
-		
+			</div>
 	</div></body>
   
 

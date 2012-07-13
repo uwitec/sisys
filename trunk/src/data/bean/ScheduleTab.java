@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class ScheduleTab {
 
-	private int id;
+	private Integer id = null;
 	private int batchId;
 	private Date time;
 	private String colorNo;
@@ -16,11 +16,11 @@ public class ScheduleTab {
 	private int wtId;
 
 	// get和set方法
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

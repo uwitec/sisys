@@ -38,7 +38,7 @@ public class ProductDAO  extends GenericQueryImpl<Product, ProductMapping> {
 	
 	public int create(Product entity) {
 		// TODO Auto-generated method stub
-		sql = "insert into product values (?,?,?,?,?,?,?,?,?,?,?)";
+		sql = "insert into product values (?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		value.add(entity.getId());
 		value.add(entity.getDeptId());
@@ -49,6 +49,7 @@ public class ProductDAO  extends GenericQueryImpl<Product, ProductMapping> {
 		value.add(entity.getDisqNum());
 		value.add(entity.getDisqPerc());
 		value.add(entity.getTotalNum());
+		value.add(entity.getCompleteNum());
 		value.add(entity.getIsDelete());
 		value.add(entity.getDeleteTime());
 		
@@ -87,7 +88,7 @@ public class ProductDAO  extends GenericQueryImpl<Product, ProductMapping> {
 	public int update(Product entity, Integer pk) {
 		// TODO Auto-generated method stub
 		sql = "update product set deptId=?,prolineId=?,proNo=?,proName=?,time=?," +
-				"disqNum=?,disqPerc=?,totalNum=?,isDelete=?,deleteTime=? where Id=?";
+				"disqNum=?,disqPerc=?,totalNum=?,completeNum=?,isDelete=?,deleteTime=? where Id=?";
 
 		value.add(entity.getDeptId());
 		value.add(entity.getProlineId());
@@ -97,6 +98,7 @@ public class ProductDAO  extends GenericQueryImpl<Product, ProductMapping> {
 		value.add(entity.getDisqNum());
 		value.add(entity.getDisqPerc());
 		value.add(entity.getTotalNum());
+		value.add(entity.getCompleteNum());
 		value.add(entity.getIsDelete());
 		value.add(entity.getDeleteTime());
 		value.add(entity.getId());

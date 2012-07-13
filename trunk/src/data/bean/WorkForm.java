@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class WorkForm {
 
-	private int id;
+	private Integer id = null;
 	private int staId;
 	private int procId;
 	private int batchId;
@@ -20,11 +20,11 @@ public class WorkForm {
 	private Date deleteTime; // 若删除，则记录删除时间
 
 	// get和set方法
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

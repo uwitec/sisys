@@ -10,7 +10,7 @@ public class DepartmentMapping extends BasicMapping<Department>{
 	public Department mapping(ResultSet rs) {
 
 		Department department = new Department();
-		try {			
+		try {
 			department.setId(rs.getInt("Id"));
 			department.setDeptName(rs.getString("deptName"));
 			department.setDeptNo(rs.getString("deptNo"));

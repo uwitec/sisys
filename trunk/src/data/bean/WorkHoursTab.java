@@ -8,18 +8,18 @@ import java.util.Date;
  */
 public class WorkHoursTab {
 
-	private int id;
+	private Integer id = null;
 	private int staId;
 	private Date time;
 	private double workHours; // 工时，根据工序得到
 	private double salary; // 工钱，根据工序得到
 
 	// get和set方法
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

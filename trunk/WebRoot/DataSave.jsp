@@ -120,12 +120,23 @@
 				</li>
 				
 				<li>
-					<a href="#" class="nav-top-item current">
-						数据管理
+					<a href="#" class="nav-top-item  current">
+						数据库管理
 					</a>
 					<ul>
 						<li><a href="DataSave.jsp">数据备份</a></li>
 						<li><a href="DataLogin.jsp">数据导入</a></li>
+					</ul>
+				</li>
+				
+				<li>
+					<a href="#" class="nav-top-item">
+						基本信息录入
+					</a>
+					<ul>
+						<li><a href="StaffImport.jsp">员工表</a></li>
+						<li><a href="ProLineImport.jsp">生产线编码表</a></li>
+						<li><a href="ProImport.jsp">产品成本表</a></li>
 					</ul>
 				</li>
 				

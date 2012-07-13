@@ -22,12 +22,27 @@
 		</action>
 		
 		<action name="dataExport" class="data.util.DataSave" method="dataExport">
-			<result name="error">/error.jsp</result>
+			<result name="error">/DataSave.jsp</result>
 		</action>
 		
 		<action name="dataImport" class="data.util.DataSave" method="dataImport">
 			<result name="success">/DataLogin.jsp</result>
-			<result name="error">/error.jsp</result>
+			<result name="error">/DataLogin.jsp</result>
+		</action>
+		
+		<action name="staffImport" class="data.util.ExcelImportor" method="staffImport">
+			<result name="success">/StaffImport.jsp</result>
+			<result name="error">/StaffImport.jsp</result>
+		</action>
+		
+		<action name="proLineImport" class="data.util.ExcelImportor" method="proLineImport">
+			<result name="success">/ProLineImport.jsp</result>
+			<result name="error">/ProLineImport.jsp</result>
+		</action>
+		
+		<action name="proImport" class="data.util.ExcelImportor" method="proImport">
+			<result name="success">/ProImport.jsp</result>
+			<result name="error">/ProImport.jsp</result>
 		</action>
 
 	</package>

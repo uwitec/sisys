@@ -1,17 +1,12 @@
 package data.dao;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import data.bean.Batch;
 import data.bean.Department;
-import data.bean.User;
-import data.bean.mapping.BatchMapping;
 import data.bean.mapping.DepartmentMapping;
-import data.bean.mapping.UserMapping;
 import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 

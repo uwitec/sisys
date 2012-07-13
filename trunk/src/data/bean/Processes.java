@@ -9,21 +9,21 @@ import java.util.Date;
  */
 public class Processes {
 
-	private int id;
+	private Integer id = null;
 	private String procName;
 	private String colorNo;
 	private String procNo;
 	private int unitOutput; // 班产量，用于转换工时：工时=生产数量/班产量*8
-	private int unitCost; // 工时单价，用于转换为工钱
+	private double unitCost; // 工时单价，用于转换为工钱
 	private int isDelete;
 	private Date deleteTime;
 
 	// get和set方法
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -59,11 +59,11 @@ public class Processes {
 		this.unitOutput = unitOutput;
 	}
 
-	public int getUnitCost() {
+	public double getUnitCost() {
 		return unitCost;
 	}
 
-	public void setUnitCost(int unitCost) {
+	public void setUnitCost(double unitCost) {
 		this.unitCost = unitCost;
 	}
 
@@ -96,7 +96,9 @@ public class Processes {
 		result = prime * result + ((procNo == null) ? 0 : procNo.hashCode());
 		result = prime * result
 				+ ((procName == null) ? 0 : procName.hashCode());
-		result = prime * result + unitCost;
+		long temp;
+		temp = Double.doubleToLongBits(unitCost);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + unitOutput;
 		return result;
 	}

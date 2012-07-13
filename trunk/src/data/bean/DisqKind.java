@@ -8,18 +8,18 @@ import java.util.Date;
  */
 public class DisqKind {
 
-	private int id;
+	private Integer id = null;
 	private String disDesc;
 	private int kind; // 0代表工废，1代表料废
 	private int isDelete;
 	private Date deleteTime;
 
 	// get和set方法
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

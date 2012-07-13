@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class User {
 
-	private int id;
+	private Integer id = null;
 	private String username;
 	private String password;
 	private int level; // 用户权限，1代表查看人员，2代表普通统计员，3代表管理员
@@ -16,11 +16,11 @@ public class User {
 	private Date deleteTime;
 
 	// get和set方法
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
