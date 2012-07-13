@@ -27,7 +27,7 @@
           if (xmlHttp.readyState == 4) { // 测试状态是否请求完成
       		if (xmlHttp.status == 200) { // 如果服务端回应OK
        			var text = xmlHttp.responseText;
-       			//document.getElementById("flowpath").value = text;//将内容放入
+       			document.getElementById("flowpath").innerHTML = text;//将内容放入
       		}else { //页面不正常  
                 window.alert("您所请求的页面有异常。");  
             }  

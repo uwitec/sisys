@@ -14,6 +14,7 @@ import data.bean.Batch;
 import data.bean.Flowpath;
 import data.bean.Processes;
 import data.bean.Product;
+import data.bean.User;
 import data.bean.WorkTab;
 import data.dao.BatchDAO;
 import data.dao.FlowpathDAO;
@@ -30,67 +31,105 @@ public class ManageBatchService {
 		Map<String, Object> equalsMap = new HashMap<String, Object>();
 		equalsMap.put("proNo", product.getProNo());
 		List<Product> pList = pdao.findEntity(equalsMap);
-		//若产品不存在，返回none
+		/*//若产品不存在，返回none
 		if(pList.size() == 0) {
 			return "pnone";
-		}
+		}*/
 		product = pList.get(0);
 		FlowpathDAO fdao = new FlowpathDAO();
 		equalsMap.clear();
 		equalsMap.put("proId", product.getId());
 		List<Flowpath> fList = fdao.findEntity(equalsMap);
-		//若对应流程不存在，返回none
+		/*//若对应流程不存在，返回none
 		if(fList.size() == 0) {
 			return "fnone";
-		}
-		Flowpath flowpath = fList.get(0);
-		String process = flowpath.getSequence();
-		String[] processes = process.split("-");
-		StringBuffer fp = new StringBuffer();
-		//得到对应的工序名称列表字符串，以“-”连接
-		ProcessesDAO procdao = new ProcessesDAO();
-		for(int i=0; i<processes.length; i++) {
-			int procId = Integer.parseInt(processes[i]);
-			equalsMap.clear();
-			equalsMap.put("Id", procId);
-			List<Processes> procList = procdao.findEntity(equalsMap);
-			if(procList.size() == 0) {
-				return "fnone";
+		}*/
+		StringBuffer fp = null;
+		Flowpath flowpath = null;
+		StringBuffer result = new StringBuffer();
+		for(int j=0; j<fList.size(); j++) {
+			if(j != fList.size()-1) {
+				result.append("<input type=\"radio\" name=\"fpath\" value=\"");
+			} else {
+				result.append("<input type=\"radio\" name=\"fpath\" checked value=\"");
 			}
-			fp.append(procList.get(0).getProcName());
-			if(i != processes.length-1) {
-				fp.append("-");
+			
+			flowpath = fList.get(j);
+			String process = flowpath.getSequence();
+			String[] processes = process.split("-");
+			fp = new StringBuffer();
+			//得到对应的工序名称列表字符串，以“-”连接
+			ProcessesDAO procdao = new ProcessesDAO();
+			for(int i=0; i<processes.length; i++) {
+				int procId = Integer.parseInt(processes[i]);
+				equalsMap.clear();
+				equalsMap.put("Id", procId);
+				List<Processes> procList = procdao.findEntity(equalsMap);
+				/*if(procList.size() == 0) {
+					return "fnone";
+				}*/
+				fp.append(procList.get(0).getProcName());
+				if(i != processes.length-1) {
+					fp.append("-");
+				}
 			}
+			result.append(process);
+			result.append("\">");
+			result.append(fp);
 		}
+		
 		//inputStream = fp.toString();
-		//将流程信息及对应的id号保存到request里
-		ActionContext context = ActionContext.getContext();  
+		//将流程信息及对应的id号保存到session里
+		ActionContext actionContext = ActionContext.getContext(); 
+	    Map session = actionContext.getSession();
+	    session.put("product", product);
+	    
+		/*ActionContext context = ActionContext.getContext();  
 	    HttpServletRequest request = (HttpServletRequest) context.get(ServletActionContext.HTTP_REQUEST);  
 		request.setAttribute("product", product);
 	    request.setAttribute("fp",fp.toString()); 
-		request.setAttribute("flowpath", flowpath);
-	    return fp.toString();
+		request.setAttribute("flowpath", flowpath);*/
+	    return result.toString();
 	}
 	
 	//批次添加
-	public String addBatch(Product product, Batch batch, Flowpath flowpath, String fp) {
-		batch.setProId(product.getId());
-		//找到对应的流程		
-		batch.setFlowId(flowpath.getId());
-		String[] processes = fp.split("-");
+	public String addBatch(Product product, Batch batch, String fpath) {
+		
+		ActionContext actionContext = ActionContext.getContext(); 
+	    Map session = actionContext.getSession();
+	    Product p = (Product) session.get("product");
+		
+	    batch.setIsDelete(0);
+	    batch.setDeleteTime(null);
+		batch.setProId(p.getId());
+		//找到对应的流程	
+		FlowpathDAO fdao = new FlowpathDAO();
+		Map<String, String> equalsMap = new HashMap<String, String>();
+		equalsMap.put("sequence", fpath);
+		List<Flowpath> fList = fdao.findEntity(equalsMap);
+		batch.setFlowId(fList.get(0).getId());
+		String[] processes = fpath.split("-");
+		for(int i=0; i<processes.length; i++) {
+			System.out.print(processes[i]);
+		}
+		
 		//在工作表建立初始化的相应记录
 		WorkTabDAO wdao = new WorkTabDAO();
 		WorkTab wt = new WorkTab();
+		wt.setId(0);
 		wt.setProcId(Integer.parseInt(processes[0]));
 		int num = wdao.create(wt);
 		if(num == 0) {
 			return "false";
 		}
 		WorkTabDAO wdao1 = new WorkTabDAO();
-		batch.setWorkTabId(wdao1.count());
+		int tabid = wdao1.count();
+		//System.out.println(tabid + " " );
+		batch.setWorkTabId(tabid);
 		for(int i=1; i<processes.length; i++) {
 			WorkTabDAO wdaoi = new WorkTabDAO();
 			WorkTab wti = new WorkTab();
+			wti.setId(0);
 			if(i != processes.length-1) {
 				wti.setIsEnd(0);
 			} else {
@@ -103,6 +142,11 @@ public class ManageBatchService {
 			}
 		}
 		batch.setStatus(0);
+		BatchDAO bdao = new BatchDAO();
+		num = bdao.create(batch);
+		if(num == 0) {
+			return "false";
+		}
 		return "success";
 	}
 	

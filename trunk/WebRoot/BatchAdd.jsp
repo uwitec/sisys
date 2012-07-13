@@ -13,21 +13,13 @@
 %>
 
 <%
-	String fp = (String)request.getAttribute("fp");
-	Batch batch = (Batch)request.getAttribute("batch");
-	Product product = (Product)request.getAttribute("product");
-	Flowpath flowpath = (Flowpath)request.getAttribute("flowpath");
 	
 	String error = request.getParameter("result");
 	if(error == null) {
 		error = "";
 	} else if(error.equals("success")) {
 		error = "添加成功！";
-	} else if(error.equals("fnone")){
-		error = "流程不存在，请重新选择！";
-	} else if(error.equals("pnone")){
-		error = "产品不存在，请重新输入产品编号！";
-	} else if(error.equals("false")) {
+	}  else if(error.equals("false")) {
 		error = "添加失败！";
 	}
 %>
@@ -229,11 +221,10 @@
 				<div class="content-box-content">
 
 					<div id="login-content">
-
-						<input type="hidden" value=${product} name="product">
-						<input type="hidden" value=${fp} name="fp">
-						<input type="hidden" value=${flowpath} name="flowpath">
-						<input type="hidden" value=${batch} name="batch">
+						
+						<label>
+							<%=error%>
+						</label>
 						
 						<form action="addBatch.action" method="get">
 
@@ -261,10 +252,8 @@
 								</tr>
 								<tr>									
 									<td>
-										<div>
-											<textarea  id="flowpath" name="batch.flowId" value=${batch.flowId}>
-											${fp}
-											</textarea>
+										<div id="flowpath">
+											
 										</div>
 									</td>
 								</tr>

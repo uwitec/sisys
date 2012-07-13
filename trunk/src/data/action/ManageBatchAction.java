@@ -1,6 +1,9 @@
 package data.action;
 
 
+import java.io.InputStream;
+import java.io.StringBufferInputStream;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
@@ -25,7 +28,8 @@ public class ManageBatchAction extends BaseAction {
 	private Flowpath flowpath = new Flowpath();
 	private String fp = "";
 	//相应ajax请求
-	private String inputStream = "";
+	private InputStream inputStream;
+	private String fpath;
 	
 	//对应的get()和set()方法
 	public Batch getBatch() {
@@ -58,11 +62,17 @@ public class ManageBatchAction extends BaseAction {
 	public String getProNo() {
 		return proNo;
 	}
-	public void setInputStream(String inputStream) {
+	public void setInputStream(InputStream inputStream) {
 		this.inputStream = inputStream;
 	}
-	public String getInputStream() {
+	public InputStream getInputStream() {
 		return inputStream;
+	}
+	public void setFpath(String fpath) {
+		this.fpath = fpath;
+	}
+	public String getFpath() {
+		return fpath;
 	}
 	
 	public String execute() {
@@ -72,19 +82,20 @@ public class ManageBatchAction extends BaseAction {
 	//进入批次添加页面
 	public String preAddBatch() {
 		product.setProNo(proNo);
-		inputStream = mbs.preAddBatch(product);
+		inputStream = new StringBufferInputStream(mbs.preAddBatch(product));
 		return "success"; 
 	}
 	
 	//批次添加
 	public String addBatch() {
-		return mbs.addBatch(product, batch, flowpath, fp);
+		return mbs.addBatch(product, batch, fpath);
 	}
 	
 	//超期批次的修改
 	public String modifyOutDue() {
 		return mbs.modifyOutDue(product, batch);
 	}
+	
 	
 	
 
