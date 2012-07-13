@@ -1,485 +1,333 @@
--- phpMyAdmin SQL Dump
--- version 3.2.2.1
--- http://www.phpmyadmin.net
---
--- 主机: localhost
--- 生成日期: 2012 年 07 月 12 日 13:39
--- 服务器版本: 5.0.67
--- PHP 版本: 5.3.0
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- 数据库: `sisys`
---
-
--- --------------------------------------------------------
-
---
--- 表的结构 `batch`
---
-
-CREATE TABLE IF NOT EXISTS `batch` (
-  `Id` int(11) NOT NULL auto_increment,
-  `batchNo` varchar(20) default NULL,
-  `flowId` int(11) default NULL,
-  `proId` int(11) default NULL,
-  `workTabId` int(11) default NULL,
-  `status` int(11) default NULL,
-  `startTime` date default NULL,
-  `endTime` date default NULL,
-  `disqNum` int(11) default NULL,
-  `disqPercent` int(11) default NULL,
-  `totalNum` int(11) default NULL,
-  `isDelete` int(11) default '0',
-  `deleteTime` date default NULL,
-  PRIMARY KEY  (`Id`),
-  KEY `FK_Reference_12` (`workTabId`),
-  KEY `FK_Reference_5` (`flowId`),
-  KEY `FK_Reference_6` (`proId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `batch`
---
-
-
--- --------------------------------------------------------
-
---
--- 表的结构 `dailystaffdisq`
---
-
-CREATE TABLE IF NOT EXISTS `dailystaffdisq` (
-  `Id` int(11) NOT NULL auto_increment,
-  `disqdeId` int(11) default NULL,
-  `staffId` int(11) default NULL,
-  `totalNum` int(11) default NULL,
-  `time` date default NULL,
-  PRIMARY KEY  (`Id`),
-  KEY `FK_Reference_20` (`disqdeId`),
-  KEY `FK_Reference_21` (`staffId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `dailystaffdisq`
---
-
-
--- --------------------------------------------------------
-
---
--- 表的结构 `department`
---
-
-CREATE TABLE IF NOT EXISTS `department` (
-  `Id` int(11) NOT NULL auto_increment,
-  `deptNo` int(11) default NULL,
-  `deptName` varchar(20) default NULL,
-  `isDelete` int(11) default '0',
-  `deleteTime` date default NULL,
-  PRIMARY KEY  (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `department`
---
-
-
--- --------------------------------------------------------
-
---
--- 表的结构 `disqdetail`
---
-
-CREATE TABLE IF NOT EXISTS `disqdetail` (
-  `Id` int(11) NOT NULL auto_increment,
-  `disKId` int(11) default NULL,
-  `nextId` int(11) default NULL,
-  `num` int(11) default NULL,
-  PRIMARY KEY  (`Id`),
-  KEY `FK_Reference_2` (`disKId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `disqdetail`
---
-
-
--- --------------------------------------------------------
-
---
--- 表的结构 `disqkind`
---
-
-CREATE TABLE IF NOT EXISTS `disqkind` (
-  `Id` int(11) NOT NULL auto_increment,
-  `disDesc` varchar(30) default NULL,
-  `kind` int(11) default NULL,
-  `isDelete` int(11) default '0',
-  `deleteTime` date default NULL,
-  PRIMARY KEY  (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `disqkind`
---
-
-
--- --------------------------------------------------------
-
---
--- 表的结构 `flowpath`
---
-
-CREATE TABLE IF NOT EXISTS `flowpath` (
-  `Id` int(11) NOT NULL auto_increment,
-  `sequence` varchar(20) default NULL,
-  `proId` int(11) default NULL,
-  `isDelete` int(11) default '0',
-  `deleteTime` date default NULL,
-  PRIMARY KEY  (`Id`),
-  KEY `FK_Reference_10` (`proId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `flowpath`
---
-
-
--- --------------------------------------------------------
-
---
--- 表的结构 `process`
---
-
-CREATE TABLE IF NOT EXISTS `process` (
-  `Id` int(11) NOT NULL auto_increment,
-  `procName` varchar(20) default NULL,
-  `colorNo` varchar(10) default NULL,
-  `procNo` varchar(20) default NULL,
-  `unitOutput` int(11) default NULL,
-  `unitCost` int(11) default NULL,
-  `isDelete` int(11) default '0',
-  `deleteTime` date default NULL,
-  PRIMARY KEY  (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `process`
---
-
-
--- --------------------------------------------------------
-
---
--- 表的结构 `product`
---
-
-CREATE TABLE IF NOT EXISTS `product` (
-  `Id` int(11) NOT NULL auto_increment,
-  `deptId` int(11) default NULL,
-  `prolineId` int(11) default NULL,
-  `proNo` varchar(20) default NULL,
-  `proName` varchar(20) default NULL,
-  `time` date default NULL,
-  `disqNum` int(11) default NULL,
-  `disqPerc` double default NULL,
-  `totalNum` int(11) default NULL,
-  `isDelete` int(11) default '0',
-  `deleteTime` date default NULL,
-  PRIMARY KEY  (`Id`),
-  KEY `FK_Reference_14` (`deptId`),
-  KEY `FK_Reference_22` (`prolineId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `product`
---
-
-
--- --------------------------------------------------------
-
---
--- 表的结构 `productline`
---
-
-CREATE TABLE IF NOT EXISTS `productline` (
-  `Id` int(11) NOT NULL auto_increment,
-  `lineNo` int(11) default NULL,
-  `lineDesc` varchar(20) default NULL,
-  `isDelete` int(11) default '0',
-  `deleteTime` date default NULL,
-  PRIMARY KEY  (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `productline`
---
-
-
--- --------------------------------------------------------
-
---
--- 表的结构 `scheduletab`
---
-
-CREATE TABLE IF NOT EXISTS `scheduletab` (
-  `Id` int(11) NOT NULL auto_increment,
-  `batchId` int(11) default NULL,
-  `time` date default NULL,
-  `colorNo` varchar(10) default NULL,
-  `num` int(11) default NULL,
-  PRIMARY KEY  (`Id`),
-  KEY `FK_Reference_16` (`batchId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `scheduletab`
---
-
-
--- --------------------------------------------------------
-
---
--- 表的结构 `staff`
---
-
-CREATE TABLE IF NOT EXISTS `staff` (
-  `Id` int(11) NOT NULL auto_increment,
-  `deptId` int(11) default NULL,
-  `kind` varchar(20) default NULL,
-  `staName` varchar(20) default NULL,
-  `staNo` varchar(20) default NULL,
-  `isDelete` int(11) default '0',
-  `deleteTime` date default NULL,
-  PRIMARY KEY  (`Id`),
-  KEY `AK_Key_2` (`Id`),
-  KEY `FK_Reference_15` (`deptId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `staff`
---
-
-
--- --------------------------------------------------------
-
---
--- 表的结构 `staffdetail`
---
-
-CREATE TABLE IF NOT EXISTS `staffdetail` (
-  `Id` int(11) NOT NULL auto_increment,
-  `staffId` int(11) default NULL,
-  `proName` varchar(20) default NULL,
-  `proNo` varchar(20) default NULL,
-  `procName` varchar(10) default NULL,
-  `quaNum` int(11) default NULL,
-  `gWaste` int(11) default NULL,
-  `lWaste` int(11) default NULL,
-  `workHours` double default NULL,
-  PRIMARY KEY  (`Id`),
-  KEY `FK_Reference_18` (`staffId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `staffdetail`
---
-
-
--- --------------------------------------------------------
-
---
--- 表的结构 `staffkind`
---
-
-CREATE TABLE IF NOT EXISTS `staffkind` (
-  `Id` int(11) NOT NULL auto_increment,
-  `kindDesc` varchar(20) default NULL,
-  `isDelete` int(11) default NULL,
-  `deleteTime` date default NULL,
-  PRIMARY KEY  (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `staffkind`
---
-
-
--- --------------------------------------------------------
-
---
--- 表的结构 `user`
---
-
-CREATE TABLE IF NOT EXISTS `user` (
-  `Id` int(11) NOT NULL auto_increment,
-  `username` varchar(20) default NULL,
-  `password` varchar(20) default NULL,
-  `level` int(11) default NULL,
-  `isDelete` int(11) default '0',
-  `deleteTime` date default NULL,
-  PRIMARY KEY  (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `user`
---
-
-
--- --------------------------------------------------------
-
---
--- 表的结构 `workform`
---
-
-CREATE TABLE IF NOT EXISTS `workform` (
-  `Id` int(11) NOT NULL auto_increment,
-  `staId` int(11) default NULL,
-  `procId` int(11) default NULL,
-  `batchId` int(11) default NULL,
-  `proId` int(11) default NULL,
-  `quaNum` int(11) default NULL,
-  `disDetail` varchar(0) default NULL,
-  `time` date default NULL,
-  `isDelete` int(11) default '0',
-  `deleteTime` date default NULL,
-  PRIMARY KEY  (`Id`),
-  KEY `FK_Reference_11` (`proId`),
-  KEY `FK_Reference_7` (`batchId`),
-  KEY `FK_Reference_8` (`staId`),
-  KEY `FK_Reference_9` (`procId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `workform`
---
-
-
--- --------------------------------------------------------
-
---
--- 表的结构 `workhourstab`
---
-
-CREATE TABLE IF NOT EXISTS `workhourstab` (
-  `Id` int(11) NOT NULL auto_increment,
-  `staId` int(11) default NULL,
-  `time` date default NULL,
-  `workHours` double default NULL,
-  `salary` double default NULL,
-  PRIMARY KEY  (`Id`),
-  KEY `FK_Reference_17` (`staId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `workhourstab`
---
-
-
--- --------------------------------------------------------
-
---
--- 表的结构 `worktab`
---
-
-CREATE TABLE IF NOT EXISTS `worktab` (
-  `Id` int(11) NOT NULL auto_increment,
-  `procId` int(11) default NULL,
-  `quNum` int(11) default NULL,
-  `disqNum` int(11) default NULL,
-  `isOver` int(11) default NULL,
-  `overTime` date default NULL,
-  `isEnd` int(11) default NULL,
-  PRIMARY KEY  (`Id`),
-  KEY `FK_Reference_13` (`procId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `worktab`
---
-
-
---
--- 限制导出的表
---
-
---
--- 限制表 `batch`
---
-ALTER TABLE `batch`
-  ADD CONSTRAINT `FK_Reference_12` FOREIGN KEY (`workTabId`) REFERENCES `worktab` (`Id`),
-  ADD CONSTRAINT `FK_Reference_5` FOREIGN KEY (`flowId`) REFERENCES `flowpath` (`Id`),
-  ADD CONSTRAINT `FK_Reference_6` FOREIGN KEY (`proId`) REFERENCES `product` (`Id`);
-
---
--- 限制表 `dailystaffdisq`
---
-ALTER TABLE `dailystaffdisq`
-  ADD CONSTRAINT `FK_Reference_20` FOREIGN KEY (`disqdeId`) REFERENCES `disqdetail` (`Id`),
-  ADD CONSTRAINT `FK_Reference_21` FOREIGN KEY (`staffId`) REFERENCES `staff` (`Id`);
-
---
--- 限制表 `disqdetail`
---
-ALTER TABLE `disqdetail`
-  ADD CONSTRAINT `FK_Reference_2` FOREIGN KEY (`disKId`) REFERENCES `disqkind` (`Id`);
-
---
--- 限制表 `flowpath`
---
-ALTER TABLE `flowpath`
-  ADD CONSTRAINT `FK_Reference_10` FOREIGN KEY (`proId`) REFERENCES `product` (`Id`);
-
---
--- 限制表 `product`
---
-ALTER TABLE `product`
-  ADD CONSTRAINT `FK_Reference_14` FOREIGN KEY (`deptId`) REFERENCES `department` (`Id`),
-  ADD CONSTRAINT `FK_Reference_22` FOREIGN KEY (`prolineId`) REFERENCES `productline` (`Id`);
-
---
--- 限制表 `scheduletab`
---
-ALTER TABLE `scheduletab`
-  ADD CONSTRAINT `FK_Reference_16` FOREIGN KEY (`batchId`) REFERENCES `batch` (`Id`);
-
---
--- 限制表 `staff`
---
-ALTER TABLE `staff`
-  ADD CONSTRAINT `FK_Reference_15` FOREIGN KEY (`deptId`) REFERENCES `department` (`Id`);
-
---
--- 限制表 `staffdetail`
---
-ALTER TABLE `staffdetail`
-  ADD CONSTRAINT `FK_Reference_18` FOREIGN KEY (`staffId`) REFERENCES `staff` (`Id`);
-
---
--- 限制表 `workform`
---
-ALTER TABLE `workform`
-  ADD CONSTRAINT `FK_Reference_11` FOREIGN KEY (`proId`) REFERENCES `product` (`Id`),
-  ADD CONSTRAINT `FK_Reference_7` FOREIGN KEY (`batchId`) REFERENCES `batch` (`Id`),
-  ADD CONSTRAINT `FK_Reference_8` FOREIGN KEY (`staId`) REFERENCES `staff` (`Id`),
-  ADD CONSTRAINT `FK_Reference_9` FOREIGN KEY (`procId`) REFERENCES `process` (`Id`);
-
---
--- 限制表 `workhourstab`
---
-ALTER TABLE `workhourstab`
-  ADD CONSTRAINT `FK_Reference_17` FOREIGN KEY (`staId`) REFERENCES `staff` (`Id`);
-
---
--- 限制表 `worktab`
---
-ALTER TABLE `worktab`
-  ADD CONSTRAINT `FK_Reference_13` FOREIGN KEY (`procId`) REFERENCES `process` (`Id`);
+/*==============================================================*/
+/* DBMS name:      MySQL 5.0                                    */
+/* Created on:     2012/7/14 0:49:51                            */
+/*==============================================================*/
+
+
+drop table if exists Staff;
+
+drop table if exists batch;
+
+drop table if exists dailyStaffDisq;
+
+drop table if exists department;
+
+drop table if exists disqDetail;
+
+drop table if exists disqKind;
+
+drop table if exists flowpath;
+
+drop table if exists processes;
+
+drop table if exists product;
+
+drop table if exists productLine;
+
+drop table if exists scheduleTab;
+
+drop table if exists staffKind;
+
+drop table if exists user;
+
+drop table if exists workForm;
+
+drop table if exists workHoursTab;
+
+drop table if exists workTab;
+
+/*==============================================================*/
+/* Table: Staff                                                 */
+/*==============================================================*/
+create table Staff
+(
+   Id                   int not null auto_increment,
+   deptId               int,
+   kind                 varchar(20),
+   staName              varchar(20),
+   staNo                varchar(20),
+   isDelete             int default 0,
+   deleteTime           date,
+   primary key (Id),
+   key AK_Key_2 (Id)
+);
+
+/*==============================================================*/
+/* Table: batch                                                 */
+/*==============================================================*/
+create table batch
+(
+   Id                   int not null auto_increment,
+   batchNo              varchar(20),
+   flowId               int,
+   proId                int,
+   workTabId            int,
+   status               int,
+   startTime            date,
+   endTime              date,
+   disqNum              int,
+   disqPercent          int,
+   totalNum             int,
+   note                 varchar(20),
+   completeNum          int,
+   isDelete             int default 0,
+   deleteTime           date,
+   primary key (Id)
+);
+
+/*==============================================================*/
+/* Table: dailyStaffDisq                                        */
+/*==============================================================*/
+create table dailyStaffDisq
+(
+   Id                   int not null auto_increment,
+   disqdeId             int,
+   staffId              int,
+   totalNum             int,
+   time                 date,
+   primary key (Id)
+);
+
+/*==============================================================*/
+/* Table: department                                            */
+/*==============================================================*/
+create table department
+(
+   Id                   int not null auto_increment,
+   deptNo               varchar(20),
+   deptName             varchar(20),
+   isDelete             int default 0,
+   deleteTime           date,
+   primary key (Id)
+);
+
+/*==============================================================*/
+/* Table: disqDetail                                            */
+/*==============================================================*/
+create table disqDetail
+(
+   Id                   int not null auto_increment,
+   disKId               int,
+   nextId               int,
+   num                  int,
+   primary key (Id)
+);
+
+/*==============================================================*/
+/* Table: disqKind                                              */
+/*==============================================================*/
+create table disqKind
+(
+   Id                   int not null auto_increment,
+   disDesc              varchar(30),
+   kind                 int,
+   isDelete             int default 0,
+   deleteTime           date,
+   primary key (Id)
+);
+
+/*==============================================================*/
+/* Table: flowpath                                              */
+/*==============================================================*/
+create table flowpath
+(
+   Id                   int not null auto_increment,
+   sequence             varchar(50),
+   proId                int,
+   isDelete             int default 0,
+   deleteTime           date,
+   primary key (Id)
+);
+
+/*==============================================================*/
+/* Table: processes                                             */
+/*==============================================================*/
+create table processes
+(
+   Id                   int not null auto_increment,
+   procName             varchar(20),
+   colorNo              varchar(10),
+   procNo               varchar(20),
+   unitOutput           double,
+   unitCost             double,
+   isDelete             int default 0,
+   deleteTime           date,
+   primary key (Id)
+);
+
+/*==============================================================*/
+/* Table: product                                               */
+/*==============================================================*/
+create table product
+(
+   Id                   int not null auto_increment,
+   deptId               int,
+   prolineId            int,
+   proNo                varchar(20),
+   proName              varchar(20),
+   time                 date,
+   disqNum              int,
+   disqPerc             double,
+   totalNum             int,
+   completeNum          int,
+   isDelete             int default 0,
+   deleteTime           date,
+   primary key (Id)
+);
+
+/*==============================================================*/
+/* Table: productLine                                           */
+/*==============================================================*/
+create table productLine
+(
+   Id                   int not null auto_increment,
+   lineNo               int,
+   lineDesc             varchar(20),
+   isDelete             int default 0,
+   deleteTime           date,
+   primary key (Id)
+);
+
+/*==============================================================*/
+/* Table: scheduleTab                                           */
+/*==============================================================*/
+create table scheduleTab
+(
+   Id                   int not null auto_increment,
+   batchId              int,
+   time                 date,
+   colorNo              varchar(10),
+   num                  int,
+   wtId                 int,
+   primary key (Id)
+);
+
+/*==============================================================*/
+/* Table: staffKind                                             */
+/*==============================================================*/
+create table staffKind
+(
+   Id                   int not null auto_increment,
+   kindDesc             varchar(20),
+   isDelete             int,
+   deleteTime           date,
+   primary key (Id)
+);
+
+/*==============================================================*/
+/* Table: user                                                  */
+/*==============================================================*/
+create table user
+(
+   Id                   int not null auto_increment,
+   username             varchar(20),
+   password             varchar(20),
+   level                int,
+   isDelete             int default 0,
+   deleteTime           date,
+   primary key (Id)
+);
+
+/*==============================================================*/
+/* Table: workForm                                              */
+/*==============================================================*/
+create table workForm
+(
+   Id                   int not null auto_increment,
+   staId                int,
+   procId               int,
+   batchId              int,
+   proId                int,
+   quaNum               int,
+   disDetail            varchar(0),
+   time                 date,
+   isDelete             int default 0,
+   deleteTime           date,
+   gWaste               int,
+   fWaste               int,
+   workHours            double,
+   primary key (Id)
+);
+
+/*==============================================================*/
+/* Table: workHoursTab                                          */
+/*==============================================================*/
+create table workHoursTab
+(
+   Id                   int not null auto_increment,
+   staId                int,
+   time                 date,
+   workHours            double,
+   salary               double,
+   primary key (Id)
+);
+
+/*==============================================================*/
+/* Table: workTab                                               */
+/*==============================================================*/
+create table workTab
+(
+   Id                   int not null auto_increment,
+   procId               int,
+   quNum                int,
+   disqNum              int,
+   isOver               int,
+   overTime             date,
+   isEnd                int,
+   primary key (Id)
+);
+
+alter table Staff add constraint FK_Reference_15 foreign key (deptId)
+      references department (Id) on delete restrict on update restrict;
+
+alter table batch add constraint FK_Reference_12 foreign key (workTabId)
+      references workTab (Id) on delete restrict on update restrict;
+
+alter table batch add constraint FK_Reference_5 foreign key (flowId)
+      references flowpath (Id) on delete restrict on update restrict;
+
+alter table batch add constraint FK_Reference_6 foreign key (proId)
+      references product (Id) on delete restrict on update restrict;
+
+alter table dailyStaffDisq add constraint FK_Reference_20 foreign key (disqdeId)
+      references disqDetail (Id) on delete restrict on update restrict;
+
+alter table dailyStaffDisq add constraint FK_Reference_21 foreign key (staffId)
+      references Staff (Id) on delete restrict on update restrict;
+
+alter table disqDetail add constraint FK_Reference_2 foreign key (disKId)
+      references disqKind (Id) on delete restrict on update restrict;
+
+alter table flowpath add constraint FK_Reference_10 foreign key (proId)
+      references product (Id) on delete restrict on update restrict;
+
+alter table product add constraint FK_Reference_14 foreign key (deptId)
+      references department (Id) on delete restrict on update restrict;
+
+alter table product add constraint FK_Reference_22 foreign key (prolineId)
+      references productLine (Id) on delete restrict on update restrict;
+
+alter table scheduleTab add constraint FK_Reference_16 foreign key (batchId)
+      references batch (Id) on delete restrict on update restrict;
+
+alter table scheduleTab add constraint FK_Reference_19 foreign key (wtId)
+      references workTab (Id) on delete restrict on update restrict;
+
+alter table workForm add constraint FK_Reference_11 foreign key (proId)
+      references product (Id) on delete restrict on update restrict;
+
+alter table workForm add constraint FK_Reference_7 foreign key (batchId)
+      references batch (Id) on delete restrict on update restrict;
+
+alter table workForm add constraint FK_Reference_8 foreign key (staId)
+      references Staff (Id) on delete restrict on update restrict;
+
+alter table workForm add constraint FK_Reference_9 foreign key (procId)
+      references processes (Id) on delete restrict on update restrict;
+
+alter table workHoursTab add constraint FK_Reference_17 foreign key (staId)
+      references Staff (Id) on delete restrict on update restrict;
+
+alter table workTab add constraint FK_Reference_13 foreign key (procId)
+      references processes (Id) on delete restrict on update restrict;
+

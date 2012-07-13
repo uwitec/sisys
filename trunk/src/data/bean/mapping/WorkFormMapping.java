@@ -23,6 +23,7 @@ public class WorkFormMapping extends BasicMapping<WorkForm> {
 			workForm.setQuaNum(rs.getInt("quaNum"));
 			workForm.setStaId(rs.getInt("staId"));
 			workForm.setTime(rs.getDate("time"));
+			workForm.setWorkHours(rs.getDouble("workHours"));
 		} catch(SQLException ex) {
 			ex.printStackTrace();
 		}
