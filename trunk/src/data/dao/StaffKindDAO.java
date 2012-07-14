@@ -1,12 +1,18 @@
 package data.dao;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import data.bean.Batch;
 import data.bean.StaffKind;
+import data.bean.User;
+
+import data.bean.mapping.BatchMapping;
 import data.bean.mapping.StaffKindMapping;
+import data.bean.mapping.UserMapping;
 import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
@@ -106,7 +112,7 @@ public class StaffKindDAO extends GenericQueryImpl<StaffKind, StaffKindMapping> 
 		try {
 			resultSet = genericTemplate.executeQuery();
 			//System.out.print(genericTemplate.executeQuery());
-			staffKind = staffKindMapping.mapping(resultSet);
+			staffKind = (StaffKind) staffKindMapping.mapping(resultSet);
 			list.add(staffKind);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -127,7 +133,7 @@ public class StaffKindDAO extends GenericQueryImpl<StaffKind, StaffKindMapping> 
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			staffKind = staffKindMapping.mapping(resultSet);
+			staffKind = (StaffKind)staffKindMapping.mapping(resultSet);
 			list.add(staffKind);
 		} catch(Exception ex) {
 			ex.printStackTrace();

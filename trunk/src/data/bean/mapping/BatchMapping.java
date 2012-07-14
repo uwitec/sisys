@@ -7,7 +7,6 @@ import data.bean.Batch;
 
 public class BatchMapping  extends BasicMapping<Batch> {
 
-	@Override
 	public Batch mapping(ResultSet rs) {
 		// TODO Auto-generated method stub
 		Batch batch = new Batch();

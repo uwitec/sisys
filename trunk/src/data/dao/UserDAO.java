@@ -109,7 +109,7 @@ public class UserDAO extends GenericQueryImpl<User, UserMapping>{
 		try {
 			resultSet = genericTemplate.executeQuery();
 			//System.out.print(genericTemplate.executeQuery());
-			user = userMapping.mapping(resultSet);
+			user = (User) userMapping.mapping(resultSet);
 			list.add(user);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -130,7 +130,7 @@ public class UserDAO extends GenericQueryImpl<User, UserMapping>{
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			user = userMapping.mapping(resultSet);
+			user = (User)userMapping.mapping(resultSet);
 			list.add(user);
 		} catch(Exception ex) {
 			ex.printStackTrace();

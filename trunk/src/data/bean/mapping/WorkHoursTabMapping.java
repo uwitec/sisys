@@ -7,7 +7,6 @@ import data.bean.WorkHoursTab;
 
 public class WorkHoursTabMapping extends BasicMapping<WorkHoursTab> {
 
-	@Override
 	public WorkHoursTab mapping(ResultSet rs) {
 		WorkHoursTab workHoursTab = new WorkHoursTab();
 		try {

@@ -109,7 +109,7 @@ public class DepartmentDAO extends GenericQueryImpl<Department, DepartmentMappin
 		try {
 			resultSet = genericTemplate.executeQuery();
 			//System.out.print(genericTemplate.executeQuery());
-			department = departmentMapping.mapping(resultSet);
+			department = (Department) departmentMapping.mapping(resultSet);
 			list.add(department);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -130,7 +130,7 @@ public class DepartmentDAO extends GenericQueryImpl<Department, DepartmentMappin
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			department = departmentMapping.mapping(resultSet);
+			department = (Department)departmentMapping.mapping(resultSet);
 			list.add(department);
 		} catch(Exception ex) {
 			ex.printStackTrace();

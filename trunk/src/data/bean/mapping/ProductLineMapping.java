@@ -7,12 +7,11 @@ import data.bean.ProductLine;
 
 public class ProductLineMapping extends BasicMapping<ProductLine> {
 
-	@Override
 	public ProductLine mapping(ResultSet rs) {
 		
 		ProductLine productLine = new ProductLine();
 		try {
-			productLine.setLineNo(rs.getInt("lineNo"));
+			productLine.setLineNo(rs.getString("lineNo"));
 			productLine.setDeleteTime(rs.getDate("deleteTime"));
 			productLine.setId(rs.getInt("Id"));
 			productLine.setIsDelete(rs.getInt("isDelete"));

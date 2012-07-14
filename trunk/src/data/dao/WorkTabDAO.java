@@ -4,7 +4,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import data.bean.WorkTab;
+
 import data.bean.mapping.WorkTabMapping;
 import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
@@ -110,7 +112,7 @@ public class WorkTabDAO extends GenericQueryImpl<WorkTab, WorkTabMapping> {
 		try {
 			resultSet = genericTemplate.executeQuery();
 			//System.out.print(genericTemplate.executeQuery());
-			workTab = workTabMapping.mapping(resultSet);
+			workTab = (WorkTab) workTabMapping.mapping(resultSet);
 			list.add(workTab);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -131,7 +133,7 @@ public class WorkTabDAO extends GenericQueryImpl<WorkTab, WorkTabMapping> {
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			workTab = workTabMapping.mapping(resultSet);
+			workTab = (WorkTab) workTabMapping.mapping(resultSet);
 			list.add(workTab);
 		} catch(Exception ex) {
 			ex.printStackTrace();

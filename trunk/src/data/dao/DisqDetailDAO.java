@@ -4,8 +4,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.bean.DailyStaffDisq;
 import data.bean.DisqDetail;
+import data.bean.User;
+import data.bean.mapping.DailyStaffDisqMapping;
 import data.bean.mapping.DisqDetailMapping;
+import data.bean.mapping.UserMapping;
 import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
@@ -103,7 +107,7 @@ public class DisqDetailDAO  extends GenericQueryImpl<DisqDetail, DisqDetailMappi
 		try {
 			resultSet = genericTemplate.executeQuery();
 			//System.out.print(genericTemplate.executeQuery());
-			disqDetail = disqDetailMapping.mapping(resultSet);
+			disqDetail = (DisqDetail) disqDetailMapping.mapping(resultSet);
 			list.add(disqDetail);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -124,7 +128,7 @@ public class DisqDetailDAO  extends GenericQueryImpl<DisqDetail, DisqDetailMappi
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			disqDetail = disqDetailMapping.mapping(resultSet);
+			disqDetail = (DisqDetail) disqDetailMapping.mapping(resultSet);
 			list.add(disqDetail);
 		} catch(Exception ex) {
 			ex.printStackTrace();

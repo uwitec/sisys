@@ -4,8 +4,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.bean.Product;
 import data.bean.StaffDetail;
+import data.bean.User;
+import data.bean.mapping.ProductMapping;
 import data.bean.mapping.StaffDetailMapping;
+import data.bean.mapping.UserMapping;
 import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
@@ -114,7 +118,7 @@ public class StaffDetailDAO extends GenericQueryImpl<StaffDetail, StaffDetailMap
 		try {
 			resultSet = genericTemplate.executeQuery();
 			//System.out.print(genericTemplate.executeQuery());
-			staffDetail = staffDetailMapping.mapping(resultSet);
+			staffDetail = (StaffDetail) staffDetailMapping.mapping(resultSet);
 			list.add(staffDetail);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -135,7 +139,7 @@ public class StaffDetailDAO extends GenericQueryImpl<StaffDetail, StaffDetailMap
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			staffDetail = staffDetailMapping.mapping(resultSet);
+			staffDetail = (StaffDetail) staffDetailMapping.mapping(resultSet);
 			list.add(staffDetail);
 		} catch(Exception ex) {
 			ex.printStackTrace();

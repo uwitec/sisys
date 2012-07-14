@@ -16,12 +16,11 @@ public class WorkForm {
 	private int quaNum;
 	private int gWaste;
 	private int lWaste;
-	private double workHours;
 	private String disDetail; // 记录不合格详情，具体格式为:不合格种类1-不合格种类2-..-不合格种类2:不合格品1数量-不合格种类2数量-..-不合格种类n数量
 	private Date time; // 记录工单存入系统的时间
 	private int isDelete; // 标识是否删除，0未删除，1删除
 	private Date deleteTime; // 若删除，则记录删除时间
-
+	private int workHours;
 	// get和set方法
 	public int getId() {
 		return id;
@@ -118,14 +117,6 @@ public class WorkForm {
 	public void setlWaste(int lWaste) {
 		this.lWaste = lWaste;
 	}
-	public void setWorkHours(double workHours) {
-		this.workHours = workHours;
-	}
-
-	public double getWorkHours() {
-		return workHours;
-	}
-
 
 	@Override
 	public int hashCode() {
@@ -145,9 +136,7 @@ public class WorkForm {
 		result = prime * result + quaNum;
 		result = prime * result + staId;
 		result = prime * result + ((time == null) ? 0 : time.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(workHours);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + workHours;
 		return result;
 	}
 
@@ -193,30 +182,9 @@ public class WorkForm {
 				return false;
 		} else if (!time.equals(other.time))
 			return false;
-		if (Double.doubleToLongBits(workHours) != Double
-				.doubleToLongBits(other.workHours))
+		if (workHours != other.workHours)
 			return false;
 		return true;
-	}
-
-	// 构造函数
-	public WorkForm(int id, int staId, int procId, int batchId, int proId,
-			int quaNum, String disDetail, Date time, int gWaste, int lWaste,
-			double workHours, int isDelete,	Date deleteTime) {
-		super();
-		this.id = id;
-		this.staId = staId;
-		this.procId = procId;
-		this.batchId = batchId;
-		this.proId = proId;
-		this.quaNum = quaNum;
-		this.disDetail = disDetail;
-		this.time = time;
-		this.gWaste = gWaste;
-		this.lWaste = lWaste;
-		this.workHours = workHours;
-		this.isDelete = isDelete;
-		this.deleteTime = deleteTime;
 	}
 
 	public WorkForm() {
@@ -228,10 +196,37 @@ public class WorkForm {
 	public String toString() {
 		return "WorkForm [id=" + id + ", staId=" + staId + ", procId=" + procId
 				+ ", batchId=" + batchId + ", proId=" + proId + ", quaNum="
-				+ quaNum + ", gWaste=" + gWaste + ", lWaste=" + lWaste + ", workHours=" + workHours
+				+ quaNum + ", gWaste=" + gWaste + ", lWaste=" + lWaste
 				+ ", disDetail=" + disDetail + ", time=" + time + ", isDelete="
-				+ isDelete + ", deleteTime=" + deleteTime + "]";
+				+ isDelete + ", deleteTime=" + deleteTime + ", workHours="
+				+ workHours + "]";
 	}
 
-	
+	public int getWorkHours() {
+		return workHours;
+	}
+
+	public void setWorkHours(int workHours) {
+		this.workHours = workHours;
+	}
+
+	public WorkForm(int id, int staId, int procId, int batchId, int proId,
+			int quaNum, int gWaste, int lWaste, String disDetail, Date time,
+			int isDelete, Date deleteTime, int workHours) {
+		super();
+		this.id = id;
+		this.staId = staId;
+		this.procId = procId;
+		this.batchId = batchId;
+		this.proId = proId;
+		this.quaNum = quaNum;
+		this.gWaste = gWaste;
+		this.lWaste = lWaste;
+		this.disDetail = disDetail;
+		this.time = time;
+		this.isDelete = isDelete;
+		this.deleteTime = deleteTime;
+		this.workHours = workHours;
+	}
+
 }

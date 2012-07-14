@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import data.bean.Batch;
+import data.bean.User;
 import data.bean.mapping.BatchMapping;
+import data.bean.mapping.UserMapping;
 import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
@@ -130,7 +132,7 @@ public class BatchDAO  extends GenericQueryImpl<Batch, BatchMapping>{
 		try {
 			resultSet = genericTemplate.executeQuery();
 			//System.out.print(genericTemplate.executeQuery());
-			batch = batchMapping.mapping(resultSet);
+			batch = (Batch) batchMapping.mapping(resultSet);
 			list.add(batch);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -151,7 +153,7 @@ public class BatchDAO  extends GenericQueryImpl<Batch, BatchMapping>{
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			batch = batchMapping.mapping(resultSet);
+			batch = (Batch) batchMapping.mapping(resultSet);
 			list.add(batch);
 		} catch(Exception ex) {
 			ex.printStackTrace();

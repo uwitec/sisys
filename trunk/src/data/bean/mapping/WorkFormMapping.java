@@ -7,7 +7,6 @@ import data.bean.WorkForm;
 
 public class WorkFormMapping extends BasicMapping<WorkForm> {
 
-	@Override
 	public WorkForm mapping(ResultSet rs) {
 		
 		WorkForm workForm = new WorkForm();
@@ -24,7 +23,9 @@ public class WorkFormMapping extends BasicMapping<WorkForm> {
 			workForm.setQuaNum(rs.getInt("quaNum"));
 			workForm.setStaId(rs.getInt("staId"));
 			workForm.setTime(rs.getDate("time"));
-			workForm.setWorkHours(rs.getDouble("workHours"));
+			workForm.setgWaste(rs.getInt("gWaste"));
+			workForm.setlWaste(rs.getInt("lWaste"));
+			workForm.setWorkHours(rs.getInt("workHours"));
 		} catch(SQLException ex) {
 			ex.printStackTrace();
 		}

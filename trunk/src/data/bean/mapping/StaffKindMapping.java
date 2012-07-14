@@ -7,7 +7,6 @@ import data.bean.StaffKind;
 
 public class StaffKindMapping extends BasicMapping<StaffKind>{
 
-	@Override
 	public StaffKind mapping(ResultSet rs) {
 
 		StaffKind StaffKind = new StaffKind();

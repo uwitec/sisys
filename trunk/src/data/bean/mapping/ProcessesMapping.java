@@ -6,7 +6,6 @@ import data.bean.Processes;
 
 public class ProcessesMapping extends BasicMapping<Processes> {
 
-	@Override
 	public Processes mapping(ResultSet rs)  {
 		
 		Processes process = new Processes();

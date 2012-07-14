@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 import data.bean.ProductLine;
+
 import data.bean.mapping.ProductLineMapping;
+
 import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
@@ -108,7 +111,7 @@ public class ProductLineDAO  extends GenericQueryImpl<ProductLine, ProductLineMa
 		try {
 			resultSet = genericTemplate.executeQuery();
 			//System.out.print(genericTemplate.executeQuery());
-			productLine = productLineMapping.mapping(resultSet);
+			productLine = (ProductLine) productLineMapping.mapping(resultSet);
 			list.add(productLine);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -129,7 +132,7 @@ public class ProductLineDAO  extends GenericQueryImpl<ProductLine, ProductLineMa
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			productLine = productLineMapping.mapping(resultSet);
+			productLine = (ProductLine) productLineMapping.mapping(resultSet);
 			list.add(productLine);
 		} catch(Exception ex) {
 			ex.printStackTrace();

@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import data.bean.DisqDetail;
 import data.bean.DisqKind;
+import data.bean.User;
+import data.bean.mapping.DisqDetailMapping;
 import data.bean.mapping.DisqKindMapping;
+import data.bean.mapping.UserMapping;
 import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
@@ -108,7 +112,7 @@ public class DisqKindDAO  extends GenericQueryImpl<DisqKind, DisqKindMapping>{
 		try {
 			resultSet = genericTemplate.executeQuery();
 			//System.out.print(genericTemplate.executeQuery());
-			disqKind = disqKindMapping.mapping(resultSet);
+			disqKind = (DisqKind) disqKindMapping.mapping(resultSet);
 			list.add(disqKind);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -129,7 +133,7 @@ public class DisqKindDAO  extends GenericQueryImpl<DisqKind, DisqKindMapping>{
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			disqKind = disqKindMapping.mapping(resultSet);
+			disqKind = (DisqKind) disqKindMapping.mapping(resultSet);
 			list.add(disqKind);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -155,27 +159,5 @@ public class DisqKindDAO  extends GenericQueryImpl<DisqKind, DisqKindMapping>{
 			genericTemplate.close();
 		}
 		return result;
-	}
-	
-	//得到不合格种类表内的所有记录
-	public List<DisqKind> readAll() {
-		// TODO Auto-generated method stub
-		DisqKindMapping disqKindMapping = new DisqKindMapping();
-		DisqKind disqKind = null;
-		ResultSet resultSet;
-		sql = "select * from disqKind";
-		genericTemplate.setSqlValue(sql);
-		try {
-			resultSet = genericTemplate.executeQuery();
-			while(resultSet.next()) {
-				disqKind = (DisqKind) disqKindMapping.mapping(resultSet);
-			}			
-			list.add(disqKind);
-		} catch(Exception ex) {
-			ex.printStackTrace();
-		}finally {
-			genericTemplate.close();
-		}
-		return list;
 	}
 }

@@ -9,7 +9,22 @@ import java.util.Date;
 public class ProductLine {
 
 	private Integer id = null;
-	private int lineNo;
+	private String lineNo;
+
+	public ProductLine(Integer id, String lineNo, String lineDesc,
+			int isDelete, Date deleteTime) {
+		super();
+		this.id = id;
+		this.lineNo = lineNo;
+		this.lineDesc = lineDesc;
+		this.isDelete = isDelete;
+		this.deleteTime = deleteTime;
+	}
+
+	public void setLineNo(String lineNo) {
+		this.lineNo = lineNo;
+	}
+
 	private String lineDesc;
 	private int isDelete;
 	private Date deleteTime;
@@ -47,22 +62,20 @@ public class ProductLine {
 		this.deleteTime = deleteTime;
 	}
 
-	// 得到hashCode
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
 				+ ((deleteTime == null) ? 0 : deleteTime.hashCode());
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + isDelete;
 		result = prime * result
 				+ ((lineDesc == null) ? 0 : lineDesc.hashCode());
-		result = prime * result + lineNo;
+		result = prime * result + ((lineNo == null) ? 0 : lineNo.hashCode());
 		return result;
 	}
 
-	// 判断两个类是否相同
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -77,7 +90,10 @@ public class ProductLine {
 				return false;
 		} else if (!deleteTime.equals(other.deleteTime))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (isDelete != other.isDelete)
 			return false;
@@ -86,40 +102,28 @@ public class ProductLine {
 				return false;
 		} else if (!lineDesc.equals(other.lineDesc))
 			return false;
-		if (lineNo != other.lineNo)
+		if (lineNo == null) {
+			if (other.lineNo != null)
+				return false;
+		} else if (!lineNo.equals(other.lineNo))
 			return false;
 		return true;
 	}
 
 	// 构造函数
-	public ProductLine(int id, int lineNo, String lineDesc, int isDelete, Date deleteTime) {
-		super();
-		this.id = id;
-		this.lineDesc = lineDesc;
-		this.isDelete = isDelete;
-		this.deleteTime = deleteTime;
-		this.lineNo = lineNo;
-	}
 
-	
-
-	
 	public ProductLine() {
 		// TODO Auto-generated constructor stub
 	}
 
-	// 转换为字符串
 	@Override
 	public String toString() {
-		return "ProductLine [id=" + id + ", lineNo=" + lineNo + ", lineDesc=" + lineDesc
-				+ ", isDelete=" + isDelete + ", deleteTime=" + deleteTime + "]";
+		return "ProductLine [id=" + id + ", lineNo=" + lineNo + ", lineDesc="
+				+ lineDesc + ", isDelete=" + isDelete + ", deleteTime="
+				+ deleteTime + "]";
 	}
 
-	public void setLineNo(int lineNo) {
-		this.lineNo = lineNo;
-	}
-
-	public int getLineNo() {
+	public String getLineNo() {
 		return lineNo;
 	}
 

@@ -7,7 +7,6 @@ import data.bean.StaffDetail;
 
 public class StaffDetailMapping extends BasicMapping<StaffDetail> {
 
-	@Override
 	public StaffDetail mapping(ResultSet rs) {
 
 		StaffDetail staffDetail = new StaffDetail();
