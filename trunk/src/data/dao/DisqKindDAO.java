@@ -156,4 +156,26 @@ public class DisqKindDAO  extends GenericQueryImpl<DisqKind, DisqKindMapping>{
 		}
 		return result;
 	}
+	
+	//得到不合格种类表内的所有记录
+	public List<DisqKind> readAll() {
+		// TODO Auto-generated method stub
+		DisqKindMapping disqKindMapping = new DisqKindMapping();
+		DisqKind disqKind = null;
+		ResultSet resultSet;
+		sql = "select * from disqKind";
+		genericTemplate.setSqlValue(sql);
+		try {
+			resultSet = genericTemplate.executeQuery();
+			while(resultSet.next()) {
+				disqKind = (DisqKind) disqKindMapping.mapping(resultSet);
+			}			
+			list.add(disqKind);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			genericTemplate.close();
+		}
+		return list;
+	}
 }

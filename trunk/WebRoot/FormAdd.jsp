@@ -1,6 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ page import="data.bean.DisqKind"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<%
+	List<DisqKind> dkList = (List)request.getAttribute("dkList");
+	System.out.println(dkList);
+	int height = (Integer)request.getAttribute("height");
+%>
+
+<%	
+	String error = request.getParameter("result");
+	if(error == null) {
+		error = "";
+	} else if(error.equals("success")) {
+		error = "添加成功！";
+	}  else if(error.equals("false")) {
+		error = "添加失败！";
+	}
+%>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -41,6 +62,12 @@
 
 <!--                       Javascripts                       -->
 
+<script type="text/javascript"
+	src="resources/scripts/addWorkForm.js"></script>
+
+<script type="text/javascript"
+	src="resources/scripts/addDisqKind.js"></script>
+
 <!-- jQuery -->
 <script type="text/javascript"
 	src="resources/scripts/jquery-1.3.2.min.js"></script>
@@ -70,6 +97,8 @@
 				DD_belatedPNG.fix('.png_bg, img, li');
 			</script>
 		<![endif]-->
+		
+<base target="_self" />
 
 </head>
 
@@ -162,44 +191,105 @@
 					<div class="tab-content default-tab" id="tab1">
 						<!-- This is the target div. id must match the href of this div's tab -->
 
-						<form id="" method="" action="">
-							<table class="">
+						<form id="" action="addWorkForm.action" method="get">
+							<table class="" id="table">
 								<tr>
-									<td><span>姓名</span></td>
-									<td><input type="text" width="50px"></td>
 									<td><span>工号</span></td>
-									<td><input type="text" width="50px"></td>
-									<td><span>所属生产线</span></td>
-									<td><input type="text" width="50px"></td>
+									<td><input type="text" width="50px"  id="staNo" name="staff.staNo" onblur="displayStaNo()"/></td>
+				
+									<td><span>姓名</span></td>
+									<td><input type="text" width="50px"  id="staName" name="staff.staName"/></td>
+										
 								</tr>
 								<tr>
+									<td><span>产品编号</span></td>
+									<td><input type="text" width="50px" id="proNo" name="product.proNo" onblur="displayProNo()"/></td>
+								
 									<td><span>产品名称</span></td>
-									<td><input type="text" width="50px"></td>
-									<td><span>批次号</span></td>
-									<td><input type="text" width="50px"></td>
+									<td><input type="text" width="50px" id="proName" name="product.proName"/></td>
+									</tr>
+								<tr>
+									<td><span>工序编号</span></td>
+									<td><input type="text" width="50px" id="procNo" name="processes.procNo" onblur="displayProcNo()"/></td>
+								
 									<td><span>工序名称</span></td>
-									<td><input type="text" width="50px"></td>
+									<td><input type="text" width="50px" id="procName" name="processes.procName"/></td>									
+									</tr>
+								<tr>
+									<td><span>批次号</span></td>
+									<td><input type="text" width="50px" name="batchNo"/></td>
 								</tr>
 								<tr>
-									<td><span>产品总数</span></td>
-									<td><input type="text" width="50px"></td>
+									
 									<td><span>合格品数量</span></td>
-									<td><input type="text" width="50px"></td>
+									<td><input type="text" width="50px" name="workForm.quaNum"/></td>
 								</tr>
 								<tr>
-									<td><span>不合格品数量</span></td>
-									<td><input type="text" width="50px"></td>
 									<td><span>不合格品种类</span></td>
-									<td><select name="" class="" style="width: 155px">
-											<option value="option1">种类一</option>
-											<option value="option2">种类二</option>
-											<option value="option3">种类三</option>
-											<option value="option4">添加种类</option>
+									<td><select name="disqKind1" class="" style="width: 155px">
+										<c:forEach items="${dkList }" var="entity">
+											<option value="${entity.id }">${entity.disDesc}</option>
+										</c:forEach>
+											<option value="0" onclick="addDK()">添加种类</option>
 									</select></td>
+									<td><span>不合格品数量</span></td>
+									<td><input type="text" width="50px" name="disqNum1"/></td>
 								</tr>
 								<tr>
-									<td><input class="button" type="submit" value="提交"></td>
-									<td><input class="button" type="reset" value="重置"></td>
+									<td><span>不合格品种类</span></td>
+									<td><select name="disqKind2" class="" style="width: 155px">
+										<c:forEach items="${dkList }" var="entity">
+											<option value="${entity.id }">${entity.disDesc}</option>
+										</c:forEach>
+											<option value="0" onclick="addDK()">添加种类</option>
+									</select></td>
+									<td><span>不合格品数量</span></td>
+									<td><input type="text" width="50px" name="disqNum2"/></td>
+								</tr>
+								<tr>
+									<td><span>不合格品种类</span></td>
+									<td><select name="disqKind3" class="" style="width: 155px">
+										<c:forEach items="${dkList }" var="entity">
+											<option value="${entity.id }">${entity.disDesc}</option>
+										</c:forEach>
+											<option value="0" onclick="addDK()">添加种类</option>
+									</select></td>
+									<td><span>不合格品数量</span></td>
+									<td><input type="text" width="50px" name="disqNum3"/></td>
+								</tr>
+								
+								<%for(int i=4; i<height-1; i++) {
+								%>
+								<tr>
+									<td><span>不合格品种类</span></td>
+									<td><select name="disqKind"+${i} class="" style="width: 155px">
+										<c:forEach items="${dkList}" var="entity">
+											<option value="${entity.id }">${entity.disDesc}</option>
+										</c:forEach>
+											<option value="0" onclick="addDK()">添加种类</option>
+									</select></td>
+									<td><span>不合格品数量</span></td>
+									<td><input type="text" width="50px" name="disqNum4"/></td>
+								</tr>
+								<%}%>
+								
+								<tr>
+									<td><span>不合格品种类</span></td>
+									<td><select name="disqKind3" class="" style="width: 155px">
+										<c:forEach items="${dkList }" var="entity">
+											<option value="${entity.id }">${entity.disDesc}</option>
+										</c:forEach>
+											<option value="0" onclick="addDK()">添加种类</option>
+									</select></td>
+									<td><span>不合格品数量</span></td>
+									<td><input type="text" width="50px" name="disqNum3"/>
+										<input class="button" type="button" value="+" onclick=addMore(<%=++height%>)>
+									</td>
+								</tr>
+									
+								<tr>
+									<td><input class="button" type="submit" value="提交"/></td>
+									<td><input class="button" type="reset" value="重置"/></td>
 								</tr>
 							</table>
 

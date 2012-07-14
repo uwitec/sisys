@@ -1,5 +1,6 @@
 package data.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,12 +11,14 @@ import data.bean.Batch;
 import data.bean.Flowpath;
 import data.bean.Processes;
 import data.bean.Product;
+import data.bean.User;
 import data.bean.WorkTab;
 import data.dao.BatchDAO;
 import data.dao.FlowpathDAO;
 import data.dao.ProcessesDAO;
 import data.dao.ProductDAO;
 import data.dao.WorkTabDAO;
+import data.log.LogInfo;
 
 public class ManageBatchService {
 	
@@ -77,13 +80,14 @@ public class ManageBatchService {
 		//将流程信息及对应的id号保存到session里
 		ActionContext actionContext = ActionContext.getContext(); 
 	    Map session = actionContext.getSession();
-	    session.put("product", product);
+	    System.out.println(product);
 	    
 		/*ActionContext context = ActionContext.getContext();  
 	    HttpServletRequest request = (HttpServletRequest) context.get(ServletActionContext.HTTP_REQUEST);  
 		request.setAttribute("product", product);
 	    request.setAttribute("fp",fp.toString()); 
 		request.setAttribute("flowpath", flowpath);*/
+	    
 	    return result.toString();
 	}
 	
@@ -142,6 +146,15 @@ public class ManageBatchService {
 		if(num == 0) {
 			return "false";
 		}
+		
+	    //记录管理员操作信息
+	    LogInfo logInfo = new LogInfo();
+	    User user = (User)session.get("user");
+	    String content = "管理员" + user.getUsername() + "新建批次。产品名称：" + p.getProName() + ",产品编号：" + product.getProNo() 
+	    			+ ";批次号：" + batch.getBatchNo();
+	    logInfo.saveLog(user, content, System.currentTimeMillis());
+	    
+	    session.remove("product");
 		return "success";
 	}
 	
@@ -183,6 +196,17 @@ public class ManageBatchService {
 		BatchDAO bdao1 = new BatchDAO();
 		int num = bdao1.update(b, b.getId());
 		if(num == 1) {
+			
+			//记录管理员操作信息
+			ActionContext actionContext = ActionContext.getContext(); 
+		    Map session = actionContext.getSession();
+		    LogInfo logInfo = new LogInfo();
+		    User user = (User)session.get("user");
+		    String content = "管理员" + user.getUsername() + "修改超期批次。产品名称：" + product.getProName() + ",产品编号：" + product.getProNo() 
+		    			+ ";批次号：" + batch.getBatchNo() + ";备注：" + batch.getNote();
+		    logInfo.saveLog(user, content, System.currentTimeMillis());
+		    
+		    
 			return "success";
 		} else {
 			return "false";

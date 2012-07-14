@@ -12,6 +12,8 @@
 	<include file="struts_manageUser.xml"></include>
 	
 	<include file="struts_manageBatch.xml"></include>
+	
+	<include file="struts_workForm.xml"></include>
 
 	<include file="struts_manageData.xml"></include>
 	

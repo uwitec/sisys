@@ -99,7 +99,7 @@ public class GenericTemplate {
             	System.out.println(sqlValue);
                 statement = (Statement) connection.createStatement();
                 resultSet = statement.executeQuery(sqlValue);
-                System.out.println(resultSet);
+                //System.out.println(resultSet);
             }
 	        return resultSet;
 	    }

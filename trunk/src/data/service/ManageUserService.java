@@ -1,5 +1,6 @@
 package data.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import com.opensymphony.xwork2.ActionContext;
 
 import data.bean.User;
 import data.dao.UserDAO;
+import data.log.LogInfo;
 
 public class ManageUserService {
 	
@@ -66,6 +68,17 @@ public class ManageUserService {
 			int row = userDao2.create(user);
 			//System.out.println("row:" + row);
 			if(row == 1) {
+				
+				//记录管理员操作信息
+				ActionContext actionContext = ActionContext.getContext(); 
+			    Map session = actionContext.getSession();
+			    LogInfo logInfo = new LogInfo();
+			    User user1 = (User)session.get("user");
+			    String content = "管理员" + user1.getUsername() + "增加用户。用户名称：" + user.getUsername()
+			    			+ ",用户等级：" + (user.getLevel()==1 ? "查看人员" : (user.getLevel()==2? "录入人员" : "管理员"));
+			    logInfo.saveLog(user1, content, System.currentTimeMillis());
+			    
+				
 				return "success";
 			} else {
 				return "false";

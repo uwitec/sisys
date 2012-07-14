@@ -101,7 +101,7 @@
 
 					<li><a href="#" class="nav-top-item"> 工单管理 </a>
 						<ul>
-							<li><a href="FormAdd.jsp">添加工单</a></li>
+							<li><a href="formAdd.action">添加工单</a></li>
 							<li><a href="FormSearch_operator.jsp">工单列表</a></li>
 						</ul></li>
 
