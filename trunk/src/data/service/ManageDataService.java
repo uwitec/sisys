@@ -54,7 +54,7 @@ public class ManageDataService {
 		WritableWorkbook book = Workbook.createWorkbook(os);
 		book.setProtected(true);
 		init();
-		WritableSheet sheet = book.createSheet(title, 0);
+		WritableSheet sheet = book.createSheet("sheet1", 0);
 		int row = 0;
 		int col = 0;
 		Label label = null;
@@ -65,12 +65,11 @@ public class ManageDataService {
 		Map<String,Boolean> map = new HashMap<String,Boolean>();
 		
 		sheet.mergeCells(0, 0, cols-1, 1);
-		label = new Label(col,row,title,format1);
+		label = new Label(col,row,title.substring(0, title.indexOf("表")+1),format1);
 		sheet.addCell(label);
 		row += 2;
 		
 		for (TD td : listTD) {
-			System.out.println(td);
 			if (td == null) { 
 				row++; 
 				col = 0; 
@@ -402,7 +401,7 @@ public class ManageDataService {
 		String sequence;
 		StringBuffer sb = new StringBuffer("");
 		for(int i = 0;i < sequenceList.size();i++){
-			if(sb != null){
+			if(!sb.toString().isEmpty()){
 				sb.append("-");
 			}
 			sb.append(sequenceList.get(i));
@@ -430,10 +429,13 @@ public class ManageDataService {
 		List<TD> list = new ArrayList<TD>();
 		if(content.indexOf("</TR>") >= 0){
 			content = content.replaceAll("TR", "tr");
+			content = content.replaceAll("TH", "th");
 			content = content.replaceAll("TD", "td");
 			content = content.replaceAll("rowSpan", "rowspan");
 			content = content.replaceAll("colSpan", "colspan");
 		}
+		content = content.replaceAll("<th", "<td");
+		content = content.replaceAll("</th>", "</td>");
 		
 		String[] trs = content.split("</tr>");
 		for(String tr : trs){
@@ -452,7 +454,7 @@ public class ManageDataService {
 				begin = s.indexOf("rowspan=");
 				if(begin != -1){
 					end = s.indexOf(" ",begin);
-					if(end == -1){
+					if(end == -1 || end > index){
 						end = index;
 					}
 					numberStr = s.substring(begin + 8, end).replace('\"' , ' ' ).replace('\'' , ' ' ).trim();
@@ -477,8 +479,10 @@ public class ManageDataService {
 						cols++;
 					}
 				}
-				
 				td.content = s.substring(index + 1).replaceAll("<.*?>", "").replaceAll(" ", "").trim();
+				if(td.content.equals("&nbsp;")){
+					td.content = " ";
+				}
 				list.add(td);
 			}
 			list.add(null);
@@ -499,6 +503,8 @@ public class ManageDataService {
 		format1.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);
 		format2.setAlignment(jxl.format.Alignment.CENTRE);
 		format2.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);
+		format1.setWrap(true);
+		format2.setWrap(true);
 	}
 	
 }

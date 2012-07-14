@@ -251,7 +251,7 @@
 									<td><span>选择流程</span></td>
 								</tr>
 								<tr>									
-									<td>
+									<td colspan=4>
 										<div id="flowpath">
 											
 										</div>

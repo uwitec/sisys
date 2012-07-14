@@ -37,7 +37,6 @@
 	
 	<SCRIPT type=text/javascript>
 		function tableExportor(id){ 
-			alert("test");
 			var forum = document.forms["tableExport"]; 
 			forum.title.value = document.getElementById('tableTitle').innerHTML;
 			forum.content.value=eval(id+".innerHTML"); 
@@ -63,7 +62,7 @@
 					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
 						
 						<h2 style="text-align:center" id="tableTitle">部门产品生产进度汇总表</h2>
-						<form name="tableExport" action="tableExport.action">
+						<form name="tableExport" action="tableExport.action" mwthod="POST">
 							<input type="hidden" name="title">
 							<input type="hidden" name="content">
 							<div align="center"><input  onclick=tableExportor('MainTable') class="button" type="button" value="导出"></div>

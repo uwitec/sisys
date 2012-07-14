@@ -10,15 +10,27 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     
     <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+    <SCRIPT type=text/javascript>
+		function tableExportor(id){ 
+			var forum = document.forms["tableExport"]; 
+			forum.title.value = document.getElementById('tableTitle').innerHTML;
+			forum.content.value=eval(id+".innerHTML"); 
+			forum.submit(); 
+		} 
+	</SCRIPT>
 
   </head>
   
   <body>
-    <h2 align="center">生产线废品统计表(时间:2012/06/02-2012/07/02)</h2>
-	<div align="center"><a class="button" href="#">导出</a></div>
+    <h2 align="center" id="tableTitle">生产线废品统计表(时间:2012/06/02-2012/07/02)</h2>
+	<form name="tableExport" method="POST" action="tableExport.action">
+		<input type="hidden" name="title">
+		<input type="hidden" name="content">
+		<div align="center"><input  onclick=tableExportor('MainTable') class="button" type="button" value="导出"></div>
+	</form>
 	<br></br>
 	<div align="center">
-		<table border="1" cellspacing="1" cellpadding="5">
+		<table border="1" cellspacing="1" cellpadding="5" id="MainTable">
 				<tr align="center">
 					<th width=20%>产品名称</th>
 					<th width=20%>产品编码</th>

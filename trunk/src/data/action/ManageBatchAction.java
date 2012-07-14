@@ -3,6 +3,8 @@ package data.action;
 
 import java.io.InputStream;
 import java.io.StringBufferInputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -82,10 +84,13 @@ public class ManageBatchAction extends BaseAction {
 	}
 	
 	//进入批次添加页面
-	public String preAddBatch() {
+	public String preAddBatch() throws Exception {
 		product.setProNo(proNo);
-		inputStream = new StringBufferInputStream(mbs.preAddBatch(product));
-		return "success"; 
+		String result = mbs.preAddBatch(product);
+		System.out.println(result);
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(result);
+		return null; 
 	}
 	
 	//批次添加
