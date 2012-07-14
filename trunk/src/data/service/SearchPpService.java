@@ -27,6 +27,7 @@ import data.dao.WorkFormDAO;
 public class SearchPpService {
 	
 	List<WorkForm> list = new ArrayList<WorkForm>();
+	List<PeopleComp> peopleComp = new ArrayList<PeopleComp>();
 	private String staName;
 	private String deptName;
 	String sql;
@@ -74,18 +75,15 @@ public class SearchPpService {
 			}
 		}
 		//根据工单找出其他信息
-		List<String> lproName=new ArrayList<String>();
-		List<String> lproNo=new ArrayList<String>();
-		List<String> lprocName=new ArrayList<String>();
+	
 		for(int i=0;i<list.size();i++){
+			PeopleComp tmp = new PeopleComp();
 			int proId=list.get(i).getProId();
 			ProductDAO productDAO=new ProductDAO();
 			List<Product> product=new ArrayList<Product>();
 			Map<String, Integer> equalsmap2 = new HashMap<String, Integer>();
 			equalsmap2.put("Id", proId);
 			product=productDAO.findEntity(equalsmap2);
-			lproName.add(product.get(0).getProName());
-			lproNo.add(product.get(0).getProNo());
 			
 			int procId=list.get(i).getProcId();
 			ProcessesDAO processesDAO = new ProcessesDAO();
@@ -93,15 +91,21 @@ public class SearchPpService {
 			Map<String, Integer> equalsmap3 = new HashMap<String, Integer>();
 			equalsmap3.put("Id", procId);
 			processes=processesDAO.findEntity(equalsmap3);
-			lprocName.add(processes.get(0).getProcName());
+			
+			tmp.proName=product.get(0).getProName();
+			tmp.proNo=product.get(0).getProNo();
+			tmp.procName=processes.get(0).getProcName();
+			tmp.quaNum=list.get(i).getQuaNum();
+			tmp.gWaste=list.get(i).getgWaste();
+			tmp.lWaste=list.get(i).getlWaste();
+			tmp.workHours=list.get(i).getWorkHours();
+			
+			peopleComp.add(tmp);
 		}
 		
 					
 		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("list", list);
-		map.put("lproName", lproName);
-		map.put("lproNo", lproNo);
-		map.put("lprocName", lprocName);
+		map.put("list", peopleComp);
 		map.put("staName", staName);
 		map.put("deptName", deptName);
 		return map;
@@ -120,7 +124,7 @@ public class SearchPpService {
 		Iterator<WorkForm> it =list.iterator();
 		//list.iterator();
 		while(it.hasNext())
-		System.out.println(it.next().getWorkHours());
+		System.out.println(it.next().getgWaste());
 	}
 	public String getStaName() {
 		return staName;
@@ -134,5 +138,13 @@ public class SearchPpService {
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
 	}
-
+class PeopleComp{
+	public String proName;
+	public String proNo;
+	public String procName;
+	public int quaNum;
+	public int gWaste;
+	public int lWaste;	
+	public int workHours;
+}
 }

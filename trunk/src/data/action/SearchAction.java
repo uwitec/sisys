@@ -119,9 +119,6 @@ public class SearchAction extends BaseAction {
 		if (mapPp != null) {
 			
 			ActionContext.getContext().put("Ppsheet", mapPp.get("list"));
-			ActionContext.getContext().put("lproName", mapPp.get("lproName"));
-			ActionContext.getContext().put("lproNo", mapPp.get("lproNo"));
-			ActionContext.getContext().put("lprocName", mapPp.get("lprocName"));
 			ActionContext.getContext().put("staName", mapPp.get("staName"));
 			ActionContext.getContext().put("sTime", startTime);
 			ActionContext.getContext().put("eTime", endTime);

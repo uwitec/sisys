@@ -59,6 +59,7 @@
 <script type="text/javascript"
 	src="resources/scripts/jquery.datePicker.js"></script>
 <script type="text/javascript" src="resources/scripts/jquery.date.js"></script>
+<script type="text/javascript" src="resources/scripts/My97DatePicker/WdatePicker.js"></script>
 <!--[if IE]><script type="text/javascript" src="resources/scripts/jquery.bgiframe.js"></script><![endif]-->
 
 
@@ -203,8 +204,10 @@
 
 							<p>
 								 <s:textfield name="staNo" label="工号"></s:textfield>
-								 <s:textfield name="startTime" label="起始时间(YYYY-MM-DD)"></s:textfield>
-								 <s:textfield name="endTime" label="截止时间(YYYY-MM-DD)"></s:textfield> 
+								<s:textfield name="startTime" label="起始时间(YYYY-MM-DD)"
+									onClick="WdatePicker()"></s:textfield>
+								<s:textfield name="endTime" label="截止时间(YYYY-MM-DD)"
+									onClick="WdatePicker()"></s:textfield>
 							</p>
 
 							<div class="clear"></div>
@@ -223,6 +226,7 @@
 		</div>
 		<!-- End #footer -->
 		</div>
+	</div>
 	</div>
 </body>
 

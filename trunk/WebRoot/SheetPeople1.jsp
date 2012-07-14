@@ -38,13 +38,12 @@
 					<td width=10%>料废数量</td>
 					<td width=10%>工时统计</td>
 				</tr>
-				<s:iterator value="%{Phsheet}" id="id"   status="status">
-				<s:property value='status.index'/>
+				<s:iterator value="Ppsheet">
 				<tr align="center">
 					<td width=10%><%=i++%></td>
-					<td width=10%><s:property value='%{lproName[#status.index]}'/> </td>
-					<td width=10%><s:property value='%{lproNo[#status.index]}'/></td>
-					<td width=10%><s:property value=<s:property value='%{lprocName[#status.index]}'/> /></td>
+					<td width=10%><s:property value="proName"/> </td>
+					<td width=10%><s:property value="proNo"/></td>
+					<td width=10%><s:property value="procName"/></td>
 					<td width=10%><s:property value="quaNum" /></td>
 					<td width=10%><s:property value="gWaste" /></td>
 					<td width=10%><s:property value="lWaste" /></td>

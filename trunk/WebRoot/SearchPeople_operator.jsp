@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -59,6 +59,7 @@
 <script type="text/javascript"
 	src="resources/scripts/jquery.datePicker.js"></script>
 <script type="text/javascript" src="resources/scripts/jquery.date.js"></script>
+<script type="text/javascript" src="resources/scripts/My97DatePicker/WdatePicker.js"></script>
 <!--[if IE]><script type="text/javascript" src="resources/scripts/jquery.bgiframe.js"></script><![endif]-->
 
 
@@ -147,20 +148,22 @@
 
 				<div id="login-content">
 
-					<form action="SheetPeople.html">
+						<s:form action="SearchPp.action">
 
-						<p>
-							<label>工号</label> <input class="text-input" type="text" />
-						</p>
+							<p>
+								 <s:textfield name="staNo" label="工号"></s:textfield>
+								<s:textfield name="startTime" label="起始时间(YYYY-MM-DD)"
+									onClick="WdatePicker()"></s:textfield>
+								<s:textfield name="endTime" label="截止时间(YYYY-MM-DD)"
+									onClick="WdatePicker()"></s:textfield>
+							</p>
 
-						<div class="clear"></div>
-
-					</form>
-					<div>
-						<input class="button" type="submit" value="确定"
-							onclick="window.open('SheetPeople1.jsp')" />
+							<div class="clear"></div>
+								
+						
+						 <s:submit value="submit"/>
+						</s:form>
 					</div>
-				</div>
 			</div>
 
 
