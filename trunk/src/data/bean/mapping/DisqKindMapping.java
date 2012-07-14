@@ -7,6 +7,7 @@ import data.bean.DisqKind;
 
 public class DisqKindMapping extends BasicMapping<DisqKind> {
 
+	@Override
 	public DisqKind mapping(ResultSet rs) {
 
 		DisqKind disqKind = new DisqKind();

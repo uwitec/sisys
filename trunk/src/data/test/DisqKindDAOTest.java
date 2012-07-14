@@ -1,8 +1,6 @@
 package data.test;
 
-import data.bean.Batch;
 import data.bean.DisqKind;
-import data.dao.BatchDAO;
 import data.dao.DisqKindDAO;
 
 public class DisqKindDAOTest {

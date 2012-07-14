@@ -7,44 +7,12 @@
 	
     <constant name="struts.enable.DynamicMethodInvocation" value="true" />
     <constant name="struts.devMode" value="true" />
+	<constant name="struts.multipart.saveDir" value="/tmp"></constant>
     
 	<include file="struts_manageUser.xml"></include>
 	
 	<include file="struts_manageBatch.xml"></include>
 
-	<package name="common" namespace="/" extends="struts-default">
-		
-		<action name="test" class="data.action.test" method="tableExportor">
-			<result name="error">/error.jsp</result>
-		</action>
-		
-		<action name="tableExportor" class="data.util.ExcelExportor" method="checkLogin">
-		</action>
-		
-		<action name="dataExport" class="data.util.DataSave" method="dataExport">
-			<result name="error">/DataSave.jsp</result>
-		</action>
-		
-		<action name="dataImport" class="data.util.DataSave" method="dataImport">
-			<result name="success">/DataLogin.jsp</result>
-			<result name="error">/DataLogin.jsp</result>
-		</action>
-		
-		<action name="staffImport" class="data.util.ExcelImportor" method="staffImport">
-			<result name="success">/StaffImport.jsp</result>
-			<result name="error">/StaffImport.jsp</result>
-		</action>
-		
-		<action name="proLineImport" class="data.util.ExcelImportor" method="proLineImport">
-			<result name="success">/ProLineImport.jsp</result>
-			<result name="error">/ProLineImport.jsp</result>
-		</action>
-		
-		<action name="proImport" class="data.util.ExcelImportor" method="proImport">
-			<result name="success">/ProImport.jsp</result>
-			<result name="error">/ProImport.jsp</result>
-		</action>
-
-	</package>
+	<include file="struts_manageData.xml"></include>
 	
 </struts>

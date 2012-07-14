@@ -1,8 +1,6 @@
 package data.test;
 
-import data.bean.Batch;
 import data.bean.StaffKind;
-import data.dao.BatchDAO;
 import data.dao.StaffKindDAO;
 
 public class StaffKindDAOTest {

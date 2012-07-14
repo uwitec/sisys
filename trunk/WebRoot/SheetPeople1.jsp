@@ -21,7 +21,7 @@
   
   <body>
     <h2 align="center" id="tableTitle">员工工作统计表</h2>
-	<form name="tableExport" method="POST" action="tableExportor.action">
+	<form name="tableExport" method="POST" action="tableExport.action">
 		<input type="hidden" name="title">
 		<input type="hidden" name="content">
 		<div align="center"><input  onclick=tableExportor('MainTable') class="button" type="button" value="导出"></div>

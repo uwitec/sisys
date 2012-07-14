@@ -5,11 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import data.bean.Product;
-import data.bean.User;
 import data.bean.WorkForm;
-import data.bean.mapping.ProductMapping;
-import data.bean.mapping.UserMapping;
 import data.bean.mapping.WorkFormMapping;
 import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
@@ -130,7 +126,7 @@ public class WorkFormDAO extends GenericQueryImpl<WorkForm, WorkFormMapping> {
 		try {
 			resultSet = genericTemplate.executeQuery();
 			//System.out.print(genericTemplate.executeQuery());
-			workForm = (WorkForm) workFormMapping.mapping(resultSet);
+			workForm = workFormMapping.mapping(resultSet);
 			list.add(workForm);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -151,7 +147,7 @@ public class WorkFormDAO extends GenericQueryImpl<WorkForm, WorkFormMapping> {
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			workForm = (WorkForm) workFormMapping.mapping(resultSet);
+			workForm = workFormMapping.mapping(resultSet);
 			list.add(workForm);
 		} catch(Exception ex) {
 			ex.printStackTrace();

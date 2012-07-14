@@ -12,16 +12,6 @@ import data.bean.Flowpath;
 import data.bean.WorkHoursTab;
 import data.bean.WorkTab;
 import data.bean.DisqKind;
-import data.list.DailyStaffDisqList;
-import data.list.DisqDetailList;
-import data.list.ProductList;
-import data.list.ScheduleTabList;
-import data.list.BatchList;
-import data.list.WorkFormList;
-import data.list.WorkHoursTabList;
-import data.list.WorkTabList;
-import data.list.FlowpathList;
-import data.list.DisqKindList;
 import data.dao.BatchDAO;
 import data.dao.DailyStaffDisqDAO;
 import data.dao.DisqDetailDAO;
@@ -167,7 +157,7 @@ public class WorkformAddAction {
 		}
 		workhour.setStaId(wf.getStaId());
 		workhour.setTime(new Date());
-		workhour.setWorkHours((double) wf.getQuaNum() * 8.0 / (double) pn);
+		workhour.setWorkHours(wf.getQuaNum() * 8.0 / pn);
 		workhour.setSalary(workhour.getWorkHours() * salary);
 		if (wf.getDisDetail() == null) {
 			DisqNum = 0;

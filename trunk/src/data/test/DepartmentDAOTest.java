@@ -1,8 +1,6 @@
 package data.test;
 
-import data.bean.Batch;
 import data.bean.Department;
-import data.dao.BatchDAO;
 import data.dao.DepartmentDAO;
 
 /**

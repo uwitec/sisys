@@ -2,9 +2,7 @@ package data.test;
 
 import java.util.Date;
 
-import data.bean.Batch;
 import data.bean.DailyStaffDisq;
-import data.dao.BatchDAO;
 import data.dao.DailyStaffDisqDAO;
 
 public class DailyStaffDisqDAOTest {

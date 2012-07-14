@@ -2,6 +2,16 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
+<%
+	String result = request.getParameter("result");
+	if(result == null) {
+		result = "";
+	} else if(result.equals("error")){
+		result = "数据导入出错！";
+	} else if(result.equals("success")) {
+		result = "数据导入成功！";
+	}
+%>
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
 		
@@ -68,10 +78,10 @@
 		<script type="text/javascript">
 			function checkType(){
 				var forum = document.forms["fileForm"]; 
-				var upload = document.getElementsByName("filePath")[0].value;
+				var upload = document.getElementsByName("myFile")[0].value;
 				if(upload.length == 0){
 					alert("请选择上传文件！");
-					document.getElementsByName("filePath")[0].focus();
+					document.getElementsByName("myFile")[0].focus();
 					return false;
 				}
 				var type = upload.substring(upload.lastIndexOf(".")+1,upload.length);
@@ -79,7 +89,7 @@
 					forum.submit();
 				}else{
 					alert("文件类型错误！只允许导入sql文件！");
-					document.getElementsByName("filePath")[0].focus();
+					document.getElementsByName("myFile")[0].focus();
 					return false;
 				}
 			}
@@ -199,14 +209,19 @@
 				</div> <!-- End .content-box-header -->
 				
 				<div class="content-box-content">
+				<div align="center">
+					<label>
+						<%=result%>
+					</lable>
+				</div>
 		
 				<div id="login-content">
 				
-				<form method="post" action="dataImport.action" name="fileForm" >
+				<form method="post" action="dbImport.action" name="fileForm" enctype="multipart/form-data" >
 				
 					<p>
 						<label>路径</label>
-						<input class="text-input" type="file" name="filePath"/>
+						<input class="text-input" type="file" name="myFile"/>
 					</p>
 					
 					<div class="clear"></div>

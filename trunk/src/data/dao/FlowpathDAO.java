@@ -5,12 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import data.bean.DisqKind;
 import data.bean.Flowpath;
-import data.bean.User;
-import data.bean.mapping.DisqKindMapping;
 import data.bean.mapping.FlowpathMapping;
-import data.bean.mapping.UserMapping;
 import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
@@ -112,7 +108,7 @@ public class FlowpathDAO  extends GenericQueryImpl<Flowpath, FlowpathMapping> {
 		try {
 			resultSet = genericTemplate.executeQuery();
 			//System.out.print(genericTemplate.executeQuery());
-			flowpath = (Flowpath) flowpathMapping.mapping(resultSet);
+			flowpath = flowpathMapping.mapping(resultSet);
 			list.add(flowpath);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -133,7 +129,7 @@ public class FlowpathDAO  extends GenericQueryImpl<Flowpath, FlowpathMapping> {
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			flowpath = (Flowpath) flowpathMapping.mapping(resultSet);
+			flowpath = flowpathMapping.mapping(resultSet);
 			list.add(flowpath);
 		} catch(Exception ex) {
 			ex.printStackTrace();

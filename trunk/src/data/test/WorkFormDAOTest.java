@@ -1,8 +1,6 @@
 package data.test;
 
-import data.bean.Product;
 import data.bean.WorkForm;
-import data.dao.ProductDAO;
 import data.dao.WorkFormDAO;
 
 public class WorkFormDAOTest {

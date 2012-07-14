@@ -4,12 +4,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.bean.Product;
 import data.bean.ScheduleTab;
-import data.bean.User;
-import data.bean.mapping.ProductMapping;
 import data.bean.mapping.ScheduleTabMapping;
-import data.bean.mapping.UserMapping;
 import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
@@ -111,7 +107,7 @@ public class ScheduleTabDAO extends GenericQueryImpl<ScheduleTab, ScheduleTabMap
 		try {
 			resultSet = genericTemplate.executeQuery();
 			//System.out.print(genericTemplate.executeQuery());
-			scheduleTab = (ScheduleTab) scheduleTabMapping.mapping(resultSet);
+			scheduleTab = scheduleTabMapping.mapping(resultSet);
 			list.add(scheduleTab);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -132,7 +128,7 @@ public class ScheduleTabDAO extends GenericQueryImpl<ScheduleTab, ScheduleTabMap
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			scheduleTab = (ScheduleTab) scheduleTabMapping.mapping(resultSet);
+			scheduleTab = scheduleTabMapping.mapping(resultSet);
 			list.add(scheduleTab);
 		} catch(Exception ex) {
 			ex.printStackTrace();

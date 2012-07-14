@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="GB2312" ?>
 <!DOCTYPE struts PUBLIC
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
     "http://struts.apache.org/dtds/struts-2.0.dtd">
@@ -16,7 +16,7 @@
 		<default-interceptor-ref name="teamwareStack"/>
 		
 		
-		<!--瀹氫箟鍏ㄥ眬Result-->  
+		<!--定义全局Result-->  
         <global-results>  
             <result name="login">/login.jsp</result>  
         </global-results>

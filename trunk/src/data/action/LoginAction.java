@@ -1,6 +1,5 @@
 package data.action;
 
-import data.bean.User;
 import data.service.LoginService;
 
 public class LoginAction extends BaseAction{
@@ -8,6 +7,7 @@ public class LoginAction extends BaseAction{
 	private String username;
 	private String password;
 	
+	@Override
 	public String execute() throws Exception{
 		level = request.getParameter("level");
 		username = request.getParameter("username");

@@ -12,7 +12,7 @@ public class Test {
 		List<Element> elements = new ArrayList<Element>();
 		elements.add(element);
 		CreateSqlUtil csu = new CreateSqlUtil();
-		System.out.print(csu.createQuerySql(elements));
+		System.out.print(CreateSqlUtil.createQuerySql(elements));
 	}
 	public static void main(String args[]) {
 		Test t = new Test();

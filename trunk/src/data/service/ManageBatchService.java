@@ -4,17 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.ServletActionContext;
-
 import com.opensymphony.xwork2.ActionContext;
 
 import data.bean.Batch;
 import data.bean.Flowpath;
 import data.bean.Processes;
 import data.bean.Product;
-import data.bean.User;
 import data.bean.WorkTab;
 import data.dao.BatchDAO;
 import data.dao.FlowpathDAO;

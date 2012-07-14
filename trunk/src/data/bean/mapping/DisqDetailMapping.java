@@ -7,6 +7,7 @@ import data.bean.DisqDetail;
 
 public class DisqDetailMapping extends BasicMapping<DisqDetail> {
 
+	@Override
 	public DisqDetail mapping(ResultSet rs) {
 		
 		DisqDetail disqDetail = new DisqDetail();

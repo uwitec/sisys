@@ -7,6 +7,7 @@ import data.bean.Flowpath;
 
 public class FlowpathMapping extends BasicMapping<Flowpath> {
 
+	@Override
 	public Flowpath mapping(ResultSet rs) {
 
 		Flowpath flowpath = new Flowpath();

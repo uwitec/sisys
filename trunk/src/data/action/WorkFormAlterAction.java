@@ -21,17 +21,6 @@ import data.dao.ScheduleTabDAO;
 import data.dao.StaffDetailDAO;
 import data.dao.WorkFormDAO;
 import data.dao.WorkTabDAO;
-import data.list.BatchList;
-import data.list.DailyStaffDisqList;
-import data.list.DisqDetailList;
-import data.list.DisqKindList;
-import data.list.FlowpathList;
-import data.list.ProcessesList;
-import data.list.ProductList;
-import data.list.ScheduleTabList;
-import data.list.WorkFormList;
-import data.list.WorkHoursTabList;
-import data.list.WorkTabList;
 
 public class WorkFormAlterAction {
 	private WorkForm worksave = new WorkForm();

@@ -1,8 +1,6 @@
 package data.test;
 
-import data.bean.Flowpath;
 import data.bean.Processes;
-import data.dao.FlowpathDAO;
 import data.dao.ProcessesDAO;
 
 public class ProcessesDAOTest {

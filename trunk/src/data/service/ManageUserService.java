@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import com.opensymphony.xwork2.ActionContext;
 
 import data.bean.User;
@@ -52,7 +50,7 @@ public class ManageUserService {
 		System.out.println("user:" + user);
 		
 		UserDAO userDao = new UserDAO();
-		int num = (int)userDao.count();
+		int num = userDao.count();
 		//System.out.println("num:" + num);
 		user.setId(++num);
 		Map<String, Object> equalsMap = new HashMap<String, Object>();

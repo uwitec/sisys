@@ -79,8 +79,8 @@ public class GenericQueryImpl<E, M extends BasicMapping> {
 			genericTemplate.setSqlValue(sql.toString());
 			rs = genericTemplate.executeQuery();
 			while(rs.next()){
-				entity = (E) entityMappingClass.mapping(rs);
-				list.add((E) entity);
+				entity = entityMappingClass.mapping(rs);
+				list.add(entity);
 			} 
 				
 				
@@ -106,8 +106,8 @@ public class GenericQueryImpl<E, M extends BasicMapping> {
 			genericTemplate.setSqlValue(sql.toString());
 			rs = genericTemplate.executeQuery();
 			while(rs.next()) {
-				entity = (E) entityMappingClass.mapping(rs);
-				list.add((E) entity);
+				entity = entityMappingClass.mapping(rs);
+				list.add(entity);
 			}
 		} catch (RuntimeException re) {
 			re.printStackTrace();
@@ -130,8 +130,8 @@ public class GenericQueryImpl<E, M extends BasicMapping> {
 			genericTemplate.setSqlValue(sql);
 			rs = genericTemplate.executeQuery();
 			while(rs.next()) {
-				entity = (E) entityMappingClass.mapping(rs);
-				list.add((E) entity);
+				entity = entityMappingClass.mapping(rs);
+				list.add(entity);
 			}
 		} catch (RuntimeException re) {
 			re.printStackTrace();
@@ -183,8 +183,8 @@ public class GenericQueryImpl<E, M extends BasicMapping> {
 			genericTemplate.setSqlValue(sql.toString());
 			rs = genericTemplate.executeQuery();
 			while(rs.next()) {
-				entity = (E) entityMappingClass.mapping(rs);
-				list.add((E) entity);
+				entity = entityMappingClass.mapping(rs);
+				list.add(entity);
 			}
 		} catch (RuntimeException re) {
 			re.printStackTrace();
@@ -241,8 +241,8 @@ public class GenericQueryImpl<E, M extends BasicMapping> {
 			genericTemplate.setSqlValue(sql.toString());
 			rs = genericTemplate.executeQuery();
 			while(rs.next()) {
-				entity = (E) entityMappingClass.mapping(rs);
-				list.add((E) entity);
+				entity = entityMappingClass.mapping(rs);
+				list.add(entity);
 			}
 		} catch (RuntimeException re) {
 			re.printStackTrace();

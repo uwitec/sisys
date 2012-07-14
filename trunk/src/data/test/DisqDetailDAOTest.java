@@ -1,8 +1,6 @@
 package data.test;
 
-import data.bean.Batch;
 import data.bean.DisqDetail;
-import data.dao.BatchDAO;
 import data.dao.DisqDetailDAO;
 
 public class DisqDetailDAOTest {

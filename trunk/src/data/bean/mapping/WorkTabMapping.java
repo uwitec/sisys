@@ -7,6 +7,7 @@ import data.bean.WorkTab;
 
 public class WorkTabMapping extends BasicMapping<WorkTab> {
 
+	@Override
 	public WorkTab mapping(ResultSet rs) {
 
 		WorkTab workTab = new WorkTab();

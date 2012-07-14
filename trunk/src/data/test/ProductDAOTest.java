@@ -1,8 +1,6 @@
 package data.test;
 
-import data.bean.Processes;
 import data.bean.Product;
-import data.dao.ProcessesDAO;
 import data.dao.ProductDAO;
 
 public class ProductDAOTest {

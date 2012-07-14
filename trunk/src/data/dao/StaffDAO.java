@@ -113,7 +113,7 @@ public class StaffDAO extends GenericQueryImpl<Staff, StaffMapping> {
 		try {
 			resultSet = genericTemplate.executeQuery();
 			//System.out.print(genericTemplate.executeQuery());
-			staff = (Staff) staffMapping.mapping(resultSet);
+			staff = staffMapping.mapping(resultSet);
 			list.add(staff);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -134,7 +134,7 @@ public class StaffDAO extends GenericQueryImpl<Staff, StaffMapping> {
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			staff = (Staff)staffMapping.mapping(resultSet);
+			staff = staffMapping.mapping(resultSet);
 			list.add(staff);
 		} catch(Exception ex) {
 			ex.printStackTrace();

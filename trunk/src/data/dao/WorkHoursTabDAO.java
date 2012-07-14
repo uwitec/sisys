@@ -4,11 +4,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.bean.Product;
-import data.bean.User;
 import data.bean.WorkHoursTab;
-import data.bean.mapping.ProductMapping;
-import data.bean.mapping.UserMapping;
 import data.bean.mapping.WorkHoursTabMapping;
 import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
@@ -109,7 +105,7 @@ public class WorkHoursTabDAO extends GenericQueryImpl<WorkHoursTab, WorkHoursTab
 		try {
 			resultSet = genericTemplate.executeQuery();
 			//System.out.print(genericTemplate.executeQuery());
-			workHoursTab = (WorkHoursTab) workHoursTabMapping.mapping(resultSet);
+			workHoursTab = workHoursTabMapping.mapping(resultSet);
 			list.add(workHoursTab);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -130,7 +126,7 @@ public class WorkHoursTabDAO extends GenericQueryImpl<WorkHoursTab, WorkHoursTab
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			workHoursTab = (WorkHoursTab) workHoursTabMapping.mapping(resultSet);
+			workHoursTab = workHoursTabMapping.mapping(resultSet);
 			list.add(workHoursTab);
 		} catch(Exception ex) {
 			ex.printStackTrace();

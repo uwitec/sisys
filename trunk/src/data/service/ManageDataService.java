@@ -1,6 +1,13 @@
-package data.util;
+package data.service;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import data.action.BaseAction;
 import data.bean.Department;
 import data.bean.Flowpath;
 import data.bean.Processes;
@@ -23,22 +29,148 @@ import data.dao.ProductDAO;
 import data.dao.ProductLineDAO;
 import data.dao.StaffDAO;
 import data.dao.StaffKindDAO;
+import data.util.ColorUtil;
 
-import jxl.*;
-import jxl.read.biff.BiffException;
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableFont;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
 
-public class ExcelImportor extends BaseAction{
-	private String filePath;
+public class ManageDataService {
+	private int cols;
+	private WritableFont font1;
+	private WritableFont font2;
+	private WritableCellFormat format1;
+	private WritableCellFormat format2;
 	
-	public String staffImport() throws Exception {
-		filePath = request.getParameter("filePath");
-		Workbook book = Workbook.getWorkbook(new FileInputStream(filePath));
-		Sheet sheet = book.getSheet(0);
-		String title = sheet.getCell(0, 0).getContents();
-		if(!title.trim().equals("制造部员工表")){
-			return ERROR;
+	//表格导出为excel文件
+	public void tableExport(OutputStream os,String title,String content) throws Exception{
+		WritableWorkbook book = Workbook.createWorkbook(os);
+		book.setProtected(true);
+		init();
+		WritableSheet sheet = book.createSheet(title, 0);
+		int row = 0;
+		int col = 0;
+		Label label = null;
+		
+		
+		
+		List<TD> listTD = getTDContent(content);
+		Map<String,Boolean> map = new HashMap<String,Boolean>();
+		
+		sheet.mergeCells(0, 0, cols-1, 1);
+		label = new Label(col,row,title,format1);
+		sheet.addCell(label);
+		row += 2;
+		
+		for (TD td : listTD) { 
+			if (td == null) { 
+				row++; 
+				col = 0; 
+				continue; 
+			} 
+
+			while (map.get(col + "-" + row) != null) { 
+				col++; 
+			} 
+
+			if (td.colspan > 1 || td.rowspan > 1) { 
+				sheet.mergeCells(col, row, col + td.colspan - 1, row + td.rowspan - 1); 
+				for (int i = col; i <= col + td.colspan - 1; i++) { 
+					for (int j = row; j <= row + td.rowspan - 1; j++) { 
+						map.put(i + "-" + j, true); 
+					} 
+				} 
+			} 
+
+			label = new Label(col, row, td.content,format2); 
+			sheet.addCell(label); 
+
+			map.put(col + "-" + row, true); 
+			col += td.colspan; 
 		}
 		
+		book.write();
+		book.close();
+	}
+	
+	//数据库导出为sql文件
+	public void dbEport(OutputStream os){
+		try{
+			Runtime rt = Runtime.getRuntime();
+			Process child = rt.exec("D:/Java/MySQL/MySQL Server 5.0/bin/mysqldump -uroot -proot sisys");
+			
+			InputStream in = child.getInputStream();
+			InputStreamReader isr = new InputStreamReader(in,"utf8");
+			String inStr;
+			StringBuffer sb = new StringBuffer("");
+			String outStr;
+			BufferedReader br = new BufferedReader(isr);
+			while ((inStr = br.readLine()) != null){
+				sb.append(inStr + "\r\n");
+			}
+			outStr = sb.toString();
+			
+			OutputStreamWriter writer = new OutputStreamWriter(os, "GBK");
+			writer.write(outStr);
+			
+			writer.flush();
+			
+			in.close();
+			isr.close();
+			br.close();
+			writer.close();
+			os.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	//导入sql文件到数据库
+	public void dbImport(File myFile){
+		try {
+			Runtime rt = Runtime.getRuntime();
+			Process child = rt.exec("D:/Java/MySQL/MySQL Server 5.0/bin/mysql -uroot -proot sisys");
+			OutputStream out = child.getOutputStream();
+			
+			String inStr;
+			StringBuffer sb = new StringBuffer("");
+			String outStr;
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(myFile), "GBK"));
+			while((inStr = br.readLine()) != null){
+				sb.append(inStr + "\r\n");
+			}
+			outStr = sb.toString();
+			OutputStreamWriter writer = new OutputStreamWriter(out, "utf8");
+			writer.write(outStr);
+			writer.flush();
+			out.close();
+			br.close();
+			writer.close();
+			
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	//员工表导入
+	public String staffImport(File myFile) throws Exception {
+		Workbook book = Workbook.getWorkbook(new FileInputStream(myFile));
+		Sheet sheet = book.getSheet(0);
+		String title = sheet.getCell(0, 0).getContents();
+		if(!title.replaceAll(" ", "").equals("制造部员工表")){
+			return "dataError";
+		}
+		
+		int flag = 0;
 		int row = 1;
 		String deptName;
 		int deptNo = 1;
@@ -68,7 +200,7 @@ public class ExcelImportor extends BaseAction{
 					System.out.println(department.getDeptNo());
 					int r = new DepartmentDAO().create(department);
 					if(r <= 0){
-						return ERROR;
+						return "error";
 					}
 				}
 				department = departmentDAO.findEntity(equalsMap).get(0);
@@ -91,8 +223,9 @@ public class ExcelImportor extends BaseAction{
 					System.out.println(staff.getStaName());
 					int r = new StaffDAO().create(staff);
 					if(r <= 0){
-						return ERROR;
+						return "error";
 					}
+					flag = 1;
 				}
 				kindSet.add(cells[4].getContents());
 				System.out.println(cells[0].getContents());
@@ -109,24 +242,28 @@ public class ExcelImportor extends BaseAction{
 				staffKind.setKindDesc(kind);
 				int r = new StaffKindDAO().create(staffKind);
 				if(r <= 0){
-					return ERROR;
+					return "error";
 				}
 			}
 		}
-		return SUCCESS;
+		if(flag == 0){
+			return "dataSame";
+		}
+		return "success";
 		
 	}
 	
-	public String proLineImport() throws Exception{
-		filePath = request.getParameter("filePath");
-		Workbook book = Workbook.getWorkbook(new FileInputStream(filePath));
+	//生产线编码表导入
+	public String proLineImport(File myFile) throws Exception{
+		Workbook book = Workbook.getWorkbook(new FileInputStream(myFile));
 		Sheet sheet = book.getSheet(0);
 		String title = sheet.getCell(0, 0).getContents();
-		if(!title.trim().equals("制造部及生产线编码表")){
-			return ERROR;
+		if(!title.replaceAll(" ", "").equals("制造部及生产线编码表")){
+			return "dataError";
 		}
 		ProductLine proLine;
 		ProductLineDAO proLineDAO = new ProductLineDAO();
+		int flag = 0;
 		int row = 2;
 		Cell[] cells;
 		List<ProductLine> proLineList;
@@ -144,23 +281,27 @@ public class ExcelImportor extends BaseAction{
 					System.out.println(proLine.getLineDesc());
 					int r = new ProductLineDAO().create(proLine);
 					if(r <= 0){
-						return ERROR;
+						return "error";
 					}
+					flag = 1;
 				}
 			}
 			row++;
 		}
+		if(flag == 0){
+			return "dataSame";
+		}
 		
-		return SUCCESS;
+		return "success";
 	}
 	
-	public String proImport() throws Exception {
-		filePath = request.getParameter("filePath");
-		Workbook book = Workbook.getWorkbook(new FileInputStream(filePath));
+	//产品成本表导入
+	public String proImport(File myFile) throws Exception {
+		Workbook book = Workbook.getWorkbook(new FileInputStream(myFile));
 		Sheet sheet = book.getSheet(0);
 		String title = sheet.getCell(0, 0).getContents();
-		if(!title.trim().equals("产品制造成本表")){
-			return ERROR;
+		if(!title.replaceAll(" ", "").equals("产品制造成本表")){
+			return "dataError";
 		}
 		
 		Product product;
@@ -186,14 +327,14 @@ public class ExcelImportor extends BaseAction{
 		equalsMap.put("deptName", cells[8].getContents());
 		deptList = departmentDAO.findEntity(equalsMap);
 		if(deptList.size() == 0){
-			return ERROR;
+			return "error";
 		}
 		
 		equalsMap.clear();
 		equalsMap.put("lineNo", sheet.getCell(4, 32).getContents());
 		proLineList = productLineDAO.findEntity(equalsMap);
 		if(proLineList.size() == 0){
-			return ERROR;
+			return "noproLine";
 		}
 		
 		equalsMap.clear();
@@ -209,7 +350,7 @@ public class ExcelImportor extends BaseAction{
 			product.setTotalNum(cells[11].getContents().isEmpty()?0:Integer.parseInt(cells[11].getContents()));
 			int r = productDAO.create(product);
 			if(r <= 0){
-				return ERROR;
+				return "error";
 			}
 		}else{
 			product = proList.get(0);
@@ -221,7 +362,7 @@ public class ExcelImportor extends BaseAction{
 			product.setTotalNum(cells[11].getContents().isEmpty()?0:Integer.parseInt(cells[11].getContents()));
 			int r = productDAO.update(product, product.getId());
 			if(r <= 0){
-				return ERROR;
+				return "error";
 			}
 		}
 		product = productDAO.findEntity(equalsMap).get(0);
@@ -243,13 +384,13 @@ public class ExcelImportor extends BaseAction{
 			System.out.println(Double.parseDouble(cells[8].getContents().trim()));
 			int r = processesDAO.create(process);
 			if(r <= 0){
-				return ERROR;
+				return "error";
 			}
 			equalsMap.clear();
 			equalsMap.put("procName", process.getProcName());
 			processList = new ProcessesDAO().findEntity(equalsMap);
 			if(processList.size() == 0){
-				return ERROR;
+				return "error";
 			}
 			sequenceList.add(processList.get(processList.size()-1).getId());
 			
@@ -269,25 +410,97 @@ public class ExcelImportor extends BaseAction{
 		flowpath.setProId(product.getId());
 		int r = flowpathDAO.create(flowpath);
 		if(r <= 0){
-			return ERROR;
+			return "error";
 		}
 		
-		return SUCCESS;
+		return "success";
 	}
 	
-	
-	
-	public String getFilePath() {
-		return filePath;
+	//提取td属性及内容
+	private List<TD> getTDContent(String content){
+		int begin = -1;
+		int end = -1;
+		int index = -1;
+		String numberStr;
+		int number;
+		int flag = 0;
+		List<TD> list = new ArrayList<TD>();
+		
+		String[] trs = content.split("</TR>");
+		for(String tr : trs){
+			number = 1;
+			String[] ss = tr.split("</TD>");
+			for(String s : ss){
+				begin = s.indexOf("<TD");
+				if(begin == -1){
+					continue;
+				}
+				
+				s = s.substring(begin + 3);
+				index = s.indexOf(">");
+				TD td = new TD();
+				
+				begin = s.indexOf("rowSpan=");
+				if(begin != -1){
+					end = s.indexOf(" ",begin);
+					if(end == -1){
+						end = index;
+					}
+					numberStr = s.substring(begin + 8, end).replace('\"' , ' ' ).replace('\'' , ' ' ).trim();
+					number = Integer.parseInt(numberStr);
+					td.rowspan = number;
+				}
+				
+				begin = s.indexOf("colSpan=");
+				if(begin != -1){
+					end = s.indexOf(" ",begin);
+					if(end == -1){
+						end = index;
+					}
+					numberStr = s.substring(begin + 8, end).replace('\"' , ' ' ).replace('\'' , ' ' ).trim();
+					number = Integer.parseInt(numberStr);
+					td.colspan = number;
+					if(flag == 0){
+						cols += number;
+					}
+				}else{
+					if(flag == 0){
+						cols++;
+					}
+				}
+				
+				td.content = s.substring(index + 1).replaceAll("<.*?>", "").replaceAll(" ", "").trim();
+				list.add(td);
+			}
+			list.add(null);
+			flag = 1;
+			
+		}
+		
+		return list;
 	}
+	
+	//表格格式初始化
+	private void init() throws Exception{
+		font1= new WritableFont(WritableFont.TIMES,16,WritableFont.BOLD); 
+		font2=new WritableFont(WritableFont.createFont("楷体 _GB2312"),10,WritableFont.NO_BOLD );
+		format1=new WritableCellFormat(font1);
+		format2=new WritableCellFormat(font2);
+		format1.setAlignment(jxl.format.Alignment.CENTRE);
+		format1.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);
+		format2.setAlignment(jxl.format.Alignment.CENTRE);
+		format2.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);
+	}
+	
+}
 
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
-
-	public static void main(String[] args) throws Exception {
-//		staffImport();
-//		proLineImport();
-//		proImport();
+class TD { 
+	int rowspan = 1; 
+	int colspan = 1; 
+	String content; 
+	
+	@Override
+	public String toString(){
+		return "TD [rowspan=" + rowspan + "; colspan=" + colspan + "; content=" + content + ";]";
 	}
 }

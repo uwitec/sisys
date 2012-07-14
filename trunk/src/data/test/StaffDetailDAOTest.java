@@ -1,8 +1,6 @@
 package data.test;
 
-import data.bean.Product;
 import data.bean.StaffDetail;
-import data.dao.ProductDAO;
 import data.dao.StaffDetailDAO;
 
 public class StaffDetailDAOTest {

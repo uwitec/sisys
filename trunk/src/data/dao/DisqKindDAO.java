@@ -5,12 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import data.bean.DisqDetail;
 import data.bean.DisqKind;
-import data.bean.User;
-import data.bean.mapping.DisqDetailMapping;
 import data.bean.mapping.DisqKindMapping;
-import data.bean.mapping.UserMapping;
 import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
@@ -112,7 +108,7 @@ public class DisqKindDAO  extends GenericQueryImpl<DisqKind, DisqKindMapping>{
 		try {
 			resultSet = genericTemplate.executeQuery();
 			//System.out.print(genericTemplate.executeQuery());
-			disqKind = (DisqKind) disqKindMapping.mapping(resultSet);
+			disqKind = disqKindMapping.mapping(resultSet);
 			list.add(disqKind);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -133,7 +129,7 @@ public class DisqKindDAO  extends GenericQueryImpl<DisqKind, DisqKindMapping>{
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			disqKind = (DisqKind) disqKindMapping.mapping(resultSet);
+			disqKind = disqKindMapping.mapping(resultSet);
 			list.add(disqKind);
 		} catch(Exception ex) {
 			ex.printStackTrace();

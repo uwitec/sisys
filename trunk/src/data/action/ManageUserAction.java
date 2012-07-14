@@ -1,11 +1,6 @@
 package data.action;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import data.bean.User;
-import data.dao.UserDAO;
 import data.service.ManageUserService;
 
 public class ManageUserAction extends BaseAction{
@@ -22,6 +17,7 @@ public class ManageUserAction extends BaseAction{
 		this.user = user;
 	}
 	
+	@Override
 	public String execute(){
 		return null;
 	}

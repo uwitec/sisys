@@ -1,8 +1,6 @@
 package data.test;
 
-import data.bean.DisqKind;
 import data.bean.Flowpath;
-import data.dao.DisqKindDAO;
 import data.dao.FlowpathDAO;
 
 public class FlowpathDAOTest {

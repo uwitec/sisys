@@ -7,6 +7,7 @@ import data.bean.WorkForm;
 
 public class WorkFormMapping extends BasicMapping<WorkForm> {
 
+	@Override
 	public WorkForm mapping(ResultSet rs) {
 		
 		WorkForm workForm = new WorkForm();

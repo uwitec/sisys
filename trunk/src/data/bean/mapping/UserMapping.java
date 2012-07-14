@@ -7,6 +7,7 @@ import data.bean.User;
 
 public class UserMapping extends BasicMapping<User>{
 
+	@Override
 	public User mapping(ResultSet rs)  {
 		
 		User user = new User();

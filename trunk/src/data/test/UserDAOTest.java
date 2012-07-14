@@ -3,9 +3,7 @@ package data.test;
 import java.util.HashMap;
 import java.util.Map;
 
-import data.bean.Batch;
 import data.bean.User;
-import data.dao.BatchDAO;
 import data.dao.UserDAO;
 import data.util.OrderType;
 

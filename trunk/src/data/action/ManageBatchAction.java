@@ -7,6 +7,7 @@ import java.io.StringBufferInputStream;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.StrutsStatics;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -19,7 +20,7 @@ public class ManageBatchAction extends BaseAction {
 	
 	private ManageBatchService mbs = new ManageBatchService();
 	ActionContext context = ActionContext.getContext();  
-    HttpServletRequest request = (HttpServletRequest) context.get(ServletActionContext.HTTP_REQUEST);  
+    HttpServletRequest request = (HttpServletRequest) context.get(StrutsStatics.HTTP_REQUEST);  
 	
 	//批次和产品
 	private String proNo = request.getParameter("proNo");
@@ -75,6 +76,7 @@ public class ManageBatchAction extends BaseAction {
 		return fpath;
 	}
 	
+	@Override
 	public String execute() {
 		return null;
 	}

@@ -7,6 +7,7 @@ import data.bean.DailyStaffDisq;
 
 public class DailyStaffDisqMapping extends BasicMapping<DailyStaffDisq>  {
 
+	@Override
 	public DailyStaffDisq mapping(ResultSet rs) {
 		
 		DailyStaffDisq dailyStaffDisq = new DailyStaffDisq();

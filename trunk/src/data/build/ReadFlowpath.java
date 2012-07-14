@@ -8,8 +8,6 @@ import java.util.List;
 import jxl.Cell;
 import jxl.Sheet;
 import data.bean.Flowpath;
-import data.bean.ProductLine;
-import data.dao.ProductLineDAO;
 
 //读XLS文件，得到Flowpath的集合并将其存入数据库中
 class ReadFlowpath {

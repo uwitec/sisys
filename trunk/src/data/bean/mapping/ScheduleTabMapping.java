@@ -7,6 +7,7 @@ import data.bean.ScheduleTab;
 
 public class ScheduleTabMapping extends BasicMapping<ScheduleTab> {
 
+	@Override
 	public ScheduleTab mapping(ResultSet rs) {
 		
 		ScheduleTab scheduleTab = new ScheduleTab();

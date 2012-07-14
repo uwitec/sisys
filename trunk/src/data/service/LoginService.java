@@ -1,8 +1,6 @@
 package data.service;
 
 import java.sql.SQLException;
-import java.util.List;
-
 import data.bean.User;
 import data.dao.UserDAO;
 

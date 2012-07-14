@@ -7,6 +7,7 @@ import data.bean.Department;
 
 public class DepartmentMapping extends BasicMapping<Department>{
 
+	@Override
 	public Department mapping(ResultSet rs) {
 
 		Department department = new Department();

@@ -7,6 +7,7 @@ import data.bean.ProductLine;
 
 public class ProductLineMapping extends BasicMapping<ProductLine> {
 
+	@Override
 	public ProductLine mapping(ResultSet rs) {
 		
 		ProductLine productLine = new ProductLine();

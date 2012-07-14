@@ -5,12 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import data.bean.Flowpath;
 import data.bean.Processes;
-import data.bean.User;
-import data.bean.mapping.FlowpathMapping;
 import data.bean.mapping.ProcessesMapping;
-import data.bean.mapping.UserMapping;
 import data.util.GenericQueryImpl;
 import data.util.GenericTemplate;
 
@@ -120,7 +116,7 @@ public class ProcessesDAO  extends GenericQueryImpl<Processes, ProcessesMapping>
 		try {
 			resultSet = genericTemplate.executeQuery();
 			//System.out.print(genericTemplate.executeQuery());
-			processes = (Processes) processesMapping.mapping(resultSet);
+			processes = processesMapping.mapping(resultSet);
 			list.add(processes);
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -141,7 +137,7 @@ public class ProcessesDAO  extends GenericQueryImpl<Processes, ProcessesMapping>
 		genericTemplate.setValues(value);
 		try {
 			resultSet = genericTemplate.executeQuery();
-			processes = (Processes) processesMapping.mapping(resultSet);
+			processes = processesMapping.mapping(resultSet);
 			list.add(processes);
 		} catch(Exception ex) {
 			ex.printStackTrace();
