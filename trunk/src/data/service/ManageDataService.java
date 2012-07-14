@@ -278,7 +278,7 @@ public class ManageDataService {
 				proLineList = proLineDAO.findEntity(equalsMap);
 				if(proLineList.size() == 0){
 					proLine = new ProductLine();
-					proLine.setLineNo(Integer.parseInt(cells[0].getContents()));
+					proLine.setLineNo(cells[0].getContents());
 					proLine.setLineDesc(cells[1].getContents());
 					System.out.println(proLine.getLineDesc());
 					int r = new ProductLineDAO().create(proLine);

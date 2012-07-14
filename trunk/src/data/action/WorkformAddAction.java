@@ -20,6 +20,16 @@ import data.dao.ScheduleTabDAO;
 import data.dao.WorkFormDAO;
 import data.dao.WorkHoursTabDAO;
 import data.dao.WorkTabDAO;
+import data.list.BatchList;
+import data.list.DailyStaffDisqList;
+import data.list.DisqDetailList;
+import data.list.DisqKindList;
+import data.list.FlowpathList;
+import data.list.ProductList;
+import data.list.ScheduleTabList;
+import data.list.WorkFormList;
+import data.list.WorkHoursTabList;
+import data.list.WorkTabList;
 
 /**
  * 基于用ajax实现了动态显示工单的情况下 即已知工单员工id，产品id，工序id，工序颜色 实现了工单的存储及数据库的修改功能

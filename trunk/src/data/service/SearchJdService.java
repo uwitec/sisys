@@ -77,14 +77,15 @@ public class SearchJdService {
 		List<ScheduleTab> list=new ArrayList<ScheduleTab>();
 		String staName =new String();
 		Map<String,Object> map = new HashMap<String, Object>();
-		map=s.SearchJd("1","2012-07-11","1");
+		map=s.SearchJd("210290910","2012-07-14","122");
 		
+		System.out.println(map.size());
 		list=(List<ScheduleTab>) map.get("list");
 		staName=(String) map.get("proName");
 		System.out.println(staName);
 		Iterator<ScheduleTab> it =list.iterator();
 		//list.iterator();
 		while(it.hasNext())
-		System.out.println(it.next().getColorNo());
+		System.out.println(it.next().getTime().getDate());
 	}
 }

@@ -80,6 +80,7 @@ public class ManageBatchService {
 		//将流程信息及对应的id号保存到session里
 		ActionContext actionContext = ActionContext.getContext(); 
 	    Map session = actionContext.getSession();
+	    session.put("product", product);
 	    System.out.println(product);
 	    
 		/*ActionContext context = ActionContext.getContext();  

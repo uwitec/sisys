@@ -20,6 +20,16 @@ import data.dao.ScheduleTabDAO;
 import data.dao.WorkFormDAO;
 import data.dao.WorkHoursTabDAO;
 import data.dao.WorkTabDAO;
+import data.list.BatchList;
+import data.list.DailyStaffDisqList;
+import data.list.DisqDetailList;
+import data.list.DisqKindList;
+import data.list.FlowpathList;
+import data.list.ProductList;
+import data.list.ScheduleTabList;
+import data.list.WorkFormList;
+import data.list.WorkHoursTabList;
+import data.list.WorkTabList;
 
 public class WorkFormDeleteAction {
 	private WorkForm work = new WorkForm();
