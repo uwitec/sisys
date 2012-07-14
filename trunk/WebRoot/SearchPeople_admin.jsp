@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -129,22 +129,11 @@
 				
 				<li>
 					<a href="#" class="nav-top-item">
-						数据库管理
+						数据管理
 					</a>
 					<ul>
 						<li><a href="DataSave.jsp">数据备份</a></li>
 						<li><a href="DataLogin.jsp">数据导入</a></li>
-					</ul>
-				</li>
-				
-				<li>
-					<a href="#" class="nav-top-item">
-						基本信息录入
-					</a>
-					<ul>
-						<li><a href="StaffImport.jsp">员工表</a></li>
-						<li><a href="ProLineImport.jsp">生产线编码表</a></li>
-						<li><a href="ProImport.jsp">产品成本表</a></li>
 					</ul>
 				</li>
 				
@@ -210,27 +199,22 @@
 
 				<div id="login-content">
 
-					<form action="SheetPeople.jsp">
+						<s:form action="SearchPp.action">
 
-						<p>
-							<label>工号</label> <input class="text-input" type="text" />
-						</p>
+							<p>
+								 <s:textfield name="staNo" label="工号"></s:textfield>
+								 <s:textfield name="startTime" label="起始时间(YYYY-MM-DD)"></s:textfield>
+								 <s:textfield name="endTime" label="截止时间(YYYY-MM-DD)"></s:textfield> 
+							</p>
 
-						<div class="clear"></div>
-
-					</form>
-					<div>
-						<input class="button" type="submit" value="确定"
-							onclick="window.open('SheetPeople1.jsp')" />
+							<div class="clear"></div>
+								
+						
+						 <s:submit value="submit"/>
+						</s:form>
 					</div>
-				</div>
 			</div>
 
-
-
-
-
-		</div>
 		<!-- End #main-content -->
 		<div id="footer">
 			<small> <!-- Remove this notice or replace it with whatever you want -->

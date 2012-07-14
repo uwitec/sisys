@@ -1,5 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<html>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
  <head>
 		
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -34,15 +37,7 @@
 		background-color:yellow;
 	}
 	</style>
-	
-	<SCRIPT type=text/javascript>
-		function tableExportor(id){ 
-			var forum = document.forms["tableExport"]; 
-			forum.title.value = document.getElementById('tableTitle').innerHTML;
-			forum.content.value=eval(id+".innerHTML"); 
-			forum.submit(); 
-		} 
-	</SCRIPT>
+		
 	</head>
   
 	<body><div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
@@ -61,63 +56,31 @@
 					
 					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
 						
-						<h2 style="text-align:center" id="tableTitle">部门产品生产进度汇总表</h2>
-						<form name="tableExport" action="tableExport.action" mwthod="POST">
-							<input type="hidden" name="title">
-							<input type="hidden" name="content">
-							<div align="center"><input  onclick=tableExportor('MainTable') class="button" type="button" value="导出"></div>
-						</form>
+						<h2 style="text-align:center">部门产品生产进度汇总表</h2>
 						<div align="center"><a class="button" href="SheetProduct1.html">查看不合格品统计</a><a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><a class="button" href="#">导出</a></div>
 						<br></br>
-						<table id="MainTable" border=1 cellpadding=0 cellspacing=0 class = "" style="font-size:15px;margin:0px auto;">
+						<table border=1 cellpadding=0 cellspacing=0 class = "" style="font-size:15px;margin:0px auto;">
 							<thead>
 								<tr>
 									<th colspan=3>日期</th>
-									<th rowspan=2 width="30px">21</th>
-								    <th rowspan=2 width="30px">22</th>
-									<th rowspan=2 width="30px">23</th>
-								    <th rowspan=2 width="30px">24</th>
-								    <th rowspan=2 width="30px">25</th>
-									<th rowspan=2 width="30px">26</th>
-									<th rowspan=2 width="30px">27</th>
-									<th rowspan=2 width="30px">28</th>
-									<th rowspan=2 width="30px">29</th>
-									<th rowspan=2 width="30px">30</th>
-									<th rowspan=2 width="30px">31</th>
-									<th rowspan=2 width="30px">1</th>
-								    <th rowspan=2 width="30px">2</th>
-								    <th rowspan=2 width="30px">3</th>
-								    <th rowspan=2 width="30px">4</th>
-								    <th rowspan=2 width="30px">5</th>
-									<th rowspan=2 width="30px">6</th>
-									<th rowspan=2 width="30px">7</th>
-									<th rowspan=2 width="30px">8</th>
-									<th rowspan=2 width="30px">9</th>
-									<th rowspan=2 width="30px">10</th>
-									<th rowspan=2 width="30px">11</th>
-								    <th rowspan=2 width="30px">12</th>
-								    <th rowspan=2 width="30px">13</th>
-								    <th rowspan=2 width="30px">14</th>
-								    <th rowspan=2 width="30px">15</th>
-									<th rowspan=2 width="30px">16</th>
-									<th rowspan=2 width="30px">17</th>
-									<th rowspan=2 width="30px">18</th>
-									<th rowspan=2 width="30px">19</th>
-									<th rowspan=2 width="30px">20</th>
+									<s:iterator value="Jdsheet">
+									<th><s:property value="Time" /></th>
+									</s:iterator>
 								</tr>
 								<tr>
-									<th width="100px">产品名称</th>
-									<th width="80px">产品编号</th>
-									<th width="80px">批次</th>
-								</tr>
-								
+									<th>产品名称</th>
+									<th>产品编号</th>
+									<th>批次</th>
+								</tr>																					
 							</thead>
 							<tbody style="font-size:14px">
 								<tr class="b20120502">
-									<td rowspan=2>B10曲轴链轮</td>
-									<td rowspan=2>1111702</td>
-									<td rowspan=2>20120502</td>
-									<td class="color21"></td>
+								<td rowspan=2><s:property value="proName" /></td>
+								<td rowspan=2><s:property value="proNo" /></td>
+								<td rowspan=2><s:property value="batchNo" /></td>
+								<s:iterator value="Jdsheet">				
+								<td><s:property value="num" /></td>	
+								</s:iterator>
 									<td class="color22">3000</td>
 									<td class="color23"></td>
 									<td class="color24"></td>

@@ -1,3 +1,5 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -12,34 +14,32 @@
   </head>
   
   <body>
-    <h2 align="center">产品废品统计表(时间:2012/06/02-2012/07/02)</h2>
+    <h2 align="center">产品废品统计表(时间:<s:property value="sTime" /></th>-<th><s:property value="eTime" /></th>)</h2>
 	<div align="center"><a class="button" href="#">导出</a></div>
 	<br></br>
 	<div align="center">
 		<table border="1" cellspacing="1" cellpadding="5">
 				<tr align="center">
-					<td width=25%>批次号</td>
-					<td width=25%>总数量</td>
-					<td width=25%>废品数量</td>
-					<td width=25%>废品率</td>
+					<th width=25%>批次号</th>
+					<th width=25%>总数量</th>
+					<th width=25%>废品数量</th>
+					<th width=25%>废品率</th>
 				</tr>
-				<tr align="center">
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr align="center">
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
+				
+				<s:iterator value="Pdsheet">
+				<tr align="center">				
+					<td><s:property value="batchNo"/></td>	
+					<td><s:property value="completeNum" /></td>	
+					<td><s:property value="disqNum"/></td>	
+					<td><s:property value="disqPercent"/></td>
+				</tr>	
+				</s:iterator>
+				
 				<tr align="center">
 					<td>合计</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
+					<td><s:property value="TcompleteNum"/></td>
+					<td><s:property value="TdisqNum"/></td>
+					<td><s:property value="TdisqPercent"/></td>
 				</tr>
 
 			</table>

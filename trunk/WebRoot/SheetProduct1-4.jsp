@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -10,27 +10,15 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     
     <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
-    <SCRIPT type=text/javascript>
-		function tableExportor(id){ 
-			var forum = document.forms["tableExport"]; 
-			forum.title.value = document.getElementById('tableTitle').innerHTML;
-			forum.content.value=eval(id+".innerHTML"); 
-			forum.submit(); 
-		} 
-	</SCRIPT>
 
   </head>
   
   <body>
-    <h2 align="center" id="tableTitle">部门废品统计表(时间:2012/06/02-2012/07/02)</h2>
-	<form name="tableExport" method="POST" action="tableExport.action">
-		<input type="hidden" name="title">
-		<input type="hidden" name="content">
-		<div align="center"><input  onclick=tableExportor('MainTable') class="button" type="button" value="导出"></div>
-	</form>
+    <h2 align="center"><s:property value="deptName"/>部门废品统计表(时间:<s:property value="sTime"/>到<s:property value="eTime"/>)</h2>
+	<div align="center"><a class="button" href="#">导出</a></div>
 	<br></br>
 	<div align="center">
-		<table border="1" cellspacing="1" cellpadding="5" id="MainTable">
+		<table border="1" cellspacing="1" cellpadding="5">
 				<tr align="center">
 					<th width=20%>产品名称</th>
 					<th width=20%>产品编码</th>
@@ -38,25 +26,20 @@
 					<th width=20%>废品数量</th>
 					<th width=20%>废品率</th>
 				</tr>
-				<tr align="center">
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr align="center">
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
+				<s:iterator value="Pd4sheet">
+				<tr align="center">				
+					<td><s:property value="proName"/></td>
+					<td><s:property value="proNo"/></td>	
+					<td><s:property value="completeNum" /></td>	
+					<td><s:property value="disqNum"/></td>	
+					<td><s:property value="disqPerc"/></td>
+				</tr>	
+				</s:iterator>
 				<tr align="center">
 					<td colspan=2>合计</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
+					<td><s:property value="TcompleteNum"/></td>
+					<td><s:property value="TdisqNum"/></td>
+					<td><s:property value="TdisqPercent"/></td>
 				</tr>
 
 			</table>
