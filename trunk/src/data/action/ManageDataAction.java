@@ -23,14 +23,16 @@ public class ManageDataAction extends BaseAction{
 		request.setCharacterEncoding("GBK");
 		title = request.getParameter("title");
 		content = request.getParameter("content");
+		
 		if(content.isEmpty()){
 			return ERROR;
 		}
 		
 		response.setContentType("application/ms-excel");
-		response.addHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode(title, "UTF-8") + ".xls");
+		response.addHeader("Content-Disposition", "attachment; filename=" + new String( title.getBytes("gb2312"), "ISO8859-1" ) + ".xls");
 		OutputStream os = response.getOutputStream();
 		manageDataService.tableExport(os, title, content);
+		System.out.println("end");
 		return null;
 	}
 	

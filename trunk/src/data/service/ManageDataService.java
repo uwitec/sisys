@@ -49,6 +49,8 @@ public class ManageDataService {
 	
 	//表格导出为excel文件
 	public void tableExport(OutputStream os,String title,String content) throws Exception{
+		System.out.println(title);
+		System.out.println(content);
 		WritableWorkbook book = Workbook.createWorkbook(os);
 		book.setProtected(true);
 		init();
@@ -67,7 +69,8 @@ public class ManageDataService {
 		sheet.addCell(label);
 		row += 2;
 		
-		for (TD td : listTD) { 
+		for (TD td : listTD) {
+			System.out.println(td);
 			if (td == null) { 
 				row++; 
 				col = 0; 
@@ -425,13 +428,19 @@ public class ManageDataService {
 		int number;
 		int flag = 0;
 		List<TD> list = new ArrayList<TD>();
+		if(content.indexOf("</TR>") >= 0){
+			content = content.replaceAll("TR", "tr");
+			content = content.replaceAll("TD", "td");
+			content = content.replaceAll("rowSpan", "rowspan");
+			content = content.replaceAll("colSpan", "colspan");
+		}
 		
-		String[] trs = content.split("</TR>");
+		String[] trs = content.split("</tr>");
 		for(String tr : trs){
 			number = 1;
-			String[] ss = tr.split("</TD>");
+			String[] ss = tr.split("</td>");
 			for(String s : ss){
-				begin = s.indexOf("<TD");
+				begin = s.indexOf("<td");
 				if(begin == -1){
 					continue;
 				}
@@ -440,7 +449,7 @@ public class ManageDataService {
 				index = s.indexOf(">");
 				TD td = new TD();
 				
-				begin = s.indexOf("rowSpan=");
+				begin = s.indexOf("rowspan=");
 				if(begin != -1){
 					end = s.indexOf(" ",begin);
 					if(end == -1){
@@ -451,7 +460,7 @@ public class ManageDataService {
 					td.rowspan = number;
 				}
 				
-				begin = s.indexOf("colSpan=");
+				begin = s.indexOf("colspan=");
 				if(begin != -1){
 					end = s.indexOf(" ",begin);
 					if(end == -1){

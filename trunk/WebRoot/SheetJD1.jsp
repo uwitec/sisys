@@ -1,8 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<html>
  <head>
 		
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -37,7 +34,16 @@
 		background-color:yellow;
 	}
 	</style>
-		
+	
+	<SCRIPT type=text/javascript>
+		function tableExportor(id){ 
+			alert("test");
+			var forum = document.forms["tableExport"]; 
+			forum.title.value = document.getElementById('tableTitle').innerHTML;
+			forum.content.value=eval(id+".innerHTML"); 
+			forum.submit(); 
+		} 
+	</SCRIPT>
 	</head>
   
 	<body><div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
@@ -56,10 +62,15 @@
 					
 					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
 						
-						<h2 style="text-align:center">部门产品生产进度汇总表</h2>
+						<h2 style="text-align:center" id="tableTitle">部门产品生产进度汇总表</h2>
+						<form name="tableExport" action="tableExport.action">
+							<input type="hidden" name="title">
+							<input type="hidden" name="content">
+							<div align="center"><input  onclick=tableExportor('MainTable') class="button" type="button" value="导出"></div>
+						</form>
 						<div align="center"><a class="button" href="SheetProduct1.html">查看不合格品统计</a><a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><a class="button" href="#">导出</a></div>
 						<br></br>
-						<table border=1 cellpadding=0 cellspacing=0 class = "" style="font-size:15px;margin:0px auto;">
+						<table id="MainTable" border=1 cellpadding=0 cellspacing=0 class = "" style="font-size:15px;margin:0px auto;">
 							<thead>
 								<tr>
 									<th colspan=3>日期</th>
