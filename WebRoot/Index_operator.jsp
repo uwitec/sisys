@@ -170,7 +170,7 @@
 								</tr><tr><%}else{
 								String par=tmp_od_No.get(i);
 								System.out.println(par);%>
-								<td><a target="_blank" href=SearchIndexJd?proNo=<%=par%>><%=tmp_od.get(i)%></a></td>
+								<td><a style="color:red" target="_blank" href=SearchIndexJd?proNo=<%=par%>><%=tmp_od.get(i)%></a></td>
 								<%}}
 								}else
 									out.println(resultMap.get("message_od"));
