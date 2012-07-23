@@ -59,7 +59,7 @@ public class WorkformAddAction {
 	private ProductList prol = new ProductList();
 	private WorkHoursTabList whtl = new WorkHoursTabList();
 	
-	DecimalFormat df = new DecimalFormat("0.00");
+	DecimalFormat doublef = new DecimalFormat("0.00");
 
 	private List<DisqDetail> disqdetaillist = new ArrayList<DisqDetail>();
 	private int DisqNum;
@@ -151,14 +151,14 @@ public class WorkformAddAction {
 		//计算批次的不合格情况和不合格百分比
 		bat.setDisqNum(DisqNum + bat.getDisqNum());
 		if (bat.getCompleteNum() != 0 || bat.getDisqNum() != 0) {
-			bat.setDisqPercent(Double.parseDouble(df.format((double) bat.getDisqNum()
+			bat.setDisqPercent(Double.parseDouble(doublef.format((double) bat.getDisqNum()
 					/ ((double) bat.getCompleteNum() + (double) bat
 							.getDisqNum()))));
 		}
 		//计算产品的不合格情况和不合格百分比
 		product.setDisqNum(product.getDisqNum() + DisqNum);
 		if (product.getCompleteNum() != 0 || product.getDisqNum() != 0) {
-			product.setDisqPerc(Double.parseDouble(df.format((double) product.getDisqNum()
+			product.setDisqPerc(Double.parseDouble(doublef.format((double) product.getDisqNum()
 					/ ((double) product.getCompleteNum() + (double) product
 							.getDisqNum()))));
 		}
@@ -218,8 +218,8 @@ public class WorkformAddAction {
 		workhour.setStaId(wf.getStaId());
 		workhour.setTime(new Date());
 		//工时和工费的计算
-		workhour.setWorkHours(Double.parseDouble(df.format((double) wf.getQuaNum() * 8.0 / (double) pn)));
-		workhour.setSalary(Double.parseDouble(df.format(workhour.getWorkHours() * salary)));
+		workhour.setWorkHours(Double.parseDouble(doublef.format((double) wf.getQuaNum() * 8.0 / (double) pn)));
+		workhour.setSalary(Double.parseDouble(doublef.format(workhour.getWorkHours() * salary)));
 		if(workhour.getWorkHours() < 0) {
 			workhour.setWorkHours(0);
 		} 
