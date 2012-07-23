@@ -1,5 +1,6 @@
 package data.service;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 
 import java.text.ParseException;
@@ -87,7 +88,7 @@ public class SearchWhService {
 					for(int k=0;k<list.size();k++){
 						System.out.println(list.get(k).getStaId());
 						for(int j=k+1;j<list.size();j++){
-							if(list.get(j).getTime()==list.get(k).getTime()){
+							if(list.get(j).getTime().compareTo(list.get(k).getTime()) == 0){
 								list.get(k).setWorkHours(list.get(k).getWorkHours()+list.get(j).getWorkHours());
 								list.get(k).setSalary(list.get(k).getSalary()+list.get(j).getSalary());
 								list.remove(j);
@@ -123,6 +124,9 @@ public class SearchWhService {
 		List<Map<String,Object>> listMap = (List<Map<String,Object>>) mapWh.get("listMap");
 		List<String> dateNo = new ArrayList<String>();
 		
+		Double workHours = 0.0;
+		Double salary = 0.0;
+		
 		Calendar startTime = Calendar.getInstance();
 		Calendar endTime = Calendar.getInstance();
 		System.out.println(mapWh.get("starttime"));
@@ -139,16 +143,24 @@ public class SearchWhService {
 		for(int i = 0;i < listMap.size();i++){
 			List<WorkHoursTab> list = (List<WorkHoursTab>)listMap.get(i).get("list");
 			Map<String,WorkHoursTab> map = new HashMap<String,WorkHoursTab>();
+			Map<String,Double> totalMap = new HashMap<String,Double>();
+			workHours = 0.00;
+			salary = 0.00;
 			for(int j = 0;j < list.size();j++){
 				WorkHoursTab wh = list.get(j);
 				curTime.setTime(wh.getTime());
 				String day = curTime.getTime().getMonth()+1 + "-" + curTime.getTime().getDate();
 				//根据当前对应时间段编号存储wh信息
 				map.put(day, wh);
+				workHours += wh.getWorkHours();
+				salary += wh.getSalary();
 			}
 			list.clear();
+			totalMap.put("workHours", new BigDecimal(workHours).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue());
+			totalMap.put("salary", new BigDecimal(salary).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue());
 			
 			listMap.get(i).put("whMap", map);
+			listMap.get(i).put("totalMap", totalMap);
 		}
 		
 		mapWh.put("dateNo", dateNo);
@@ -164,7 +176,7 @@ public class SearchWhService {
 		String staName =new String();
 		Map<String,Object> map = new HashMap<String, Object>();
 		map=s.Search("5","2012-07-01","2012-07-19");
-//		map = s.ShowWh(map);
+		map = s.ShowWh(map);
 		System.out.println(map);
 		
 //		list=(List<WorkHoursTab>) map.get("list");

@@ -49,6 +49,7 @@
 					<%for(String t : dateNo){ %>
 						<th rowspan=2 width="30px"><%=t %></th>
 					<%} %>
+					<th rowspan=2 width="30px">合计</th>
 				</tr>
 				<tr>
 					<th>姓名</th>
@@ -57,6 +58,7 @@
 				</tr>
 				<%for(int i = 0;i < listMap.size();i++){
 					Map whMap = (Map)(listMap.get(i).get("whMap"));
+					Map totalMap = (Map)(listMap.get(i).get("totalMap"));
 				 %>
 				<tr align="center">
 				
@@ -73,6 +75,7 @@
 							<%}else{%>
 							<td>&nbsp</td>
 					<%}}} %>
+					<td><%=totalMap.get("workHours") %></td>
 					</tr>
 					<tr align="center">
 						<td>报酬(元)</td>
@@ -86,6 +89,7 @@
 							<%}else{%>
 							<td>&nbsp</td>
 					<%}}} %>
+					<td><%=totalMap.get("salary") %></td>
 					</tr>
 					
 				<%} %>
