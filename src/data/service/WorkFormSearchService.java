@@ -94,7 +94,7 @@ public class WorkFormSearchService {
 		 */
 		request.setAttribute("form", wfs);
 		// request.setAttribute("page", page);
-	
+
 		User user = (User) session.get("user");
 		switch (user.getLevel()) {
 		case 1:
@@ -176,19 +176,33 @@ public class WorkFormSearchService {
 			 */
 			wfslist = Conditionsearch(staffNo, proNo, batchNo);
 
-			request.setAttribute("form", wfslist);
-
 			User user = (User) session.get("user");
-			switch (user.getLevel()) {
-			case 1:
-				result = "viewer";
-				break;
-			case 2:
-				result = "operator";
-				break;
-			case 3:
-				result = "admin";
-				break;
+			if (wfslist != null) {
+				request.setAttribute("form", wfslist);
+
+				switch (user.getLevel()) {
+				case 1:
+					result = "viewer";
+					break;
+				case 2:
+					result = "operator";
+					break;
+				case 3:
+					result = "admin";
+					break;
+				}
+			} else {
+				switch (user.getLevel()) {
+				case 1:
+					result = "inputerrorviewer";
+					break;
+				case 2:
+					result = "inputerroroperator";
+					break;
+				case 3:
+					result = "inputerroradmin";
+					break;
+				}
 			}
 		}
 		return result;
