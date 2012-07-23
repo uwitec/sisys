@@ -63,7 +63,7 @@ public class WorkFormAlterAction {
 	private ProcessesList pl = new ProcessesList();
 	private ProductList prol = new ProductList();
 	private WorkHoursTabList whtl = new WorkHoursTabList();
-	
+
 	DecimalFormat df = new DecimalFormat("0.00");
 
 	private List<DisqDetail> disqdetaillist = new ArrayList<DisqDetail>();
@@ -172,7 +172,7 @@ public class WorkFormAlterAction {
 						whtdao = new WorkHoursTabDAO();
 						whtdao.create(workhour);
 						if (worksave.getDisDetail() != null
-								|| worksave.getDisDetail().equals("")) {
+								&& !worksave.getDisDetail().equals(":")) {
 							DailyStaffDisqDAO dsdd = new DailyStaffDisqDAO();
 							dsdd.delete(ddsave);
 						}
@@ -195,8 +195,9 @@ public class WorkFormAlterAction {
 							ddd = new DisqDetailDAO();
 							ddd.create(disqdetaillist.get(i));
 						}
+						System.out.println(work.getDisDetail());
 						if (work.getDisDetail() != null
-								|| work.getDisDetail().equals("")) {
+								&& !work.getDisDetail().equals(":")) {
 							DailyStaffDisqDAO dsdd = new DailyStaffDisqDAO();
 							dsdd.create(dd);
 						}
@@ -214,20 +215,25 @@ public class WorkFormAlterAction {
 	public String deletedisq(WorkForm wf) {
 		String sql;
 
-		if (wf.getDisDetail() == null || wf.getDisDetail().equals(":")) {
-			DisqNumsave = 0;
+		int procid = wf.getProcId();
+		sql = "select * from processes where Id=" + procid;
+		List<Processes> proclist = pl.createSQL(sql);
+		double wh = Double.parseDouble(df.format((double) wf.getQuaNum() * 8.0 / (double) proclist.get(0).getUnitOutput()));
+		double money = Double.parseDouble(df.format(wh * proclist.get(0).getUnitCost()));
+		sql = "select * from workhourstab where staId=" + wf.getStaId()
+				+ " and time='" + wf.getTime() + "' and workHours=" + wh + " and salary=" + money;
+		List<WorkHoursTab> whtlist = whtl.createSQL(sql);
+		whtl.getGenericTemplate().close();
+		if (whtlist.size() == 0) {
+			return "error";
 		} else {
+			workhoursave = whtlist.get(0);
 
-			String[] unq = wf.getDisDetail().split(":");
-			String[] str = unq[0].split("-");
-			sql = "select * from workhourstab where staId=" + wf.getStaId()
-					+ " and time='" + wf.getTime() + "'";
-			List<WorkHoursTab> whtlist = whtl.createSQL(sql);
-			whtl.getGenericTemplate().close();
-			if (whtlist.size() == 0) {
-				return "error";
+			if (wf.getDisDetail() == null || wf.getDisDetail().equals(":")) {
+				DisqNumsave = 0;
 			} else {
-				workhoursave = whtlist.get(0);
+				String[] unq = wf.getDisDetail().split(":");
+				String[] str = unq[0].split("-");
 				sql = "select * from DailyStaffDisq where staffId="
 						+ wf.getStaId() + " and time='" + wf.getTime() + "'";
 				List<DailyStaffDisq> dsdlist = dsdl.createSQL(sql);
@@ -319,14 +325,16 @@ public class WorkFormAlterAction {
 
 		bat.setDisqNum(bat.getDisqNum() - DisqNumsave);
 		if (bat.getCompleteNum() != 0 || bat.getDisqNum() != 0) {
-			bat.setDisqPercent(Double.parseDouble(df.format((double) bat.getDisqNum()
+			bat.setDisqPercent(Double.parseDouble(df.format((double) bat
+					.getDisqNum()
 					/ ((double) bat.getCompleteNum() + (double) bat
 							.getDisqNum()))));
 		}
 
 		product.setDisqNum(product.getDisqNum() - DisqNumsave);
 		if (product.getCompleteNum() != 0 || product.getDisqNum() != 0) {
-			product.setDisqPerc(Double.parseDouble(df.format((double) product.getDisqNum()
+			product.setDisqPerc(Double.parseDouble(df.format((double) product
+					.getDisqNum()
 					/ ((double) product.getCompleteNum() + (double) product
 							.getDisqNum()))));
 		}
@@ -365,8 +373,10 @@ public class WorkFormAlterAction {
 		}
 		workhour.setStaId(wf.getStaId());
 		workhour.setTime(wf.getTime());
-		workhour.setWorkHours(Double.parseDouble(df.format((double) wf.getQuaNum() * 8.0 / (double) pn)));
-		workhour.setSalary(Double.parseDouble(df.format(workhour.getWorkHours() * salary)));
+		workhour.setWorkHours(Double.parseDouble(df.format((double) wf
+				.getQuaNum() * 8.0 / (double) pn)));
+		workhour.setSalary(Double.parseDouble(df.format(workhour.getWorkHours()
+				* salary)));
 		if (wf.getDisDetail() == null || wf.getDisDetail().equals(":")) {
 			DisqNum = 0;
 		} else {
@@ -479,13 +489,13 @@ public class WorkFormAlterAction {
 					return "outofline";
 				}
 				// 如果所修改工序是同一批次原工序的后一个工序，则判断是否超出范围
-				/*System.out.println(i != 0
-						&& wtab.getId() == wtabnow.getId() - 1);
-				System.out.println(bat.getBatchNo().equals(
-						batchnow.getBatchNo()));
-				System.out
-						.println(wtabnow.getQuNum() + wtabnow.getDisqNum() > wtlist
-								.get(i - 1).getQuNum() - wtab.getQuNum());*/
+				/*
+				 * System.out.println(i != 0 && wtab.getId() == wtabnow.getId()
+				 * - 1); System.out.println(bat.getBatchNo().equals(
+				 * batchnow.getBatchNo())); System.out
+				 * .println(wtabnow.getQuNum() + wtabnow.getDisqNum() > wtlist
+				 * .get(i - 1).getQuNum() - wtab.getQuNum());
+				 */
 				if (i != 0 && wtab.getId() == wtabnow.getId() - 1
 						&& bat.getBatchNo().equals(batchnow.getBatchNo())) {
 					if (wtabnow.getQuNum() + wtabnow.getDisqNum() > wtlist.get(
@@ -593,17 +603,19 @@ public class WorkFormAlterAction {
 
 		batchnow.setDisqNum(batchnow.getDisqNum() + DisqNum);
 		if (batchnow.getCompleteNum() != 0 || batchnow.getDisqNum() != 0) {
-			batchnow.setDisqPercent(Double.parseDouble(df.format((double) batchnow.getDisqNum()
-					/ ((double) batchnow.getCompleteNum() + (double) batchnow
-							.getDisqNum()))));
+			batchnow.setDisqPercent(Double.parseDouble(df
+					.format((double) batchnow.getDisqNum()
+							/ ((double) batchnow.getCompleteNum() + (double) batchnow
+									.getDisqNum()))));
 		}
 
 		productnow.setDisqNum(productnow.getDisqNum() + DisqNum);
 		if (productnow.getCompleteNum() != 0 || productnow.getDisqNum() != 0) {
 			productnow
-					.setDisqPerc(Double.parseDouble(df.format((double) productnow.getDisqNum()
-							/ ((double) productnow.getCompleteNum() + (double) productnow
-									.getDisqNum()))));
+					.setDisqPerc(Double.parseDouble(df
+							.format((double) productnow.getDisqNum()
+									/ ((double) productnow.getCompleteNum() + (double) productnow
+											.getDisqNum()))));
 		}
 
 		return "success";
