@@ -1,5 +1,6 @@
 package data.action;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -57,6 +58,8 @@ public class WorkformAddAction {
 	private DisqDetailList ddl = new DisqDetailList();
 	private ProductList prol = new ProductList();
 	private WorkHoursTabList whtl = new WorkHoursTabList();
+	
+	DecimalFormat df = new DecimalFormat("0.00");
 
 	private List<DisqDetail> disqdetaillist = new ArrayList<DisqDetail>();
 	private int DisqNum;
@@ -148,16 +151,16 @@ public class WorkformAddAction {
 		//计算批次的不合格情况和不合格百分比
 		bat.setDisqNum(DisqNum + bat.getDisqNum());
 		if (bat.getCompleteNum() != 0 || bat.getDisqNum() != 0) {
-			bat.setDisqPercent((double) bat.getDisqNum()
+			bat.setDisqPercent(Double.parseDouble(df.format((double) bat.getDisqNum()
 					/ ((double) bat.getCompleteNum() + (double) bat
-							.getDisqNum()));
+							.getDisqNum()))));
 		}
 		//计算产品的不合格情况和不合格百分比
 		product.setDisqNum(product.getDisqNum() + DisqNum);
 		if (product.getCompleteNum() != 0 || product.getDisqNum() != 0) {
-			product.setDisqPerc((double) product.getDisqNum()
+			product.setDisqPerc(Double.parseDouble(df.format((double) product.getDisqNum()
 					/ ((double) product.getCompleteNum() + (double) product
-							.getDisqNum()));
+							.getDisqNum()))));
 		}
 		work.setWorkHours(workhour.getWorkHours());
 		//error
@@ -215,8 +218,8 @@ public class WorkformAddAction {
 		workhour.setStaId(wf.getStaId());
 		workhour.setTime(new Date());
 		//工时和工费的计算
-		workhour.setWorkHours((double) wf.getQuaNum() * 8.0 / (double) pn);
-		workhour.setSalary(workhour.getWorkHours() * salary);
+		workhour.setWorkHours(Double.parseDouble(df.format((double) wf.getQuaNum() * 8.0 / (double) pn)));
+		workhour.setSalary(Double.parseDouble(df.format(workhour.getWorkHours() * salary)));
 		if(workhour.getWorkHours() < 0) {
 			workhour.setWorkHours(0);
 		} 
