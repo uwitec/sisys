@@ -238,6 +238,7 @@ public class WorkFormAlterAction {
 					 * List<DisqKind> dklist = dkl.createSQL(sql); if
 					 * (dklist.size() == 0) { return "error"; }
 					 */
+					ddl = new DisqDetailList();
 					sql = "select * from disqdetail where Id=" + nid;
 					List<DisqDetail> dislist = ddl.createSQL(sql);
 					ddl.getGenericTemplate().close();
@@ -360,7 +361,7 @@ public class WorkFormAlterAction {
 			workhour.setId(1);
 		}
 		workhour.setStaId(wf.getStaId());
-		workhour.setTime(new Date());
+		workhour.setTime(wf.getTime());
 		workhour.setWorkHours((double) wf.getQuaNum() * 8.0 / (double) pn);
 		workhour.setSalary(workhour.getWorkHours() * salary);
 		if (wf.getDisDetail() == null || wf.getDisDetail().equals(":")) {
@@ -381,6 +382,7 @@ public class WorkFormAlterAction {
 
 			for (int i = 0; i < str.length; i++) {
 				sql = "select * from disqKind where Id =" + str[i];
+				dkl = new DisqKindList();
 				List<DisqKind> dklist = dkl.createSQL(sql);
 				dkl.getGenericTemplate().close();
 				if (dklist.size() == 0) {
@@ -471,25 +473,33 @@ public class WorkFormAlterAction {
 				if (i != 0
 						&& wtabnow.getQuNum() + wtabnow.getDisqNum() > wtlist
 								.get(i - 1).getQuNum()) {
-					/*
-					 * System.out.println("wtab的不合格品：" + wtab.getDisqNum());
-					 * System.out.println("wtab的合格品：" + wtab.getQuNum());
-					 * System.out.println("修改后工单的合格品：" + wf.getQuaNum());
-					 * System.out.println("wtabnow的不合格品：" +
-					 * wtabnow.getDisqNum()); System.out.println("wtabnow的合格品："
-					 * + wtabnow.getQuNum()); System.out.println("前工序的合格品数量：" +
-					 * wtlist.get(i-1).getQuNum());
-					 * System.out.println("现在的不合格品：" + DisqNum);
-					 * System.out.println("原来的不合格品：" + DisqNumsave);
-					 */
 					return "outofline";
 				}
 				// 如果所修改工序是同一批次原工序的后一个工序，则判断是否超出范围
+				/*System.out.println(i != 0
+						&& wtab.getId() == wtabnow.getId() - 1);
+				System.out.println(bat.getBatchNo().equals(
+						batchnow.getBatchNo()));
+				System.out
+						.println(wtabnow.getQuNum() + wtabnow.getDisqNum() > wtlist
+								.get(i - 1).getQuNum() - wtab.getQuNum());*/
 				if (i != 0 && wtab.getId() == wtabnow.getId() - 1
 						&& bat.getBatchNo().equals(batchnow.getBatchNo())) {
 					if (wtabnow.getQuNum() + wtabnow.getDisqNum() > wtlist.get(
 							i - 1).getQuNum()
-							- wtab.getQuNum()) {
+							- worksave.getQuaNum()) {
+
+						System.out.println("wtab的不合格品：" + wtab.getDisqNum());
+						System.out.println("wtab的合格品：" + wtab.getQuNum());
+						System.out.println("修改后工单的合格品：" + wf.getQuaNum());
+						System.out.println("wtabnow的不合格品："
+								+ wtabnow.getDisqNum());
+						System.out.println("wtabnow的合格品：" + wtabnow.getQuNum());
+						System.out.println("前工序的合格品数量："
+								+ wtlist.get(i - 1).getQuNum());
+						System.out.println("现在的不合格品：" + DisqNum);
+						System.out.println("原来的不合格品：" + DisqNumsave);
+
 						System.out.println("我的错3");
 						return "outofline";
 					}
