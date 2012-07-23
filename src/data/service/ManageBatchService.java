@@ -101,11 +101,20 @@ public class ManageBatchService {
 		if("".equals(batch.getBatchNo()) || "".equals(batch.getTotalNum()) || "".equals(product.getProNo())){
 			return "isnull";
 		}
+		Product p = (Product) session.get("product");
+		//判断产品是否存在
+		ProductDAO pdao = new ProductDAO();
+		Map<String, Object> equalsMap = new HashMap<String, Object>();
+		equalsMap.put("proNo", product.getProNo());
+		List<Product> pList = pdao.findEntity(equalsMap);
+		//若产品不存在，返回none
+		if(pList.size() == 0) {
+			return "pnone";
+		}
 	
 		//判断批次是否已经存在
 		BatchDAO bdao = new BatchDAO();
-		Product p = (Product) session.get("product");
-		Map<String, String> equalsMap = new HashMap<String, String>();
+		equalsMap.clear();
 		equalsMap.put("batchNo", batch.getBatchNo());
 		equalsMap.put("proId", String.valueOf(p.getId()));
 		List<Batch> blist = bdao.findEntity(equalsMap);

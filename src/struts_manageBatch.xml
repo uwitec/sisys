@@ -28,6 +28,7 @@
 		<action name="addBatch" class="data.action.ManageBatchAction" method="addBatch">
 			<result name="repetition">/BatchAdd_${level}.jsp?result=repetition&amp;current=batchAdd</result>
 			<result name="false">/BatchAdd_${level}.jsp?result=false&amp;current=batchAdd</result>
+			<result name="pnone">/BatchAdd_${level}.jsp?result=pnone&amp;current=batchAdd</result>
 			<result name="isnull">/BatchAdd_${level}.jsp?result=isnull&amp;current=batchAdd</result>
 			<result name="success">/BatchAdd_${level}.jsp?result=success&amp;current=batchAdd</result>
 		</action>
