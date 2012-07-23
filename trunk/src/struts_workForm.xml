@@ -66,8 +66,8 @@
 		</action>
 		<action name="formAlter" class="data.action.WorkFormEditAction" method="formalter">
 			<result name="success">/FormDetail_admin.jsp?result=successAlter&amp;current=workForm</result>
-			<result name="outofline">/FormDetail_admin.jsp?result=outofline&amp;current=workForm</result>
-			<result name="error">/FormDetail_admin.jsp?result=errorAlter&amp;current=workForm</result>
+			<result name="outofline">/FormDetail_admin.jsp?result=outoflineAlter&amp;current=workForm</result>
+			<result name="error">/FormDetail_admin.jsp?result=error&amp;current=workForm</result>
 			<result name="isdelete">/FormDetail_admin.jsp?result=isdelete&amp;current=workForm</result>
 		</action>
 		

@@ -8,13 +8,15 @@
 <%	
 	String error = request.getParameter("result");
 	if(error == null) {
-		error = "1";
+		error = "";
 	}  else if(error.equals("isdelete")) {
-		error = "记录已删除，不能再次修改或删除！";
+		error = "该工单已删除，不能进行以上操作！";
 	} else if(error.equals("error")) {
-		error = "操作失败！";
+		error = "操作失败，请检查后重试！";
 	} else if(error.equals("outofline")) {
-		error = "若修改或删除，则后工序产品数大于前工序产品数，请检查后重试！";
+		error = "删除工单后，则后工序产品数大于前工序产品数，请检查后重试！";
+	} else if(error.equals("outoflineAlter")) {
+		error = "修改工单后，则后工序产品数大于前工序产品数，请检查后重试！";
 	} else if(error.equals("successAlter")) {
 		error = "修改成功！";
 	} else if(error.equals("success")) {
