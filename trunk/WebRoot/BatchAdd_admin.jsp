@@ -27,6 +27,8 @@
 		error = "该批次已存在！";
 	}  else if(error.equals("isnull")) {
 		error = "输入不能为空！";
+	}  else if(error.equals("pnone")) {
+		error = "该产品不存在！";
 	}
 %>
 
