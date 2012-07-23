@@ -15,6 +15,10 @@
 		error = "修改失败！";
 	} else if(error.equals("empty")) {
 		error = "输入不能为空！";
+	} else if(error.equals("inputerror")) {
+		error = "输入错误，请检查后重新输入！";
+	} else if(error.equals("error")) {
+		error = "输入不能为空！";
 	}
 	
 	User user = (User)session.getAttribute("user"); 

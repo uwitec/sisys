@@ -132,9 +132,12 @@
 		
 		
 		<action name="searchByBatch" class="data.action.WorkFormSearchAction" method="searchByBatch">
-			<result name="errorviewer">/searchByBatch_viewer.jsp?current=workForm</result>
-			<result name="erroroperator">/searchByBatch_operator.jsp?current=workForm</result>
-			<result name="erroradmin">/searchByBatch_admin.jsp?current=workForm</result>
+			<result name="errorviewer">/searchByBatch_viewer.jsp?result=error&amp;current=workForm</result>
+			<result name="erroroperator">/searchByBatch_operator.jsp?result=error&amp;current=workForm</result>
+			<result name="erroradmin">/searchByBatch_admin.jsp?result=error&amp;current=workForm</result>
+			<result name="inputerrorviewer">/searchByBatch_viewer.jsp?result=inputerror&amp;current=workForm</result>
+			<result name="inputerroroperator">/searchByBatch_operator.jsp?result=inputerror&amp;current=workForm</result>
+			<result name="inputerroradmin">/searchByBatch_admin.jsp?result=inputerror&amp;current=workForm</result>
 			<result name="viewer">/FormSearch_viewer.jsp?current=workForm</result>
 			<result name="operator">/FormSearch_operator.jsp?current=workForm</result>
 			<result name="admin">/FormSearch_admin.jsp?current=workForm</result>
