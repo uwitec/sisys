@@ -23,6 +23,10 @@
 		error = "添加成功！";
 	}  else if(error.equals("false")) {
 		error = "添加失败！";
+	}  else if(error.equals("repetition")) {
+		error = "该批次已存在！";
+	}  else if(error.equals("isnull")) {
+		error = "输入不能为空！";
 	}
 %>
 

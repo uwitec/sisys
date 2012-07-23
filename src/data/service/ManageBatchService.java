@@ -97,9 +97,24 @@ public class ManageBatchService {
 	
 	//批次添加
 	public String addBatch(Product product, Batch batch, String fpath) {
+		//判断输入是否完整
+		if("".equals(batch.getBatchNo()) || "".equals(batch.getTotalNum()) || "".equals(product.getProNo())){
+			return "isnull";
+		}
 	
+		//判断批次是否已经存在
+		BatchDAO bdao = new BatchDAO();
+		Product p = (Product) session.get("product");
+		Map<String, String> equalsMap = new HashMap<String, String>();
+		equalsMap.put("batchNo", batch.getBatchNo());
+		equalsMap.put("proId", String.valueOf(p.getId()));
+		List<Batch> blist = bdao.findEntity(equalsMap);
+		if( blist.size() != 0){
+			return "repetition";
+		}
+		//批次不存在，新建批次
 		Calendar startTime = Calendar.getInstance();
-	    Product p = (Product) session.get("product");
+	    //Product p = (Product) session.get("product");
 	    System.out.println(p);
 	    batch.setIsDelete(0);
 	    batch.setDeleteTime(null);
@@ -109,7 +124,8 @@ public class ManageBatchService {
 		batch.setEndTime(startTime.getTime());
 		//找到对应的流程	
 		FlowpathDAO fdao = new FlowpathDAO();
-		Map<String, String> equalsMap = new HashMap<String, String>();
+		//Map<String, String> equalsMap = new HashMap<String, String>();
+		equalsMap.clear();
 		equalsMap.put("sequence", fpath);
 		List<Flowpath> fList = fdao.findEntity(equalsMap);
 		batch.setFlowId(fList.get(0).getId());
@@ -147,7 +163,7 @@ public class ManageBatchService {
 			}
 		}
 		batch.setStatus(0);
-		BatchDAO bdao = new BatchDAO();
+		bdao = new BatchDAO();
 		num = bdao.create(batch);
 		if(num == 0) {
 			return "false";
