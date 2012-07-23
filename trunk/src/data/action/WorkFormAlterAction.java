@@ -1,5 +1,6 @@
 package data.action;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 import data.bean.Batch;
@@ -62,6 +63,8 @@ public class WorkFormAlterAction {
 	private ProcessesList pl = new ProcessesList();
 	private ProductList prol = new ProductList();
 	private WorkHoursTabList whtl = new WorkHoursTabList();
+	
+	DecimalFormat df = new DecimalFormat("0.00");
 
 	private List<DisqDetail> disqdetaillist = new ArrayList<DisqDetail>();
 	private List<DisqDetail> disqdetaillistsave = new ArrayList<DisqDetail>();
@@ -316,16 +319,16 @@ public class WorkFormAlterAction {
 
 		bat.setDisqNum(bat.getDisqNum() - DisqNumsave);
 		if (bat.getCompleteNum() != 0 || bat.getDisqNum() != 0) {
-			bat.setDisqPercent((double) bat.getDisqNum()
+			bat.setDisqPercent(Double.parseDouble(df.format((double) bat.getDisqNum()
 					/ ((double) bat.getCompleteNum() + (double) bat
-							.getDisqNum()));
+							.getDisqNum()))));
 		}
 
 		product.setDisqNum(product.getDisqNum() - DisqNumsave);
 		if (product.getCompleteNum() != 0 || product.getDisqNum() != 0) {
-			product.setDisqPerc((double) product.getDisqNum()
+			product.setDisqPerc(Double.parseDouble(df.format((double) product.getDisqNum()
 					/ ((double) product.getCompleteNum() + (double) product
-							.getDisqNum()));
+							.getDisqNum()))));
 		}
 
 		/*
@@ -362,8 +365,8 @@ public class WorkFormAlterAction {
 		}
 		workhour.setStaId(wf.getStaId());
 		workhour.setTime(wf.getTime());
-		workhour.setWorkHours((double) wf.getQuaNum() * 8.0 / (double) pn);
-		workhour.setSalary(workhour.getWorkHours() * salary);
+		workhour.setWorkHours(Double.parseDouble(df.format((double) wf.getQuaNum() * 8.0 / (double) pn)));
+		workhour.setSalary(Double.parseDouble(df.format(workhour.getWorkHours() * salary)));
 		if (wf.getDisDetail() == null || wf.getDisDetail().equals(":")) {
 			DisqNum = 0;
 		} else {
@@ -590,17 +593,17 @@ public class WorkFormAlterAction {
 
 		batchnow.setDisqNum(batchnow.getDisqNum() + DisqNum);
 		if (batchnow.getCompleteNum() != 0 || batchnow.getDisqNum() != 0) {
-			batchnow.setDisqPercent((double) batchnow.getDisqNum()
+			batchnow.setDisqPercent(Double.parseDouble(df.format((double) batchnow.getDisqNum()
 					/ ((double) batchnow.getCompleteNum() + (double) batchnow
-							.getDisqNum()));
+							.getDisqNum()))));
 		}
 
 		productnow.setDisqNum(productnow.getDisqNum() + DisqNum);
 		if (productnow.getCompleteNum() != 0 || productnow.getDisqNum() != 0) {
 			productnow
-					.setDisqPerc((double) productnow.getDisqNum()
+					.setDisqPerc(Double.parseDouble(df.format((double) productnow.getDisqNum()
 							/ ((double) productnow.getCompleteNum() + (double) productnow
-									.getDisqNum()));
+									.getDisqNum()))));
 		}
 
 		return "success";
