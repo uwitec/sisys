@@ -23,7 +23,7 @@
   </head>
   
   <body>
-    <h2 align="center" id="tableTitle"><s:property value="lineDesc"/>废品统计表(时间:<s:property value="sTime"/>到<s:property value="eTime"/>)</h2>
+    <h2 align="center" id="tableTitle"><s:property value="lineDesc"/>(<s:property value="lineNo"/>)废品统计表(时间:<s:property value="sTime"/>到<s:property value="eTime"/>)</h2>
 	<form name="tableExport" method="POST" action="tableExport.action">
 		<input type="hidden" name="title">
 		<input type="hidden" name="content">
