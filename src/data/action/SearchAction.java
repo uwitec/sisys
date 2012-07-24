@@ -304,6 +304,7 @@ public class SearchAction extends BaseAction {
 			ActionContext.getContext().put("lineDesc", mapPd5.get("lineDesc"));
 			ActionContext.getContext().put("sTime", startTime);
 			ActionContext.getContext().put("eTime", endTime);
+			ActionContext.getContext().put("lineNo", lineNo);
 			ActionContext.getContext().put("TcompleteNum",
 					mapPd5.get("completeNum").toString());
 			ActionContext.getContext().put("TdisqNum",

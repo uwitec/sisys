@@ -40,6 +40,7 @@ public class SearchPd2Service {
 		List<Product> product = new ArrayList<Product>();
 		Map<String, String> equalsmap = new HashMap<String, String>();
 		equalsmap.put("proNo", proNo);
+		equalsmap.put("isDelete", "0");
 		product=productDAO.findEntity(equalsmap);
 		if(product.size() == 0){
 			map.put("result", "error");
@@ -57,8 +58,9 @@ public class SearchPd2Service {
 		Map<String, Object> equalsmap1 = new HashMap<String, Object>();
 		equalsmap1.put("batchNo", batchNo);
 		equalsmap1.put("proId", proId);
+		equalsmap1.put("isDelete", 0);
 		batch=batchDAO.findEntity(equalsmap1);
-		if(product.size() == 0){
+		if(batch.size() == 0){
 			map.put("result", "error");
 			map.put("message", "批次编号不存在！请重新输入！");
 			return map;
@@ -70,7 +72,13 @@ public class SearchPd2Service {
 		List<Flowpath> flowpath = new ArrayList<Flowpath>();
 		Map<String, Object> equalsmap2 = new HashMap<String, Object>();
 		equalsmap2.put("Id", flowId);
+		equalsmap2.put("isDelete", 0);
 		flowpath=flowpathDAO.findEntity(equalsmap2);
+		if(flowpath.size() == 0){
+			map.put("result", "error");
+			map.put("message", "流程编号不存在！请重新输入！");
+			return map;
+		}
 		System.out.println(flowpath.size());
 		
 //取出次产品流程中包含的所有工序
@@ -85,19 +93,29 @@ public class SearchPd2Service {
 			List<Processes> processes = new ArrayList<Processes>();
 			Map<String, Object> equalsmap3 = new HashMap<String, Object>();
 			equalsmap3.put("Id", temp);
+			equalsmap3.put("isDelete", 0);
 			processes=processesDAO.findEntity(equalsmap3);
-			
+			if(processes.size() == 0){
+				map.put("result", "error");
+				map.put("message", "工序编号不存在！请重新输入！");
+				return map;
+			}
 			
 			//查询工作表得到不合格数量
 			WorkTabDAO workTabDAO=new WorkTabDAO();
 			List<WorkTab> workTab = new ArrayList<WorkTab>();
 			sql="select * from worktab where procId='"+temp+"' and overtime between '"+starttime+"' and '"+endtime+"'";
 			workTab=workTabDAO.findEntityByList(sql);
-			if(workTab.size()>0){
+			if(workTab.size() == 0){
+				map.put("result", "error");
+				map.put("message", "工序编号不存在！请重新输入！");
+				return map;
+			}
+			else{
 				DisqBatch tempDB=new DisqBatch();
 				tempDB.procNo=processes.get(0).getProcNo();
 				tempDB.procName=processes.get(0).getProcName();
-				tempDB.totalNum=workTab.get(0).getDisqNum()+workTab.get(0).getQuNum();
+				tempDB.totalNum=workTab.get(0).getQuNum();
 				tempDB.disqNum=workTab.get(0).getDisqNum();
 				double d = (double)((tempDB.disqNum*100)/tempDB.totalNum);
 				tempDB.disqPercent= ((tempDB.disqNum)*100)%tempDB.totalNum == 0 ? d/100 : (d+1)/100;			
@@ -106,9 +124,9 @@ public class SearchPd2Service {
 		}
 		//计算总量
 		for(int i=0;i<disqBatch.size();i++){
-			completeNum=completeNum+disqBatch.get(i).totalNum;
 			disqNum=disqNum+disqBatch.get(i).disqNum;
 		}
+		completeNum=disqBatch.get(0).totalNum+disqBatch.get(0).disqNum;
 		double d = (double)((disqNum*100)/completeNum);
 		disqPercent= (disqNum*100)%completeNum == 0 ? d/100 : (d+1)/100;
 		
