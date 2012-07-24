@@ -11,7 +11,7 @@ import data.util.GenericTemplate;
 
 public class WorkTabDAO extends GenericQueryImpl<WorkTab, WorkTabMapping> {
 
-	GenericTemplate genericTemplate;
+	//GenericTemplate genericTemplate;
 	List<Object> value;
 	String sql;
 	int result;
@@ -24,7 +24,7 @@ public class WorkTabDAO extends GenericQueryImpl<WorkTab, WorkTabMapping> {
 	 */
 	public WorkTabDAO() {
 		super(WorkTab.class, workTabMapping);
-		genericTemplate = new GenericTemplate();
+		//genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
 		flag = false;

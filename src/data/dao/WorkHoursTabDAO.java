@@ -11,7 +11,7 @@ import data.util.GenericTemplate;
 
 public class WorkHoursTabDAO extends GenericQueryImpl<WorkHoursTab, WorkHoursTabMapping> {
 
-	GenericTemplate genericTemplate;
+	//GenericTemplate genericTemplate;
 	List<Object> value;
 	String sql;
 	int result;
@@ -24,7 +24,7 @@ public class WorkHoursTabDAO extends GenericQueryImpl<WorkHoursTab, WorkHoursTab
 	 */
 	public WorkHoursTabDAO() {
 		super(WorkHoursTab.class, workHoursTabMapping);
-		genericTemplate = new GenericTemplate();
+		//genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
 		flag = false;

@@ -54,18 +54,18 @@ public class WorkFormEditAction extends BaseAction {
 	private String key;
 	private String value;
 
-	private BatchList bl = new BatchList();
-	private DisqKindList dkl = new DisqKindList();
-	private FlowpathList fl = new FlowpathList();
-	private WorkTabList wtl = new WorkTabList();
-	private WorkFormList wfl = new WorkFormList();
-	private ScheduleTabList schl = new ScheduleTabList();
-	private DailyStaffDisqList dsdl = new DailyStaffDisqList();
-	private DisqDetailList ddl = new DisqDetailList();
-	private ProductList prol = new ProductList();
-	private ProcessesList procl = new ProcessesList();
-	private StaffList staff = new StaffList();
-	private WorkHoursTabList whtl = new WorkHoursTabList();
+	private BatchList bl;
+	private DisqKindList dkl;
+	private FlowpathList fl;
+	private WorkTabList wtl;
+	private WorkFormList wfl;
+	private ScheduleTabList schl;
+	private DailyStaffDisqList dsdl;
+	private DisqDetailList ddl;
+	private ProductList prol;
+	private ProcessesList procl;
+	private StaffList staff;
+	private WorkHoursTabList whtl;
 
 	ActionContext actionContext = ActionContext.getContext();
 	Map session = actionContext.getSession();

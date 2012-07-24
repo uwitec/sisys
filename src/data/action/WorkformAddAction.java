@@ -48,16 +48,16 @@ public class WorkformAddAction {
 	private Product product = new Product();
 	private WorkHoursTab workhour = new WorkHoursTab();
 
-	private BatchList bl = new BatchList();
-	private DisqKindList dkl = new DisqKindList();
-	private FlowpathList fl = new FlowpathList();
-	private WorkTabList wtl = new WorkTabList();
-	private WorkFormList wfl = new WorkFormList();
-	private ScheduleTabList schl = new ScheduleTabList();
-	private DailyStaffDisqList dsdl = new DailyStaffDisqList();
-	private DisqDetailList ddl = new DisqDetailList();
-	private ProductList prol = new ProductList();
-	private WorkHoursTabList whtl = new WorkHoursTabList();
+	private BatchList bl;
+	private DisqKindList dkl;
+	private FlowpathList fl;
+	private WorkTabList wtl;
+	private WorkFormList wfl;
+	private ScheduleTabList schl;
+	private DailyStaffDisqList dsdl;
+	private DisqDetailList ddl;
+	private ProductList prol;
+	private WorkHoursTabList whtl;
 	
 	DecimalFormat doublef = new DecimalFormat("0.00");
 
@@ -104,6 +104,7 @@ public class WorkformAddAction {
 			return "personlimit";
 		}*/
 		//判断有没有对应的产品，将产品信息记录到工单中
+		prol = new ProductList();
 		sql = "select * from product where Id=" + work.getProId();
 		List<Product> prolist = prol.createSQL(sql);
 		prol.getGenericTemplate().close();
@@ -123,6 +124,7 @@ public class WorkformAddAction {
 		
 
 		//判断有没有对应的批次，将批次信息记录到工单中
+		bl = new BatchList();
 		sql = "select * from batch where batchNo='" + batNo + "' and proId="
 				+ proId;
 		List<Batch> batlist = bl.createSQL(sql);
@@ -234,13 +236,14 @@ public class WorkformAddAction {
 			String[] std = unq[1].split("-");
 
 			//得到不合格详情表的入口ID，方便得到nextId
+			ddl = new DisqDetailList();
 			sql = "select * from disqdetail order by Id DESC limit 0,1";
 			List<DisqDetail> dislist = ddl.createSQL(sql);
 			ddl.getGenericTemplate().close();
+			dsdl = new DailyStaffDisqList();
 			sql = "select * from dailystaffdisq order by Id DESC limit 0,1";
 			List<DailyStaffDisq> dsdlist = dsdl.createSQL(sql);
 			dsdl.getGenericTemplate().close();
-			System.out.println("1213");
 			for (int i = 0; i < str.length; i++) {
 				System.out.println("str:" + str[i]);
 				dkl = new DisqKindList();
@@ -319,6 +322,7 @@ public class WorkformAddAction {
 	public String updateworktab(WorkForm wf, Flowpath flow, WorkTab wtab) {
 		String sql;
 		int flowNum;
+		fl = new FlowpathList();
 		sql = "select * from flowpath where Id=" + flow.getId();
 		List<Flowpath> flowlist = fl.createSQL(sql);
 		fl.getGenericTemplate().close();
@@ -326,6 +330,7 @@ public class WorkformAddAction {
 		String[] str = flow.getSequence().split("-");// 注意分隔号
 		flowNum = str.length;
 		int k = wtab.getId() + flowNum;
+		wtl = new WorkTabList();
 		sql = "select * from worktab where Id between " + bat.getWorkTabId()
 				+ " and " + k;
 		List<WorkTab> wtlist = wtl.createSQL(sql);

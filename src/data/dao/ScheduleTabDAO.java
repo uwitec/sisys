@@ -11,7 +11,7 @@ import data.util.GenericTemplate;
 
 public class ScheduleTabDAO extends GenericQueryImpl<ScheduleTab, ScheduleTabMapping> {
 
-	GenericTemplate genericTemplate;
+	//GenericTemplate genericTemplate;
 	List<Object> value;
 	String sql;
 	int result;
@@ -24,7 +24,7 @@ public class ScheduleTabDAO extends GenericQueryImpl<ScheduleTab, ScheduleTabMap
 	 */
 	public ScheduleTabDAO() {
 		super(ScheduleTab.class, scheduleTabMapping);
-		genericTemplate = new GenericTemplate();
+		//genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
 		flag = false;

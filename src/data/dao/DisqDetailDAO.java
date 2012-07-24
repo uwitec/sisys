@@ -11,7 +11,7 @@ import data.util.GenericTemplate;
 
 public class DisqDetailDAO  extends GenericQueryImpl<DisqDetail, DisqDetailMapping> {
 
-	GenericTemplate genericTemplate;
+	//GenericTemplate genericTemplate;
 	List<Object> value;
 	String sql;
 	int result;
@@ -24,7 +24,7 @@ public class DisqDetailDAO  extends GenericQueryImpl<DisqDetail, DisqDetailMappi
 	 */
 	public DisqDetailDAO() {
 		super(DisqDetail.class, disqDetailMapping);
-		genericTemplate = new GenericTemplate();
+		//genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
 		flag = false;

@@ -12,7 +12,7 @@ import data.util.GenericTemplate;
 
 public class WorkFormDAO extends GenericQueryImpl<WorkForm, WorkFormMapping> {
 
-	GenericTemplate genericTemplate;
+	//GenericTemplate genericTemplate;
 	List<Object> value;
 	String sql;
 	int result;
@@ -25,7 +25,7 @@ public class WorkFormDAO extends GenericQueryImpl<WorkForm, WorkFormMapping> {
 	 */
 	public WorkFormDAO() {
 		super(WorkForm.class, workFormMapping);
-		genericTemplate = new GenericTemplate();
+		//genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
 		flag = false;

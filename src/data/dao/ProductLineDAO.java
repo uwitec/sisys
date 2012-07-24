@@ -12,7 +12,7 @@ import data.util.GenericTemplate;
 
 public class ProductLineDAO  extends GenericQueryImpl<ProductLine, ProductLineMapping> {
 
-	GenericTemplate genericTemplate;
+	//GenericTemplate genericTemplate;
 	List<Object> value;
 	String sql;
 	int result;
@@ -25,7 +25,7 @@ public class ProductLineDAO  extends GenericQueryImpl<ProductLine, ProductLineMa
 	 */
 	public ProductLineDAO() {
 		super(ProductLine.class, productLineMapping);
-		genericTemplate = new GenericTemplate();
+		//genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
 		flag = false;

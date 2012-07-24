@@ -12,7 +12,7 @@ import data.util.GenericTemplate;
 
 public class BatchDAO  extends GenericQueryImpl<Batch, BatchMapping>{
 
-	GenericTemplate genericTemplate;
+	//GenericTemplate genericTemplate;
 	List<Object> value;
 	String sql;
 	int result;
@@ -25,7 +25,7 @@ public class BatchDAO  extends GenericQueryImpl<Batch, BatchMapping>{
 	 */
 	public BatchDAO() {
 		super(Batch.class, batchMapping);
-		genericTemplate = new GenericTemplate();
+		//genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
 		flag = false;

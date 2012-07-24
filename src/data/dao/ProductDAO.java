@@ -16,7 +16,7 @@ import data.util.GenericTemplate;
 
 public class ProductDAO  extends GenericQueryImpl<Product, ProductMapping> {
 
-	GenericTemplate genericTemplate;
+	//GenericTemplate genericTemplate;
 	List<Object> value;
 	String sql;
 	int result;
@@ -29,7 +29,7 @@ public class ProductDAO  extends GenericQueryImpl<Product, ProductMapping> {
 	 */
 	public ProductDAO() {
 		super(Product.class, productMapping);
-		genericTemplate = new GenericTemplate();
+		//genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
 		flag = false;
