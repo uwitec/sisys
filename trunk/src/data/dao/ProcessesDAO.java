@@ -12,7 +12,7 @@ import data.util.GenericTemplate;
 
 public class ProcessesDAO  extends GenericQueryImpl<Processes, ProcessesMapping> {
 
-	GenericTemplate genericTemplate;
+	//GenericTemplate genericTemplate;
 	List<Object> value;
 	String sql;
 	int result;
@@ -25,7 +25,7 @@ public class ProcessesDAO  extends GenericQueryImpl<Processes, ProcessesMapping>
 	 */
 	public ProcessesDAO() {
 		super(Processes.class, processesMapping);
-		genericTemplate = new GenericTemplate();
+		//genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
 		flag = false;

@@ -12,7 +12,7 @@ import data.util.GenericTemplate;
 
 public class DisqKindDAO  extends GenericQueryImpl<DisqKind, DisqKindMapping>{
 
-	GenericTemplate genericTemplate;
+	//GenericTemplate genericTemplate;
 	List<Object> value;
 	String sql;
 	int result;
@@ -25,7 +25,7 @@ public class DisqKindDAO  extends GenericQueryImpl<DisqKind, DisqKindMapping>{
 	 */
 	public DisqKindDAO() {
 		super(DisqKind.class, disqKindMapping);
-		genericTemplate = new GenericTemplate();
+		//genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
 		flag = false;

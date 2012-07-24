@@ -12,7 +12,7 @@ import data.util.GenericTemplate;
 
 public class FlowpathDAO  extends GenericQueryImpl<Flowpath, FlowpathMapping> {
 
-	GenericTemplate genericTemplate;
+	//GenericTemplate genericTemplate;
 	List<Object> value;
 	String sql;
 	int result;
@@ -25,7 +25,7 @@ public class FlowpathDAO  extends GenericQueryImpl<Flowpath, FlowpathMapping> {
 	 */
 	public FlowpathDAO() {
 		super(Flowpath.class, flowpathMapping);
-		genericTemplate = new GenericTemplate();
+		//genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
 		flag = false;

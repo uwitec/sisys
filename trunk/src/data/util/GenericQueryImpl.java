@@ -95,6 +95,8 @@ public class GenericQueryImpl<E, M extends BasicMapping> {
 				
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			genericTemplate.close();
 		}
 		return list;
 	}
@@ -122,6 +124,8 @@ public class GenericQueryImpl<E, M extends BasicMapping> {
 			re.printStackTrace();
 		} catch (Exception ex) {
 			ex.printStackTrace();
+		}finally {
+			genericTemplate.close();
 		}
 		return list;
 	}
@@ -146,6 +150,8 @@ public class GenericQueryImpl<E, M extends BasicMapping> {
 			re.printStackTrace();
 		} catch (Exception ex) {
 			ex.printStackTrace();
+		}finally {
+			genericTemplate.close();
 		}
 		return list;
 	}
@@ -169,6 +175,8 @@ public class GenericQueryImpl<E, M extends BasicMapping> {
 			}		
 		} catch (Exception re) {
 			re.printStackTrace();
+		}finally {
+			genericTemplate.close();
 		}
 		return result;
 	}
@@ -199,6 +207,8 @@ public class GenericQueryImpl<E, M extends BasicMapping> {
 			re.printStackTrace();
 		} catch (Exception ex) {
 			ex.printStackTrace();
+		}finally {
+			genericTemplate.close();
 		}
 		
 		return list;
@@ -257,6 +267,8 @@ public class GenericQueryImpl<E, M extends BasicMapping> {
 			re.printStackTrace();
 		} catch (Exception ex) {
 			ex.printStackTrace();
+		}finally {
+			genericTemplate.close();
 		}
 		return list;
 	}
@@ -311,6 +323,8 @@ public class GenericQueryImpl<E, M extends BasicMapping> {
 			}
 		} catch (Exception re) {
 			re.printStackTrace();
+		}finally {
+			genericTemplate.close();
 		}
 		return result;
 	}

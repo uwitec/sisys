@@ -12,7 +12,7 @@ import data.util.GenericTemplate;
 
 public class StaffKindDAO extends GenericQueryImpl<StaffKind, StaffKindMapping> {
 
-	GenericTemplate genericTemplate;
+	//GenericTemplate genericTemplate;
 	List<Object> value;
 	String sql;
 	int result;
@@ -25,7 +25,7 @@ public class StaffKindDAO extends GenericQueryImpl<StaffKind, StaffKindMapping> 
 	 */
 	public StaffKindDAO() {
 		super(StaffKind.class, staffKindMapping);
-		genericTemplate = new GenericTemplate();
+		//genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
 		flag = false;

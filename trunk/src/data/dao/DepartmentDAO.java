@@ -12,7 +12,7 @@ import data.util.GenericTemplate;
 
 public class DepartmentDAO extends GenericQueryImpl<Department, DepartmentMapping> {
 
-	GenericTemplate genericTemplate;
+	//GenericTemplate genericTemplate;
 	List<Object> value;
 	String sql;
 	int result;
@@ -25,7 +25,7 @@ public class DepartmentDAO extends GenericQueryImpl<Department, DepartmentMappin
 	 */
 	public DepartmentDAO() {
 		super(Department.class, departmentMapping);
-		genericTemplate = new GenericTemplate();
+		//genericTemplate = new GenericTemplate();
 		value = new ArrayList<Object>();
 		result = 0;
 		flag = false;
