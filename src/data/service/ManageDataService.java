@@ -8,11 +8,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import data.bean.Department;
@@ -22,6 +24,7 @@ import data.bean.Product;
 import data.bean.ProductLine;
 import data.bean.Staff;
 import data.bean.StaffKind;
+import data.connect.DatabaseConnect;
 import data.dao.DepartmentDAO;
 import data.dao.FlowpathDAO;
 import data.dao.ProcessesDAO;
@@ -30,6 +33,7 @@ import data.dao.ProductLineDAO;
 import data.dao.StaffDAO;
 import data.dao.StaffKindDAO;
 import data.util.ColorUtil;
+import data.util.MysqlConfig;
 
 import jxl.Cell;
 import jxl.CellType;
@@ -120,9 +124,10 @@ public class ManageDataService {
 	
 	//数据库导出为sql文件
 	public void dbEport(OutputStream os){
+		MysqlConfig mc = new MysqlConfig();
 		try{
 			Runtime rt = Runtime.getRuntime();
-			Process child = rt.exec("D:/Java/MySQL/MySQL Server 5.0/bin/mysqldump -uroot -proot sisys");
+			Process child = rt.exec(mc.getPath() + "mysqldump -uroot -proot sisys");
 			
 			InputStream in = child.getInputStream();
 			InputStreamReader isr = new InputStreamReader(in,"utf8");
@@ -145,7 +150,7 @@ public class ManageDataService {
 			br.close();
 			writer.close();
 			os.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -153,9 +158,10 @@ public class ManageDataService {
 	
 	//导入sql文件到数据库
 	public void dbImport(File myFile){
+		MysqlConfig mc = new MysqlConfig();
 		try {
 			Runtime rt = Runtime.getRuntime();
-			Process child = rt.exec("D:/Java/MySQL/MySQL Server 5.0/bin/mysql -uroot -proot sisys");
+			Process child = rt.exec(mc.getPath() + "mysql -uroot -proot sisys");
 			OutputStream out = child.getOutputStream();
 			
 			String inStr;
