@@ -127,7 +127,7 @@ public class ManageDataService {
 		MysqlConfig mc = new MysqlConfig();
 		try{
 			Runtime rt = Runtime.getRuntime();
-			Process child = rt.exec(mc.getPath() + "mysqldump -uroot -proot sisys");
+			Process child = rt.exec(mc.getPath() + "mysqldump -u" + mc.getUser() + " -p" + mc.getPassword() + " sisys");
 			
 			InputStream in = child.getInputStream();
 			InputStreamReader isr = new InputStreamReader(in,"utf8");
@@ -161,7 +161,7 @@ public class ManageDataService {
 		MysqlConfig mc = new MysqlConfig();
 		try {
 			Runtime rt = Runtime.getRuntime();
-			Process child = rt.exec(mc.getPath() + "mysql -uroot -proot sisys");
+			Process child = rt.exec(mc.getPath() + "mysql -u" + mc.getUser() + " -p" + mc.getPassword() + " sisys");
 			OutputStream out = child.getOutputStream();
 			
 			String inStr;
