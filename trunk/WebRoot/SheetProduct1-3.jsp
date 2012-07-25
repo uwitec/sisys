@@ -57,7 +57,7 @@
 				%>
 				<tr align="center">
 					<td><%=pd3List.get(i).get("staName") %></td>
-					<td><%=pd3List.get(i).get("staNo") %></td>
+					<td><a target="_blank" href=SearchPpByDisq?staNo=<%=pd3List.get(i).get("staNo")%>><%=pd3List.get(i).get("staNo")%></a></td>
 					<td><%=pd3List.get(i).get("disqNum") %></td>
 					<%for(DisqKind g:gType){ %>
 						<%if(dMap.get(g.getId()) == null){ %>

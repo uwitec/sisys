@@ -40,7 +40,8 @@ public class SearchPd3Service {
 		Map<String, Object> equalsmap2 = new HashMap<String, Object>();
 		equalsmap2.put("kind", 1);
 		equalsmap2.put("isDelete", 0);
-		lWasteType = disqKindDAO.findEntity(equalsmap2);
+		DisqKindDAO disqKindDAO1 = new DisqKindDAO();
+		lWasteType = disqKindDAO1.findEntity(equalsmap2);
 		System.out.println(lWasteType);
 
 		// 在WorkForm中查找时间符合的工单

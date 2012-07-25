@@ -45,6 +45,11 @@
 			<result name="error">/SearchPeople_${level}.jsp?result=error&amp;current=sheet</result>
 		</action>
 		
+		<action name="SearchPpByDisq" class="data.action.SearchAction" method="SearchPpByDisq">
+			<result name="success">/SheetPeople1.jsp</result>
+			<result name="error">/SearchPeople_${level}.jsp?result=error&amp;current=sheet</result>
+		</action>
+		
 		<action name="SearchPd" class="data.action.SearchAction" method="SearchPd">
 			<result name="success">/SheetProduct1-1.jsp</result>
 			<result name="error">/SearchProduct_${level}.jsp?result=error&amp;current=sheet</result>

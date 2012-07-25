@@ -1,3 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Struts2Diagram version="2.0" />
+<Struts2Diagram version="2.0">
+  <package name="search" location="0,0" size="0,0">
+    <action name="SearchJd" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="SearchIndexJd" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="ShowJd" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="SearchWh" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="SearchPp" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="SearchPd" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="SearchPd2" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="SearchPd3" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="SearchPd4" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="SearchPd5" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+  </package>
+</Struts2Diagram>
 
