@@ -108,7 +108,7 @@ public class WorkformAddAction {
 		prol = new ProductList();
 		sql = "select * from product where Id=" + work.getProId();
 		List<Product> prolist = prol.createSQL(sql);
-		prol.getGenericTemplate().close();
+		//prol.getGenericTemplate().close();
 		if(prolist.size() == 0) {
 			return "error";
 		}
@@ -240,17 +240,17 @@ public class WorkformAddAction {
 			ddl = new DisqDetailList();
 			sql = "select * from disqdetail order by Id DESC limit 0,1";
 			List<DisqDetail> dislist = ddl.createSQL(sql);
-			ddl.getGenericTemplate().close();
+			//ddl.getGenericTemplate().close();
 			dsdl = new DailyStaffDisqList();
 			sql = "select * from dailystaffdisq order by Id DESC limit 0,1";
 			List<DailyStaffDisq> dsdlist = dsdl.createSQL(sql);
-			dsdl.getGenericTemplate().close();
+			//dsdl.getGenericTemplate().close();
 			for (int i = 0; i < str.length; i++) {
 				System.out.println("str:" + str[i]);
 				dkl = new DisqKindList();
 				sql = "select * from disqKind where Id=" + str[i];
 				List<DisqKind> dklist = dkl.createSQL(sql);
-				dkl.getGenericTemplate().close();
+				//dkl.getGenericTemplate().close();
 				if (dklist.size() == 0) {
 					return "error";
 				} else if (dklist.get(0).getKind() == 1) {
@@ -326,7 +326,7 @@ public class WorkformAddAction {
 		fl = new FlowpathList();
 		sql = "select * from flowpath where Id=" + flow.getId();
 		List<Flowpath> flowlist = fl.createSQL(sql);
-		fl.getGenericTemplate().close();
+		//fl.getGenericTemplate().close();
 		flow.setSequence(flowlist.get(0).getSequence());
 		String[] str = flow.getSequence().split("-");// 注意分隔号
 		flowNum = str.length;
@@ -335,7 +335,7 @@ public class WorkformAddAction {
 		sql = "select * from worktab where Id between " + bat.getWorkTabId()
 				+ " and " + k;
 		List<WorkTab> wtlist = wtl.createSQL(sql);
-		wtl.getGenericTemplate().close();
+		//wtl.getGenericTemplate().close();
 		int i = 0;
 		for (; i < wtlist.size(); i++) {
 			System.out.print(wtlist.get(i).getProcId());

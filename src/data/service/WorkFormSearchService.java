@@ -34,6 +34,14 @@ public class WorkFormSearchService {
 	private List<WFstandard> wfs;
 	private List<WorkForm> work;
 
+	private WorkFormList workformlist;
+	private StaffList stal;
+	private ProcessesList procl;
+	private ProductList prol;
+	private BatchList batl;
+
+	private List<WFstandard> workform = new ArrayList<WFstandard>();
+
 	/**
 	 * 默认工单列表
 	 * 
@@ -41,6 +49,7 @@ public class WorkFormSearchService {
 	 */
 	public String FirstPage() {
 		String result = "";
+		User user = (User) session.get("user");
 		// Page page = new Page();
 		String sql = "select * from workform order by id desc limit 6";
 		WorkFormList wfl = new WorkFormList();
@@ -49,18 +58,32 @@ public class WorkFormSearchService {
 		if (list.size() != 0) {
 			request.setAttribute("page", list);
 		} else {
-			return "error";
+			switch (user.getLevel()) {
+			case 1:
+				result = "viewererror";
+				break;
+			case 2:
+				result = "operatorerror";
+				break;
+			case 3:
+				result = "adminerror";
+				break;
+			}
 		}
 		// page.setPageNow(1);
 		// 根据page查询工单
 		for (int i = 0; i < list.size(); i++) {
 			WFstandard wfsave = new WFstandard();
+			stal = new StaffList();
 			sql = "select * from staff where Id=" + list.get(i).getStaId();
 			List<Staff> stalist = stal.createSQL(sql);
+			procl = new ProcessesList();
 			sql = "select * from processes where Id=" + list.get(i).getProcId();
 			List<Processes> proclist = procl.createSQL(sql);
+			prol = new ProductList();
 			sql = "select * from product where Id=" + list.get(i).getProId();
 			List<Product> prolist = prol.createSQL(sql);
+			batl = new BatchList();
 			sql = "select * from batch where Id=" + list.get(i).getBatchId();
 			List<Batch> batlist = batl.createSQL(sql);
 			wfsave.setBatchNo(batlist.get(0).getBatchNo());
@@ -95,7 +118,6 @@ public class WorkFormSearchService {
 		request.setAttribute("form", wfs);
 		// request.setAttribute("page", page);
 
-		User user = (User) session.get("user");
 		switch (user.getLevel()) {
 		case 1:
 			result = "viewer";
@@ -109,14 +131,6 @@ public class WorkFormSearchService {
 		}
 		return result;
 	}
-
-	private WorkFormList workformlist = new WorkFormList();
-	private StaffList stal = new StaffList();
-	private ProcessesList procl = new ProcessesList();
-	private ProductList prol = new ProductList();
-	private BatchList batl = new BatchList();
-
-	private List<WFstandard> workform = new ArrayList<WFstandard>();
 
 	/**
 	 * 按批次搜索工单
@@ -296,12 +310,16 @@ public class WorkFormSearchService {
 
 		for (int i = 0; i < list.size(); i++) {
 			WFstandard wfsave = new WFstandard();
+			stal = new StaffList();
 			sql = "select * from staff where Id=" + list.get(i).getStaId();
 			List<Staff> stalist = stal.createSQL(sql);
+			procl = new ProcessesList();
 			sql = "select * from processes where Id=" + list.get(i).getProcId();
 			List<Processes> proclist = procl.createSQL(sql);
+			prol = new ProductList();
 			sql = "select * from product where Id=" + list.get(i).getProId();
 			List<Product> prolist = prol.createSQL(sql);
+			batl = new BatchList();
 			sql = "select * from batch where Id=" + list.get(i).getBatchId();
 			List<Batch> batlist = batl.createSQL(sql);
 			wfsave.setBatchNo(batlist.get(0).getBatchNo());
@@ -336,7 +354,6 @@ public class WorkFormSearchService {
 
 	public List<WFstandard> Conditionsearch(String staNo, String proNo,
 			String batNo) {
-		WorkFormDAO wfd = new WorkFormDAO();
 		int flag = 0;
 		String sql = "";
 		int pId = 0;
@@ -389,18 +406,23 @@ public class WorkFormSearchService {
 					+ slist.get(0).getId() + " order by procId";
 			break;
 		}
+		WorkFormDAO wfd = new WorkFormDAO();
 		List<WorkForm> list = wfd.findEntityByList(sql);
 		System.out.println(list.size());
 		wfs = new ArrayList<WFstandard>();
 
 		for (int i = 0; i < list.size(); i++) {
 			WFstandard wfsave = new WFstandard();
+			stal = new StaffList();
 			sql = "select * from staff where Id=" + list.get(i).getStaId();
 			List<Staff> stalist = stal.createSQL(sql);
+			procl = new ProcessesList();
 			sql = "select * from processes where Id=" + list.get(i).getProcId();
 			List<Processes> proclist = procl.createSQL(sql);
+			prol = new ProductList();
 			sql = "select * from product where Id=" + list.get(i).getProId();
 			List<Product> prolist = prol.createSQL(sql);
+			batl = new BatchList();
 			sql = "select * from batch where Id=" + list.get(i).getBatchId();
 			List<Batch> batlist = batl.createSQL(sql);
 			wfsave.setBatchNo(batlist.get(0).getBatchNo());
