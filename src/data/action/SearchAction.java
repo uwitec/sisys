@@ -145,7 +145,40 @@ public class SearchAction extends BaseAction {
 		} else
 			return ERROR;
 	}
+	//通过部门员工不合格情况统计跳转到员工完成情况统计
+	public String SearchPpByDisq() throws Exception {
 
+		staNo = request.getParameter("staNo");
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date time = cal.getTime();
+		time.setDate(1);
+		String startTime = format.format(time);
+		time.setMonth(time.getMonth() + 1);
+		time.setDate(0);
+		String endTime = format.format(time);
+		System.out.println(staNo);
+
+		SearchPpService searchPpService = new SearchPpService();
+		mapPp = searchPpService.SearchPp(staNo, startTime, endTime);
+
+		if (mapPp.get("result").equals("success")) {
+			
+			ActionContext.getContext().put("Ppsheet", mapPp.get("list"));
+			ActionContext.getContext().put("staName", mapPp.get("staName"));
+			ActionContext.getContext().put("sTime", startTime);
+			ActionContext.getContext().put("eTime", endTime);
+			ActionContext.getContext().put("staNo", staNo);
+			ActionContext.getContext().put("deptName", mapPp.get("deptName"));
+			
+			return SUCCESS;
+		} else{
+			ActionContext.getContext().put("message", mapPp.get("message"));	
+			return ERROR;
+		}
+	}
+	
+//员工完成情况统计单
 	public String SearchPp() throws Exception {
 
 		staNo = request.getParameter("staNo");
