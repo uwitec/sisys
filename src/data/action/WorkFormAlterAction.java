@@ -3,6 +3,8 @@ package data.action;
 import java.text.DecimalFormat;
 import java.util.*;
 
+import com.opensymphony.xwork2.ActionContext;
+
 import data.bean.Batch;
 import data.bean.DailyStaffDisq;
 import data.bean.DisqDetail;
@@ -11,6 +13,7 @@ import data.bean.Flowpath;
 import data.bean.Processes;
 import data.bean.Product;
 import data.bean.ScheduleTab;
+import data.bean.User;
 import data.bean.WorkForm;
 import data.bean.WorkHoursTab;
 import data.bean.WorkTab;
@@ -86,7 +89,14 @@ public class WorkFormAlterAction {
 			String quaNum, String disDetail, String pn, String color,
 			String batNo, String salary) {
 		String sql;
+		
+		ActionContext actionContext = ActionContext.getContext(); 
+	    Map session = actionContext.getSession();
+		User user = (User)session.get("user");
+		String name = user.getUsername();
 		work.setId(Integer.parseInt(Id));
+		work.setName(name);
+		
 		System.out.println(procId);
 		sql = "select * from workform where Id=" + work.getId();
 		List<WorkForm> wflist = wfl.createSQL(sql);

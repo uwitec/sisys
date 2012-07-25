@@ -10,6 +10,7 @@
 	List<DisqKind> dkList = (List)request.getAttribute("dkList");
 	System.out.println(dkList);
 	int height = (Integer)request.getAttribute("height");
+	String name = (String)request.getAttribute("name");
 %>
 
 <%	
@@ -289,6 +290,11 @@ function check(){
 									<td><span>不合格品数量</span></td>
 									<td><input type="text" width="50px" name="disqNum8"/>
 										
+								</tr>
+								
+								<tr>
+									<td><span>统计员姓名</span></td>
+									<td><input readOnly="true" type="text" width="50px" name="name" value="${name}"/></td>
 								</tr>
 									
 								<tr>

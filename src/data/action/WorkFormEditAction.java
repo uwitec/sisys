@@ -119,6 +119,7 @@ public class WorkFormEditAction extends BaseAction {
 	// 工单增加
 	public String formadd() {
 
+		String name = request.getParameter("name");
 		int height = 3;
 		DisqKindDAO dkdao = new DisqKindDAO();
 		List<DisqKind> dkList = dkdao.readAll();
@@ -211,7 +212,7 @@ public class WorkFormEditAction extends BaseAction {
 		System.out.println(disqDetail);
 		WorkformAddAction wfaa = new WorkformAddAction();
 		state = wfaa.WFadd(staId, proId, procId, quaNum, disqDetail, bn, color,
-				batNo, salary);
+				batNo, salary, name);
 		// session中保存职员、工序、产品的信息
 		session.remove("staff");
 		session.remove("processes");

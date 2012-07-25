@@ -76,7 +76,7 @@ public class WorkformAddAction {
 
 	public String WFadd(String staId, String proId, String procId,
 			String quaNum, String disDetail, String bn, String color,
-			String batNo, String salary) {
+			String batNo, String salary, String name) {
 		if (staId == null || proId == null || procId == null || quaNum == null) {
 			return "isnull";
 		}
@@ -88,6 +88,7 @@ public class WorkformAddAction {
 		pn = Double.parseDouble(bn);
 		this.color = color;
 		this.salary = Double.parseDouble(salary);
+		work.setName(name);
 		work.setTime(date);
 		work.setStaId(Integer.parseInt(staId));
 		work.setProId(Integer.parseInt(proId));

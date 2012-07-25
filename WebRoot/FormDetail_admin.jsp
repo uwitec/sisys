@@ -26,6 +26,7 @@
 %>
 
 <%
+	String name = (String)request.getAttribute("name");
 	WFstandard wfsave = (WFstandard)request.getAttribute("wfsave");
 	List<String> disqkind = (List)request.getAttribute("disqkind");
 	List<String> disqnum = (List)request.getAttribute("disqnum");
@@ -173,6 +174,10 @@
 									<td>${wfsave.status}</td>
 									<td><span>删除时间</span></td>
 									<td>${wfsave.deletetime}</td>
+								</tr>
+								<tr>
+									<td><span>统计员姓名</span></td>
+									<td>${name}</td>
 								</tr>
 						</table>
 						

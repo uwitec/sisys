@@ -25,6 +25,7 @@ public class WorkFormMapping extends BasicMapping<WorkForm> {
 			workForm.setStaId(rs.getInt("staId"));
 			workForm.setTime(rs.getDate("time"));
 			workForm.setWorkHours(rs.getDouble("workHours"));
+			workForm.setName(rs.getString("name"));
 		} catch(SQLException ex) {
 			ex.printStackTrace();
 		}

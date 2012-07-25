@@ -21,6 +21,7 @@ public class WorkForm {
 	private Date time; // 记录工单存入系统的时间
 	private int isDelete; // 标识是否删除，0未删除，1删除
 	private Date deleteTime; // 若删除，则记录删除时间
+	private String name;	//记录统计员姓名
 
 	// get和set方法
 	public int getId() {
@@ -126,6 +127,16 @@ public class WorkForm {
 		return workHours;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -140,6 +151,7 @@ public class WorkForm {
 		result = prime * result + id;
 		result = prime * result + isDelete;
 		result = prime * result + lWaste;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + proId;
 		result = prime * result + procId;
 		result = prime * result + quaNum;
@@ -180,6 +192,11 @@ public class WorkForm {
 			return false;
 		if (lWaste != other.lWaste)
 			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
 		if (proId != other.proId)
 			return false;
 		if (procId != other.procId)
@@ -202,7 +219,7 @@ public class WorkForm {
 	// 构造函数
 	public WorkForm(int id, int staId, int procId, int batchId, int proId,
 			int quaNum, String disDetail, Date time, int gWaste, int lWaste,
-			double workHours, int isDelete,	Date deleteTime) {
+			double workHours, int isDelete,	Date deleteTime, String name) {
 		super();
 		this.id = id;
 		this.staId = staId;
@@ -217,6 +234,7 @@ public class WorkForm {
 		this.workHours = workHours;
 		this.isDelete = isDelete;
 		this.deleteTime = deleteTime;
+		this.name = name;
 	}
 
 	public WorkForm() {
@@ -230,8 +248,7 @@ public class WorkForm {
 				+ ", batchId=" + batchId + ", proId=" + proId + ", quaNum="
 				+ quaNum + ", gWaste=" + gWaste + ", lWaste=" + lWaste + ", workHours=" + workHours
 				+ ", disDetail=" + disDetail + ", time=" + time + ", isDelete="
-				+ isDelete + ", deleteTime=" + deleteTime + "]";
+				+ isDelete + ", deleteTime=" + deleteTime + ", name=" + name + "]";
 	}
 
-	
 }
