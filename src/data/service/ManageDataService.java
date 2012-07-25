@@ -196,22 +196,22 @@ public class ManageDataService {
 		int deptNo = 1;
 		Cell[] cells;
 		Department department = null;
-		DepartmentDAO departmentDAO = new DepartmentDAO();
+		DepartmentDAO departmentDAO;
 		Staff staff;
-		StaffDAO staffDAO = new StaffDAO();
+		StaffDAO staffDAO;
 		Set<String> kindSet = new HashSet<String>();
 		List<Department> depList;
 		List<Staff> staList;
 		List<StaffKind> kindList;
 		StaffKind staffKind;
-		StaffKindDAO staffKindDAO = new StaffKindDAO();
+		StaffKindDAO staffKindDAO;
 		
 		while(row < sheet.getRows()){
 			Map<String,String> equalsMap = new HashMap<String,String>();
 			if(sheet.getCell(1, row).getContents().isEmpty()){
 				deptName = sheet.getCell(0, row).getContents();
 				equalsMap.put("deptName", deptName);
-				
+				departmentDAO = new DepartmentDAO();
 				depList = departmentDAO.findEntity(equalsMap);
 				if(depList.size() == 0){
 					department = new Department();
@@ -223,12 +223,14 @@ public class ManageDataService {
 						return "error";
 					}
 				}
+				departmentDAO = new DepartmentDAO();
 				department = departmentDAO.findEntity(equalsMap).get(0);
 				deptNo++;
 				row++;
 			}else{
 				cells = sheet.getRow(row);
 				equalsMap.put("staNo", cells[1].getContents());
+				staffDAO = new StaffDAO();
 				staList = staffDAO.findEntity(equalsMap);
 				if(staList.size() != 0){
 					System.out.println(staList.size());
@@ -256,6 +258,7 @@ public class ManageDataService {
 		for(String kind : kindSet){
 			Map<String,String> equalsMap = new HashMap<String,String>();
 			equalsMap.put("kindDesc", kind);
+			staffKindDAO = new StaffKindDAO();
 			kindList = staffKindDAO.findEntity(equalsMap);
 			if(kindList.size() == 0){
 				staffKind = new StaffKind();
@@ -282,7 +285,7 @@ public class ManageDataService {
 			return "dataError";
 		}
 		ProductLine proLine;
-		ProductLineDAO proLineDAO = new ProductLineDAO();
+		ProductLineDAO proLineDAO;
 		int flag = 0;
 		int row = 2;
 		Cell[] cells;
@@ -293,6 +296,7 @@ public class ManageDataService {
 				Map<String,String> equalsMap = new HashMap<String,String>();
 				cells = sheet.getRow(row);
 				equalsMap.put("lineNo", cells[0].getContents());
+				proLineDAO = new ProductLineDAO();
 				proLineList = proLineDAO.findEntity(equalsMap);
 				if(proLineList.size() == 0){
 					proLine = new ProductLine();
@@ -325,14 +329,14 @@ public class ManageDataService {
 		}
 		
 		Product product = new Product();
-		ProductDAO productDAO = new ProductDAO();
+		ProductDAO productDAO;
 		Flowpath flowpath = new Flowpath();
 		FlowpathDAO flowpathDAO = new FlowpathDAO();
 		Processes process;
 		ProcessesDAO processesDAO;
-		DepartmentDAO departmentDAO = new DepartmentDAO();
+		DepartmentDAO departmentDAO;
 		List<Department> deptList;
-		ProductLineDAO productLineDAO = new ProductLineDAO();
+		ProductLineDAO productLineDAO;
 		List<ProductLine> proLineList;
 		List<Integer> sequenceList = new ArrayList<Integer>();
 		int row = 2;
@@ -347,6 +351,7 @@ public class ManageDataService {
 		String proNo = cells[11].getContents();
 		equalsMap.clear();
 		equalsMap.put("proNo", proNo);
+		productDAO = new ProductDAO();
 		proList = productDAO.findEntity(equalsMap);
 		if(proList.size() != 0){
 			return "error";
@@ -365,6 +370,7 @@ public class ManageDataService {
 		equalsMap.clear();
 		equalsMap.put("lineNo", lineNo);
 		System.out.println(lineNo);
+		productLineDAO = new ProductLineDAO();
 		proLineList = productLineDAO.findEntity(equalsMap);
 		if(proLineList.size() == 0){
 			return "noproLine";
@@ -374,6 +380,7 @@ public class ManageDataService {
 		String deptNo = lineNo.trim().substring(0,1);
 		equalsMap.clear();
 		equalsMap.put("deptNo", deptNo);
+		departmentDAO = new DepartmentDAO();
 		deptList = departmentDAO.findEntity(equalsMap);
 		if(deptList.size() ==0){
 			return "error";
@@ -394,12 +401,14 @@ public class ManageDataService {
 		product.setProlineId(proLineList.get(0).getId());
 		product.setProNo(proNo);
 		product.setProName(cells[5].getContents());
+		productDAO = new ProductDAO();
 		int r = productDAO.create(product);
 		if(r < 0){
 			return "error";
 		}
 		equalsMap.clear();
 		equalsMap.put("proNo", proNo);
+		productDAO = new ProductDAO();
 		product = productDAO.findEntity(equalsMap).get(0);
 		
 		
