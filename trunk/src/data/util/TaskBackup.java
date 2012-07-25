@@ -1,14 +1,12 @@
 package data.util;
 
-import java.util.Date;
 import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import org.apache.commons.lang.time.DateUtils;
-
-import data.service.ManageDataService;
 
 public class TaskBackup implements ServletContextListener{
 	public static final long PERIOD_DAY = DateUtils.MILLIS_IN_DAY;
@@ -17,18 +15,23 @@ public class TaskBackup implements ServletContextListener{
 
 	public void contextDestroyed(ServletContextEvent event) {
 		// TODO Auto-generated method stub
-		timer.cancel();
+		timer = new Timer("数据库备份",true);
+		timer.schedule(new BackupData(), PERIOD_DAY);
 	}
 
 	public void contextInitialized(ServletContextEvent event) {
 		// TODO Auto-generated method stub
-		timer = new Timer("数据库备份",true);
-		Date date = new Date();
-		date.setHours(0);
-		date.setMinutes(0);
-		date.setSeconds(0);
 		
-		timer.schedule(new BackupData(),date,PERIOD_DAY);
+	}
+	
+}
+
+class BackupData extends TimerTask{
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

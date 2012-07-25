@@ -21,7 +21,10 @@
         </global-results>
 		
 		<action name="SearchJd" class="data.action.SearchAction" method="SearchJd">
-			<result name="success" type="redirectAction">ShowJd</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">ShowJd</param>
+				<param name="namespace">/</param>
+			</result>
 			<result name="error">/SearchJD_${level}.jsp?result=error&amp;current=sheet</result>
 		</action>
 		

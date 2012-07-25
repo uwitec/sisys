@@ -41,7 +41,7 @@ public class ManageUserService {
 		    	return "admin";
 		    }
 		}
-		
+		//return "default";
 	}
 	
 	//增加人员

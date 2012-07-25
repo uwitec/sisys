@@ -44,6 +44,9 @@ public class WorkFormService {
 		DisqKindDAO dkdao = new DisqKindDAO();
 		List<DisqKind> dkList = dkdao.readAll();
 		System.out.println(dkList);
+		User user = (User)session.get("user");
+		String name = user.getUsername();
+		request.setAttribute("name", name);
 		request.setAttribute("dkList", dkList);
 		request.setAttribute("height", height);
 		return "success";
@@ -144,6 +147,8 @@ public class WorkFormService {
 		WorkForm wf = wflist.get(0);
 		WFstandard wfsave = new WFstandard();
 		
+		String name = wf.getName();
+		
 		StaffList stal = new StaffList();
 		sql = "select * from staff where Id=" + wf.getStaId();
 		List<Staff> stalist = stal.createSQL(sql);
@@ -235,7 +240,8 @@ public class WorkFormService {
 		request.setAttribute("disqkind", listkind);
 		request.setAttribute("disqnum", listnum);
 		request.setAttribute("disqmap", disqmap);
-
+		request.setAttribute("name", name);
+		
 		User user = (User) session.get("user");
 		switch (user.getLevel()) {
 		case 1:
