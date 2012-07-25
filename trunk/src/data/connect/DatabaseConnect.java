@@ -1,15 +1,19 @@
 package data.connect;
 
+
 import java.sql.DriverManager;
 
 import com.mysql.jdbc.Connection;
 
+import data.util.MysqlConfig;
+
 public class DatabaseConnect {
 	private Connection connection = null;
+	private MysqlConfig mc = new MysqlConfig();
 	public Connection getConnection(){
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sisys?user=root&password=root");
+			Class.forName(mc.getDriver());
+			connection = (Connection) DriverManager.getConnection(mc.getUrl(), mc.getUser(), mc.getPassword());
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
