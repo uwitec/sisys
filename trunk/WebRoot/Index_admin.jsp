@@ -201,7 +201,7 @@
 						<table>
 						
 							<tbody>
-								<%if(!resultMap.get("result").equals("error_ing")){
+								<%if(resultMap.get("result").equals("success")){
 								if(resultMap.get("error_ing").equals("success")){
 								int flag=0;
 								
