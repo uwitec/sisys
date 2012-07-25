@@ -90,7 +90,7 @@ public class NewIndexService {
 		return map;
 	}
 	
-	public void updateStatus(){
+	public Map<String, Object> updateStatus(){
 		Date now = new Date();
 		List<Batch> batchList = new ArrayList<Batch>();
 		BatchDAO batchDAO = new BatchDAO();
@@ -98,11 +98,17 @@ public class NewIndexService {
 		equalMap.put("status", 0);
 		equalMap.put("isDelete", 0);
 		batchList = batchDAO.findEntity(equalMap);
+		if(batchList.size() == 0){
+			map.put("result", "error");
+			map.put("message", "请导入数据！");
+			return map;
+		}
 		for(int i = 0;i < batchList.size() ;i++){
 			if(batchList.get(i).getEndTime().compareTo(now) < 0){
 				batchList.get(i).setStatus(2);
 				batchDAO.update(batchList.get(i), 0);
 			}
 		}
+		return map;
 	}
 }

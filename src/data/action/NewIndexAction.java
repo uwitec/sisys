@@ -24,8 +24,10 @@ public class NewIndexAction extends BaseAction{
 	Map<String,Object> mapNI=new HashMap<String,Object>(); 
 	public String NewIndex() throws Exception {
 		NewIndexService nis = new NewIndexService();
-		nis.updateStatus();
+		mapNI=nis.updateStatus();
+		if(mapNI.size()==0){
 		mapNI=nis.NewIndex();
+		}
 		User user = (User)ActionContext.getContext().getSession().get("user");
 		int level = user.getLevel();
 		request.setAttribute("mapNI", mapNI);
