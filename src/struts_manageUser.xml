@@ -24,12 +24,6 @@
 				<param name="namespace">/</param>
 			</result>
 		</action>
-		<action name="NewIndex" class="data.action.NewIndexAction" method="NewIndex">
-			<result name="admin">/Index_admin.jsp?current=index</result>
-			<result name="operator">/Index_operator.jsp?current=index</result>
-			<result name="viewer">/Index_viewer.jsp?current=index</result> 
-			<result name="error">/Index_${level}.jsp?current=index</result>
-		</action>
 	</package>
 	
 	
@@ -74,6 +68,13 @@
 			<result name="nameError">/AdminInfo_admin.jsp?result=nameError&amp;current=pim</result>
 			<result name="success">/AdminInfo_admin.jsp?result=success&amp;current=pim</result>
 			<result name="false">/AdminInfo_admin.jsp?result=false&amp;current=pim</result>
+		</action>
+		
+		<action name="NewIndex" class="data.action.NewIndexAction" method="NewIndex">
+			<result name="admin">/Index_admin.jsp?current=index</result>
+			<result name="operator">/Index_operator.jsp?current=index</result>
+			<result name="viewer">/Index_viewer.jsp?current=index</result> 
+			<result name="error">/Index_${level}.jsp?current=index</result>
 		</action>
  
 	</package>

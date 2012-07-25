@@ -62,11 +62,12 @@ public class ManageBatchService {
 			String[] processes = process.split("-");
 			fp = new StringBuffer();
 			//得到对应的工序名称列表字符串，以“-”连接
-			ProcessesDAO procdao = new ProcessesDAO();
+			ProcessesDAO procdao;
 			for(int i=0; i<processes.length; i++) {
 				int procId = Integer.parseInt(processes[i]);
 				equalsMap.clear();
 				equalsMap.put("Id", procId);
+				procdao = new ProcessesDAO();
 				List<Processes> procList = procdao.findEntity(equalsMap);
 				/*if(procList.size() == 0) {
 					return "fnone";
