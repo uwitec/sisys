@@ -1,28 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-
-<%@ page import="data.bean.Page"%>
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="data.bean.User"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<%	
-	String error = (String)request.getAttribute("result");
+
+<% String error = request.getParameter("result");
 	if(error == null) {
 		error = "";
-	}  else if(error.equals("outoflineAlter")) {
-		error = "修改后后工序产品数大于前工序产品数，请检查后重试！";
-	} else if(error.equals("isdeleteAlter")) {
-		error = "记录已删除，不能修改！";
-	}  else if(error.equals("errorAlter")) {
-		error = "修改失败！";
-	} else if(error.equals("successAlter")){
+	} else if(error.equals("success")) {
 		error = "修改成功！";
-	} else if(error.equals("error")){
-		error = "逻辑错误！";
+	} else if(error.equals("nameError")){
+		error = "用户名重复，请重新输入！";
+	} else if(error.equals("false")){
+		error = "修改失败！";
+	} else if(error.equals("empty")) {
+		error = "输入不能为空！";
+	} else if(error.equals("inputerror")) {
+		error = "输入错误，请检查后重新输入！";
+	} else if(error.equals("error")) {
+		error = "输入不能为空！";
 	}
 	
+	User user = (User)session.getAttribute("user"); 
+	String username = user.getUsername();
+	String password = user.getPassword();
 %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -30,7 +31,7 @@
 		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		
-<title>Simpla Admin</title>
+<title>生产物流统计系统</title>
 		
 		<!--                       CSS                       -->
 	  
@@ -91,29 +92,22 @@
 	</head>
   
 	<body><div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
-	
 		
-		<jsp:include flush="true" page="banner_admin.jsp"></jsp:include>
+		<jsp:include flush="true" page="banner_viewer.jsp"></jsp:include>
 		
 		<div id="main-content"> <!-- Main Content Section with everything -->
-				
+			
 			<!-- Page Head -->
-			<h2>工单列表</h2>
-			<p id="page-intro">Workset List</p>
+			<h2>Welcome!</h2>
+			<p id="page-intro">What would you like to do?</p>
 			
 			<div class="clear"></div> <!-- End .clear -->
-			
-			<div align="right">
-				
-			</form>
-			</div>
-			<div class="clear"></div>
 			
 			<div class="content-box"><!-- Start Content Box -->
 				
 				<div class="content-box-header">
 					
-					<h3>Content box</h3>
+					<h3>搜索返工工单</h3>
 
 					
 					<div class="clear"></div>
@@ -122,85 +116,56 @@
 				
 				<div class="content-box-content">
 					
-					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->						
-						
-						<label>
-							${error}
-							<%=error %>
-						</label>
-						
-						<table>
-							
-							<thead>
-								<tr>								   
-								  <tr>
-									<th width=2%>Id</th>
-									<th width=5%>姓名</th>
-									<th width=5%>工号</th>
-									<th width=5%>产品</th>
-									<th width=5%>批次</th>
-									<th width=5%>工序号</th>
-									<th width=5%>工序</th>
-									<th width=5%>合格品</th>
-									<th width=5%>不合格</th>
-									<th width=10%>是否删除</th>
-									<th width=10%>删除时间</th>
-									<th width=10%>操作</th>
-								</tr>
-								</tr>
-								
-							</thead>
-						 
-							<tfoot>
-								<tr>
-									<td colspan="7"><br /></td>
-								</tr>
-							</tfoot>
-						 
-							<tbody>
-								<c:forEach items="${form }" var="entity">
-									<tr>
-										<td>${entity.wfId}</td>
-										<td>${entity.staName}</td>
-										<td>${entity.staNo}<br /></td>
-										<td>${entity.proNo}<br /></td>
-										<td>${entity.batchNo}</td>
-										<td>${entity.procNo}</td>
-										<td>${entity.procName}</td>
-										<td>${entity.quaNum}</td>
-										<td>${entity.disqNum}</td>
-										<td>${entity.status}</td>
-										<td>${entity.deletetime}</td>
-										<td>
-										<!-- Icons -->
-										
-										
-											<a href="preFormAlter.action?wfId=${entity.wfId}" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										    <a href="formdelete.action?wfId=${entity.wfId}" title="Delete" onclick="return confirm('确实要删除吗？');"><img src="resources/images/icons/cross.png" alt="Delete" /></a>
-										     <a href="formDetail.action?wfId=${entity.wfId}" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-											
-										</td>
-									</tr>							
-								</c:forEach>
-							</tbody>
-							
-						</table>
+					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+						 <form id="myForm" action="searchByBatch.action" method="get">
+    	<label>
+    		<%=error%>
+    	</label>
+    	
+    	<table>
+    		<form action="ReFormSearch_viewer.jsp?current=workForm" method="post">
+    		<tr>
+    		<td align="center">按审批人搜索</td>
+    		</tr>
+    		<tr>
+    			<td>工号</td>
+    			<td><input type="text" name="staffNo"></td>
+    		</tr>
+    		<tr>
+    		<td align="center">按责任人搜索</td>
+    		</tr>
+    		<tr>
+    			<td>工号</td>
+    			<td><input type="text" name="staffNo"></td>
+    		</tr>
+    		<tr>
+    		<td align="center">按完成员工搜索</td>
+    		</tr>
+    		<tr>
+    			<td>工号</td>
+    			<td><input type="text" name="staffNo"></td>
+    		</tr>
+    		<tr>
+    			<td><a class="button" type="button" href="ReFormSearch_viewer.jsp?current=workForm" >提交</a></td>
+    			<!--<td><input class="button" type="submit" value="提交"></td>
+				--><td><input class="button" type="reset" value="重置"></td>
+			</tr>
+			</form>
+    	</table>
+    </form>
 						
 					</div> <!-- End #tab1 -->
 					
+  
 					
 				</div> <!-- End .content-box-content -->
 				
 			</div> <!-- End .content-box -->
-			
-
-			
 
 			<div class="clear"></div>
 			
-			
 			<jsp:include flush="true" page="footer.jsp"></jsp:include>
-				
+			
 		</div> <!-- End #main-content -->
 		
 	</div></body>

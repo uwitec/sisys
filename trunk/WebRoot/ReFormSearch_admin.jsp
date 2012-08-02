@@ -8,7 +8,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <%	
-	String error = (String)request.getAttribute("result");
+	/*String error = (String)request.getAttribute("result");
 	if(error == null) {
 		error = "";
 	}  else if(error.equals("outoflineAlter")) {
@@ -21,7 +21,7 @@
 		error = "修改成功！";
 	} else if(error.equals("error")){
 		error = "逻辑错误！";
-	}
+	}*/
 	
 %>
 
@@ -98,8 +98,8 @@
 		<div id="main-content"> <!-- Main Content Section with everything -->
 				
 			<!-- Page Head -->
-			<h2>工单列表</h2>
-			<p id="page-intro">Workset List</p>
+			<h2>返工工单列表</h2>
+			<p id="page-intro">Rework List</p>
 			
 			<div class="clear"></div> <!-- End .clear -->
 			
@@ -124,10 +124,9 @@
 					
 					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->						
 						
-						<label>
+						<label><!--
 							${error}
-							<%=error %>
-						</label>
+						--></label>
 						
 						<table>
 							
@@ -135,17 +134,11 @@
 								<tr>								   
 								  <tr>
 									<th width=2%>Id</th>
-									<th width=5%>姓名</th>
-									<th width=5%>工号</th>
-									<th width=5%>产品</th>
-									<th width=5%>批次</th>
-									<th width=5%>工序号</th>
-									<th width=5%>工序</th>
-									<th width=5%>合格品</th>
-									<th width=5%>不合格</th>
-									<th width=10%>是否删除</th>
-									<th width=10%>删除时间</th>
-									<th width=10%>操作</th>
+									<th width=5%>员工姓名</th>
+									<th width=5%>审批人姓名</th>
+									<th width=5%>责任人姓名</th>
+									<th width=5%>工时</th>
+									<th width=5%>操作</th>
 								</tr>
 								</tr>
 								
@@ -158,30 +151,22 @@
 							</tfoot>
 						 
 							<tbody>
-								<c:forEach items="${form }" var="entity">
 									<tr>
-										<td>${entity.wfId}</td>
-										<td>${entity.staName}</td>
-										<td>${entity.staNo}<br /></td>
-										<td>${entity.proNo}<br /></td>
-										<td>${entity.batchNo}</td>
-										<td>${entity.procNo}</td>
-										<td>${entity.procName}</td>
-										<td>${entity.quaNum}</td>
-										<td>${entity.disqNum}</td>
-										<td>${entity.status}</td>
-										<td>${entity.deletetime}</td>
+										<td>1</td>
+										<td>aa</td>
+										<td>bb</td>
+										<td>cc</td>
+										<td>1</td>
 										<td>
 										<!-- Icons -->
 										
 										
-											<a href="preFormAlter.action?wfId=${entity.wfId}" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										    <a href="formdelete.action?wfId=${entity.wfId}" title="Delete" onclick="return confirm('确实要删除吗？');"><img src="resources/images/icons/cross.png" alt="Delete" /></a>
-										     <a href="formDetail.action?wfId=${entity.wfId}" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
+											<a href="ReFormAlter_admin.jsp?current=workForm" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
+										    <a href="#" title="Delete" onclick="return confirm('确实要删除吗？');"><img src="resources/images/icons/cross.png" alt="Delete" /></a>
+										     <a href="ReFormDetail_admin.jsp?current=workForm" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
 											
 										</td>
-									</tr>							
-								</c:forEach>
+									</tr>
 							</tbody>
 							
 						</table>

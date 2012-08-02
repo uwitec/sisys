@@ -101,6 +101,11 @@
 					工单列表
 				</span></a></li>
 				
+				<li><a class="shortcut-button" href="searchReForm_admin.jsp?current=workForm"><span>
+					<img src="resources/images/icons/paper_content_pencil_48.png" alt="icon" /><br />
+					返工工单列表
+				</span></a></li>
+				
 				<li><a class="shortcut-button" href="BatchAdd_admin.jsp?current=batchAdd"><span>
 					<img src="resources/images/icons/image_add_48.png" alt="icon" /><br />
 					新建批次

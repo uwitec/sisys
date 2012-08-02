@@ -35,6 +35,7 @@
 			</a>
 			<ul>
 				<li><a href="searchByBatch_admin.jsp?current=workForm">工单列表</a></li>
+				<li><a href="searchReForm_admin.jsp?current=workForm">返工工单列表</a></li>
 			</ul>
 		</li>
 		
@@ -51,9 +52,13 @@
 		</li>
 		
 		<li>
-			<a href="OutOfDue.jsp?current=outOfDue" class="nav-top-item no-submenu <%if(cur.equals("outOfDue")) out.println("current"); %>"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
+			<a href="#" class="nav-top-item <%if(cur.equals("outOfDue")) out.println("current"); %>"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
 				超期批次管理
 			</a>
+			<ul>
+				<li><a href="OutOfDue.jsp?current=outOfDue">超期批次处理</a></li>
+				<li><a href="OutofDueSearch.jsp?current=outOfDue">超期批次查询</a></li>
+			</ul>
 		</li>
 		
 		<li>

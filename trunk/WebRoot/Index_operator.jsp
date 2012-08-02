@@ -101,10 +101,20 @@
 					工单列表
 				</span></a></li>
 				
+				<li><a class="shortcut-button" href="searchReForm_operator.jsp?current=workForm"><span>
+					<img src="resources/images/icons/paper_content_pencil_48.png" alt="icon" /><br />
+					返工工单列表
+				</span></a></li>
+				
 				
 				<li><a class="shortcut-button" href="formAdd.action"><span>
 					<img src="resources/images/icons/pencil_48.png" alt="icon" /><br />
-					新建工单
+					添加工单
+				</span></a></li>
+				
+				<li><a class="shortcut-button" href="reformAdd.jsp?current=workForm"><span>
+					<img src="resources/images/icons/pencil_48.png" alt="icon" /><br />
+					添加返工工单
 				</span></a></li>
 				
 				
