@@ -165,141 +165,130 @@ function check(){
 						</label>
 						
 						<form id="myForm" action="addWorkForm.action" method="post">
-							<table class="" id="table">
+							<div class="formHeader">
+								<span>产品编号</span><input type="text" name="proNo">
+								<span>产品名称</span><input type="text" name="proName" readOnly="true">
+								<span>工序编号</span><input type="text" name="procNo">
+								<span>工序名称</span><input type="text" name="procName" readOnly="true">
+								<span>批次编号</span><input type="text" name="batNo">
+							</div>
+							<table class="formAdd" id="table">
 								<tr>
-									<td><span>工号</span></td>
-									<td><input type="text" width="50px"  id="staNo" name="staNo" onblur="displayStaNo()"/></td>
-				
-									<td><span>姓名</span></td>
-									<td><input readOnly="true" type="text" width="50px"  id="staName" name="staName"/></td>
-										
+									<th></th>
+									<th></th>
+									<th></th>
+									<th colspan=11 style="text-align:center">不合格品种类及数量</th>
+									<th></th>
 								</tr>
 								<tr>
-									<td><span>产品编号</span></td>
-									<td><input type="text" width="50px" id="proNo" name="proNo" onblur="displayProNo()"/></td>
-								
-									<td><span>产品名称</span></td>
-									<td><input readOnly="true" type="text" width="50px" id="proName" name="proName"/></td>
-									</tr>
-								<tr>
-									<td><span>工序编号</span></td>
-									<td><input type="text" width="50px" id="procNo" name="procNo" onblur="displayProcNo()"/></td>
-								
-									<td><span>工序名称</span></td>
-									<td><input readOnly="true" type="text" width="50px" id="procName" name="procName"/></td>									
-									</tr>
-								<tr>
-									<td><span>批次号</span></td>
-									<td><input type="text" width="50px" id="batNo" name="batchNo"/></td>
-								</tr>
-								<tr>
+									<th>员工工号</th>
+									<th>员工姓名</th>
+									<th>合格品数量</th>
 									
-									<td><span>合格品数量</span></td>
-									<td><input type="text" width="50px" id="quaNum" name="quaNum"/></td>
-								</tr>
-								<tr>
-									<td><span>不合格品种类</span></td>
-									<td><select name="disqKind1" class="" style="width: 155px">
-										<c:forEach items="${dkList }" var="entity">
-											<option value="${entity.id}">${entity.disDesc}</option>
-										</c:forEach>
-											<option value="0" onclick="addDK()">添加种类</option>
-									</select></td>
-									<td><span>不合格品数量</span></td>
-									<td><input type="text" width="50px" name="disqNum1" /></td>
-								</tr>
-								<tr>
-									<td><span>不合格品种类</span></td>
-									<td><select name="disqKind2" class="" style="width: 155px">
-										<c:forEach items="${dkList }" var="entity">
-											<option value="${entity.id }">${entity.disDesc}</option>
-										</c:forEach>
-											<option value="0" onclick="addDK()">添加种类</option>
-									</select></td>
-									<td><span>不合格品数量</span></td>
-									<td><input type="text" width="50px" name="disqNum2""/></td>
-								</tr>
-								<tr>
-									<td><span>不合格品种类</span></td>
-									<td><select name="disqKind3" class="" style="width: 155px">
-										<c:forEach items="${dkList }" var="entity">
-											<option value="${entity.id }">${entity.disDesc}</option>
-										</c:forEach>
-											<option value="0" onclick="addDK()">添加种类</option>
-									</select></td>
-									<td><span>不合格品数量</span></td>
-									<td><input type="text" width="50px" name="disqNum3"/></td>
+									<th>调试不合格</th>
+									<th>气孔砂眼</th>
+									<th>裂纹</th>
+									<th>缺料起层</th>
+									<th>碰、划、拉伤</th>
+									<th>尺寸不合格</th>
+									<th>加工缺陷</th>
+									<th>物理性能不合格</th>
+									<th>化学成分不合格</th>
+									<th>试验检验件</th>
+									<th>其它</th>
+									
+									<th>后工序确认</th>
 								</tr>
 								
-								<tr>
-									<td><span>不合格品种类</span></td>
-									<td><select name="disqKind4" class="" style="width: 155px">
-										<c:forEach items="${dkList}" var="entity">
-											<option value="${entity.id }">${entity.disDesc}</option>
-										</c:forEach>
-											<option value="0" onclick="addDK()">添加种类</option>
-									</select></td>
-									<td><span>不合格品数量</span></td>
-									<td><input type="text" width="50px" name="disqNum4"/></td>
+								<tr class="formContent">
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
 								</tr>
-								
-								<tr>
-									<td><span>不合格品种类</span></td>
-									<td><select name="disqKind5" class="" style="width: 155px">
-										<c:forEach items="${dkList}" var="entity">
-											<option value="${entity.id }">${entity.disDesc}</option>
-										</c:forEach>
-											<option value="0" onclick="addDK()">添加种类</option>
-									</select></td>
-									<td><span>不合格品数量</span></td>
-									<td><input type="text" width="50px" name="disqNum5"/></td>
+								<tr class="formContent">
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
 								</tr>
-								
-								<tr>
-									<td><span>不合格品种类</span></td>
-									<td><select name="disqKind6" class="" style="width: 155px">
-										<c:forEach items="${dkList}" var="entity">
-											<option value="${entity.id }">${entity.disDesc}</option>
-										</c:forEach>
-											<option value="0" onclick="addDK()">添加种类</option>
-									</select></td>
-									<td><span>不合格品数量</span></td>
-									<td><input type="text" width="50px" name="disqNum6"/></td>
+								<tr class="formContent">
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
 								</tr>
-								
-								<tr>
-									<td><span>不合格品种类</span></td>
-									<td><select name="disqKind7" class="" style="width: 155px">
-										<c:forEach items="${dkList}" var="entity">
-											<option value="${entity.id }">${entity.disDesc}</option>
-										</c:forEach>
-											<option value="0" onclick="addDK()">添加种类</option>
-									</select></td>
-									<td><span>不合格品数量</span></td>
-									<td><input type="text" width="50px" name="disqNum7" /></td>
+								<tr class="formContent">
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
 								</tr>
-								
-								<tr>
-									<td><span>不合格品种类</span></td>
-									<td><select name="disqKind8" class="" style="width: 155px">
-										<c:forEach items="${dkList }" var="entity">
-											<option value="${entity.id }">${entity.disDesc}</option>
-										</c:forEach>
-											<option value="0" onclick="addDK()">添加种类</option>
-									</select></td>
-									<td><span>不合格品数量</span></td>
-									<td><input type="text" width="50px" name="disqNum8"/>
-										
-								</tr>
-								
-								<tr>
-									<td><span>统计员姓名</span></td>
-									<td><input readOnly="true" type="text" width="50px" name="name" value="${name}"/></td>
+								<tr class="formContent">
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
+									<td><input type="text" name="" ></td>
 								</tr>
 									
 								<tr>
-									<td><input class="button" type="button" onclick="check()" value="提交"/></td>
-									<td><input class="button" type="reset" value="重置"/></td>
+									<td class="but"><input class="button" type="button" onclick="check()" value="提交"/></td>
+									<td class="but"><input class="button" type="reset" value="重置"/></td>
 								</tr>
 							</table>
 
