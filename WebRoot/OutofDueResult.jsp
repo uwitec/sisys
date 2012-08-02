@@ -1,26 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-<%@ page import="data.bean.Page"%>
-
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page import="java.text.*" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<%	
-	String error = (String)request.getAttribute("result");
-	if(error == null) {
-		error = "";
-	}  else if(error.equals("outoflineAlter")) {
-		error = "修改后后工序产品数大于前工序产品数，请检查后重试！";
-	} else if(error.equals("isdeleteAlter")) {
-		error = "记录已删除，不能修改！";
-	}  else if(error.equals("errorAlter")) {
-		error = "修改失败！";
-	} else if(error.equals("successAlter")){
-		error = "修改成功！";
-	} else if(error.equals("error")){
-		error = "逻辑错误！";
+
+<%
+	/*String result = request.getParameter("result");
+	String message = "";
+	if(result != null){
+		message = request.getAttribute("message").toString();;
 	}
+	Calendar cal = Calendar.getInstance();
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	Date time = cal.getTime();
+	time.setDate(1);
+	String startTime = format.format(time);
+	time.setMonth(time.getMonth() + 1);
+	time.setDate(0);
+	String endTime = format.format(time);*/
 	
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -80,6 +76,7 @@
 <script type="text/javascript"
 	src="resources/scripts/jquery.datePicker.js"></script>
 <script type="text/javascript" src="resources/scripts/jquery.date.js"></script>
+<script type="text/javascript" src="resources/scripts/My97DatePicker/WdatePicker.js"></script>
 <!--[if IE]><script type="text/javascript" src="resources/scripts/jquery.bgiframe.js"></script><![endif]-->
 
 
@@ -97,41 +94,27 @@
 <body>
 	<div id="body-wrapper">
 		<!-- Wrapper for the radial gradient background -->
-		
-		<jsp:include flush="true" page="banner_operator.jsp"></jsp:include>
-		
+
+		<jsp:include flush="true" page="banner_admin.jsp"></jsp:include>
+
 		<div id="main-content">
 			<!-- Main Content Section with everything -->
 
 			<!-- Page Head -->
-			<h2>工单列表</h2>
-			<p id="page-intro">Workset List</p>
+			<h2>超期批次查询</h2>
+			<p id="page-intro">Extended batch inquiries</p>
 
-			<ul class="shortcut-buttons-set">
 
-				<li><a class="shortcut-button" href="formAdd.action"><span>
-							<img src="resources/images/icons/pencil_48.png" alt="icon" /><br />
-							继续添加工单
-					</span></a></li>
-
-			</ul>
-			<!-- End .shortcut-buttons-set -->
 
 			<div class="clear"></div>
 			<!-- End .clear -->
-
-			<div align="right">
-				
-			</form>
-			</div>
-			<div class="clear"></div>
 
 			<div class="content-box">
 				<!-- Start Content Box -->
 
 				<div class="content-box-header">
 
-					<h3>Content box</h3>
+					<h3>Search Box</h3>
 
 
 					<div class="clear"></div>
@@ -141,29 +124,23 @@
 
 				<div class="content-box-content">
 
-					<div class="tab-content default-tab" id="tab1">
-						<!-- This is the target div. id must match the href of this div's tab -->
-						<label>
-							${error}
-							<%=error %>
-						</label>
+					<div id="login-content">
+						
 						<table>
 							
 							<thead>
 								<tr>								   
 								  <tr>
 									<th width=2%>Id</th>
-									<th width=5%>姓名</th>
-									<th width=5%>工号</th>
-									<th width=5%>产品</th>
-									<th width=5%>批次</th>
-									<th width=5%>工序号</th>
-									<th width=5%>工序</th>
-									<th width=5%>合格品</th>
-									<th width=5%>不合格</th>
-									<th width=10%>是否删除</th>
-									<th width=10%>删除时间</th>
-									<th width=10%>操作</th>
+									<th width=10%>产品</th>
+									<th width=10%>批次</th>
+									<th width=5%>目标数量</th>
+									<th width=10%>开始时间</th>
+									<th width=10%>截止时间</th>
+									<th width=10%>完成时间</th>
+									<th width=10%>是否处理</th>
+									<th width=30%>备注</th>
+									<th width=3%>操作</th>
 								</tr>
 								</tr>
 								
@@ -176,53 +153,38 @@
 							</tfoot>
 						 
 							<tbody>
-								<c:forEach items="${form }" var="entity">
 									<tr>
-										<td>${entity.wfId}</td>
-										<td>${entity.staName}</td>
-										<td>${entity.staNo}<br /></td>
-										<td>${entity.proNo}<br /></td>
-										<td>${entity.batchNo}</td>
-										<td>${entity.procNo}</td>
-										<td>${entity.procName}</td>
-										<td>${entity.quaNum}</td>
-										<td>${entity.disqNum}</td>
-										<td>${entity.status}</td>
-										<td>${entity.deletetime}</td>
+										<td>1</td>
+										<td>aa</td>
+										<td>1000</td>
+										<td>1000</td>
+										<td>0611</td>
+										<td>0614</td>
+										<td>0615</td>
+										<td>no</td>
+										<td></td>
 										<td>
 										<!-- Icons -->
 										
-										     <a href="formDetail.action?wfId=${entity.wfId}" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
+											<a href="OutOfDue.jsp?current=OutOfDue" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
 											
 										</td>
-									</tr>							
-								</c:forEach>
+									</tr>	
 							</tbody>
 							
 						</table>
-						
 					</div>
-					<!-- End #tab1 -->
-
+					<!-- End #login-content -->
 				</div>
-				<!-- End .content-box-content -->
 
+			<!-- End #main-content -->
+			<div id="footer">
+				<small> <!-- Remove this notice or replace it with whatever you want -->
+					&#169; Copyright 2012 Your Company | Powered by 顺江实验室 | <a href="#">Top</a>
+				</small>
 			</div>
-			<!-- End .content-box -->
-
-
-
-
-			<div class="clear"></div>
-
-
-			<jsp:include flush="true" page="footer.jsp"></jsp:include>
-
 			<!-- End #footer -->
-
 		</div>
-		<!-- End #main-content -->
-
 	</div>
 </body>
 

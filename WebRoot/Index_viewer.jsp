@@ -101,6 +101,11 @@
 					工单列表
 				</span></a></li>
 				
+				<li><a class="shortcut-button" href="searchReForm_viewer.jsp?current=workForm"><span>
+					<img src="resources/images/icons/paper_content_pencil_48.png" alt="icon" /><br />
+					返工工单列表
+				</span></a></li>
+				
 				
 			</ul><!-- End .shortcut-buttons-set -->
 			

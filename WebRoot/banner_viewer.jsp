@@ -29,6 +29,7 @@
 			</a>
 			<ul>
 				<li><a href="searchByBatch_viewer.jsp?current=workForm">工单列表</a></li>
+				<li><a href="searchReForm_viewer.jsp?current=workForm">返工工单列表</a></li>
 			</ul>
 		</li>
 		
